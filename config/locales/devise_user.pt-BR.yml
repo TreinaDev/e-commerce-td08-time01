@@ -25,3 +25,15 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: "não confere."
+            password:
+              too_short: "muito pequena."
+            email:
+              invalid: "inválido."
+        
+        
