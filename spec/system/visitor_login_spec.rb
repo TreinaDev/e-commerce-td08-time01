@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário deslogado acessa página de login' do
-  it 'e faz o login no site' do
+  it 'e faz o login no site com sucesso' do
     user = create(:user, name: 'José da Silva')
 
     visit root_path

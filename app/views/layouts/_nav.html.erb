@@ -30,6 +30,10 @@
         <li class="nav-item">
           <%= link_to 'Entrar', new_user_session_path, class: 'nav-link active'  %>
         </li>
+
+        <li class="nav-item">
+          <%= link_to 'Registrar', new_user_registration_path, class: 'nav-link active'  %>
+        </li>
       <%end%>
 
       <% if user_signed_in? %>
