@@ -1,0 +1,81 @@
+' no mac, option + D abre o desenho
+
+@startuml "Ecommerce"
+
+class Cart {
+}
+class CartItem {
+  +sales_qty
+}
+class Cashback{
+  +name
+  +percentage
+  +active
+  +start_date
+  +end_date
+}
+class Order {
+  +created_at
+  +payment_id
+}
+class Price{
+  +in_BRL
+  +start_date
+}
+class Product{
+  +name
+  +brand
+  +description
+  +available
+  +sku
+  +quantity
+  +photo
+  +color
+  +size
+}
+class ProductCategory {
+  +name
+  +available
+  +parent_category
+}
+class Promo {
+  +name
+  +percentage
+  +active
+  +start_date
+  +end_date
+  +cupom 
+  ' cupom deve ter 8 digitos
+  +max_discount_per_order
+  +max_uses
+}
+class User {
+  +name
+  +email
+  +senha
+  +cpf
+  +cnpj
+  +category
+}
+
+Product "1"  -- "1..*" Price
+' um preço pertence a apenas 1 produto
+' um produto tem 1 ou vários preços (ao longo do tempo)
+
+CartItem  "0..*" - "1" Cart
+' um item de um carrinho está apenas em 1 carrinho
+' um carrinho é composto de zero ou vários items
+
+Product "1" - "*" CartItem
+' um item de carrinho é vinculado apenas a um produto 
+' um produto pode estar vinculado a vários itens de carrinho
+
+Promo "*" -- "*" Product
+' uma promoção está vinculada a 0 ou mais produtos
+' um produto pode estar vinculado a 0 ou mais promoções
+
+Cashback "*" -- "*" Product
+' um cashback está vinculado a 0 ou mais produtos
+' um produto pode estar vinculado a 0 ou mais cashbacks
+
+@enduml
