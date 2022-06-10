@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      product: Produto
+    attributes:
+      user:
+        name: Nome
+        brand: Marca
+        description: Descrição
+        sku: SKU
+

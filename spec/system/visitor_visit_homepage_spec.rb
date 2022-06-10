@@ -11,11 +11,13 @@ describe 'Visitante visita a app' do
     Product.create!(name: 'Caneca Mon Amour', 
                     brand: 'TOC & Ex-TOC',
                     description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
-    )
+                    sku: 'TOC1234',
+                  )
     Product.create!(name: 'Garrafa Star Wars', 
                     brand: 'Zona Criativa',
-                    description: 'Garrafa térmica inox, star wars'
-    )
+                    description: 'Garrafa térmica inox, star wars',
+                    sku: 'ZON0001',
+                  )
     visit root_path
 
     expect(Product.count).to be 2
