@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :product do
-    name { "MyString" }
-    brand { "MyString" }
-    description { "MyString" }
-    sku { "MyString" }
+    name { "Caneca Mon Amour" }
+    brand { "TOC & Ex-TOC" }
+    description { "Caneca em cerâmica com desenho de uma flecha do cupido" }
+    sku { "TOC1234" }
   end
 end
