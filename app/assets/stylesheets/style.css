@@ -1,0 +1,20 @@
+.mini-button {
+  --bs-btn-padding-y: .25rem;
+  --bs-btn-padding-x: .5rem;
+  --bs-btn-font-size: .75rem;
+}
+
+.search-bar {
+  max-width: 50%;
+}
+
+.field_with_errors label {
+  color: rgb(255,0,0)
+}
+.field_with_errors input {
+  border-color: rgb(255, 0, 0)
+}
+
+.field_with_errors textarea {
+  border-color: rgb(255, 0, 0)
+}

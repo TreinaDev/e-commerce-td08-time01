@@ -1,0 +1,61 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+  <div class="container-fluid">
+    <%= link_to 'E-Commerce', root_path, class: 'navbar-brand mb-0 h1' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse row d-flex justify-content-center search-bar">
+      <div class="input-group">
+        <div class="input-group-text p-0">
+          <select class="form-select form-select shadow-none bg-light border-0">
+            <option>Categorias</option>
+            <option>Um</option>
+            <option>Dois</option>
+            <option>Três</option>as</option>
+            <option>Um</option>
+            <option>Dois</option>
+            <option>Quatro</option>
+          </select>
+        </div>
+        <input type="text" class="form-control" placeholder="Busque aqui seu produto">
+        <button class="btn btn-warning input-group-text shadow-none px-4">
+          Procurar
+        </button>
+      </div>
+    </div>
+
+    <ul class="navbar-nav">
+      <% unless user_signed_in? || admin_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Entrar', new_user_session_path, class: 'nav-link active'  %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Registrar', new_user_registration_path, class: 'nav-link active'  %>
+        </li>
+      <%end%>
+
+      <% if user_signed_in? %>
+        <li class="nav-link">
+          <%= current_user.name %>
+        <li>
+
+        <li class="nav-link">
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-light mini-button' %>
+        </li>
+      <% end %>
+
+      <% if admin_signed_in? %>
+        <li class="nav-link active">
+          <%= current_admin.name %>
+        </li>
+
+        <li class="nav-link">
+          <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'btn btn-light mini-button' %>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+</nav>

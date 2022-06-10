@@ -1,0 +1,38 @@
+<h2 class="h3 mb-3 fw-normal" style="text-align:center; margin-top: 50px;">
+  <%= request.path == new_admin_registration_path ? 'Cadastrar Admin' : 'Novo Cadastro' %>
+</h2>
+
+<main class="form-signin w-100 m-auto" style="max-width: 270px;">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :name, "Nome" %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "Nome", required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "E-mail" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(no mínimo <%= @minimum_password_length %> caracteres)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "Nova senha" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "Confirmar senha" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Cadastrar-se", class: 'w-100 btn btn-lg btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  </main>
