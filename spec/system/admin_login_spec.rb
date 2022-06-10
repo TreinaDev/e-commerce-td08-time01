@@ -16,7 +16,7 @@ describe 'Administrador deslogado acessa página de login' do
   end
 
   it 'e não faz o login com sucesso' do
-    create(:admin, name: 'João do Rêgo')
+    create(:admin, name: 'João do Rêgo', password: '123456')
       
     visit new_admin_session_path
     within 'form' do

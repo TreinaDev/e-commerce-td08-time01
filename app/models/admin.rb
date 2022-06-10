@@ -5,4 +5,6 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, format: { with: /\A[A-Za-z0-9._%+-]+@mercadores.com.br\z/, message: 'com domínio inválido.' }
+  validates :name, presence: true
+
 end

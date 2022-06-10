@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(deixe em branck se não quiser modificar)</i><br />
+    <%= f.label :password %> <i>(deixe em branco se não quiser modificar)</i><br />
     <%= f.password_field :password, autocomplete: "nova senha" %>
     <% if @minimum_password_length %>
       <br />
@@ -27,7 +27,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(precisamos do password atual para confirmar suas mudanças)</i><br />
     <%= f.password_field :current_password, autocomplete: "senha atual" %>
   </div>
 

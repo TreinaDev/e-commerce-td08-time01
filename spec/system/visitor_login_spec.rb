@@ -19,7 +19,7 @@ describe 'Usuário deslogado acessa página de login' do
   end
 
   it 'e não faz o login com sucesso' do
-    create(:user, name: 'José da Silva')
+    create(:user, name: 'José da Silva', password: '123456')
       
     visit root_path
     click_on 'Entrar'
