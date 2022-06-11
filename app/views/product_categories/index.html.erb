@@ -1,0 +1,8 @@
+<h1 class="text-center">Gerenciar Categorias de Produtos</h1>
+
+<% @branches_array.each do |pc_array| %>
+  <% pc_array.reverse_each do |pc| %>
+    <%=pc.name%>/
+  <% end %>
+  <--<br />
+<% end %>

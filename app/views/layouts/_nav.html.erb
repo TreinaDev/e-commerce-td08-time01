@@ -47,6 +47,11 @@
       <% end %>
 
       <% if admin_signed_in? %>
+
+        <li class="nav-link">
+          <%= link_to 'Gerenciar Categorias', product_categories_path %>
+        </li>
+        
         <li class="nav-link active">
           <%= current_admin.name %>
         </li>
