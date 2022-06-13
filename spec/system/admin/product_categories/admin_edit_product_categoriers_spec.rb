@@ -10,7 +10,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     visit root_path
     click_on 'Gerenciar Categorias'
     first(:link, 'Editar').click
-    fill_in 'Name', with: 'Cadeira Office'
+    fill_in 'Nome', with: 'Cadeira Office'
     click_on 'Salvar'
 
     expect(page).to have_content('Categoria de Produto atualizada com sucesso')
@@ -26,7 +26,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     visit root_path
     click_on 'Gerenciar Categorias'
     first(:link, 'Editar').click
-    fill_in 'Name', with: ''
+    fill_in 'Nome', with: ''
     click_on 'Salvar'
 
     expect(page).to have_content('Falha na atualização da Categoria de Produto')
@@ -43,7 +43,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     visit root_path
     click_on 'Gerenciar Categorias'
     first(:link, 'Editar').click
-    fill_in 'Name', with: 'Cadeira Office'
+    fill_in 'Nome', with: 'Cadeira Office'
     click_on 'Salvar'
 
     expect(page).to have_content('Falha na atualização da Categoria de Produto')

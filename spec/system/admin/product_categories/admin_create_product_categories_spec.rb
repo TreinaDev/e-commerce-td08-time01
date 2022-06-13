@@ -9,8 +9,8 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     visit root_path
     click_on 'Gerenciar Categorias'
     click_on 'Nova Categoria de Produto'
-    fill_in 'Name', with: 'Cadeira Office'
-    select root_product.name, from: 'Parent'
+    fill_in 'Nome', with: 'Cadeira Office'
+    select root_product.name, from: 'Categoria Pai'
     click_on 'Salvar'
 
     expect(page).to have_content('Categoria de Produto criada com sucesso')
@@ -24,7 +24,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     visit root_path
     click_on 'Gerenciar Categorias'
     click_on 'Nova Categoria de Produto'
-    fill_in 'Name', with: ''
+    fill_in 'Nome', with: ''
     click_on 'Salvar'
 
     expect(page).to_not have_content('Categoria de Produto criada com sucesso')

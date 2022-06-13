@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      product_category:
+        one: Categoria de Produto
+        other: Categorias de Produtos
+    attributes:
+      product_category:
+        name: "Nome"
+        parent_id: "Categoria Pai"
