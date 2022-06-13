@@ -68,6 +68,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ancestry (4.2.0)
+      activerecord (>= 5.2.6)
     bcrypt (3.1.18)
     builder (3.2.4)
     bundler-audit (0.9.1)
@@ -210,6 +212,9 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -247,6 +252,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  ancestry
   bundler-audit
   capybara
   debug
@@ -259,6 +265,7 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   shoulda-matchers
+  simple_form
   simplecov
   sprockets-rails
   sqlite3 (~> 1.4)

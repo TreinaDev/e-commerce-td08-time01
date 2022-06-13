@@ -1,3 +1,7 @@
+main {
+  min-height: 73vh;
+}
+
 .mini-button {
   --bs-btn-padding-y: .25rem;
   --bs-btn-padding-x: .5rem;
@@ -17,4 +21,16 @@
 
 .field_with_errors textarea {
   border-color: rgb(255, 0, 0)
+}
+
+.buffer {
+  margin: 60px 0
+}
+
+.little-buffer {
+  margin: 20px 0
+}
+
+.standard-width {
+  max-width: 900px;
 }
