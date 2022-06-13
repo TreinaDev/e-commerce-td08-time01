@@ -1,8 +1,38 @@
 <h1 class="text-center">Gerenciar Categorias de Produtos</h1>
+<br />
+<div class="text-center">
+  <%= link_to 'Nova Categoria de Produto', new_product_category_path, class: 'btn btn-primary mini-button' %>
+</div>
+<br />
 
-<% @branches_array.each do |pc_array| %>
-  <% pc_array.reverse_each do |pc| %>
-    <%=pc.name%>/
-  <% end %>
-  <--<br />
-<% end %>
+<table class="table text-center align-middle m-auto" style="max-width: 900px">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% count = 1 %>
+    <% @product_categories.each do |product_category| %>
+      <% if product_category.ancestors? %>
+        <tr>
+          <td><%= count %></td>
+          <td class="text-start"><%= product_category.show_ancestors %> > <strong><%= product_category.name %></strong></td>
+          <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' %></td>
+        </tr>
+      <% else %>
+      <tr>
+        <td><%= count %></td>
+        <td class="text-start"><strong><%= product_category.name %></strong></td>
+        <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' %></td>
+      </tr>
+      <% end %>
+      <% count += 1 %>
+    <% end %>
+  </tbody>
+</table>
+<div class="text-center expand">
+  <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+</div>

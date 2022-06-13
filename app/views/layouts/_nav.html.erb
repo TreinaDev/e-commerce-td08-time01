@@ -1,21 +1,19 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
   <div class="container-fluid">
-    <%= link_to 'E-Commerce', root_path, class: 'navbar-brand mb-0 h1' %>
+    <%= link_to image_tag("mercadores.png", alt: "mercadores", size: '200x36'), root_path, class: 'navbar-brand mb-0' %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse row d-flex justify-content-center search-bar">
       <div class="input-group">
+        
         <div class="input-group-text p-0">
           <select class="form-select form-select shadow-none bg-light border-0">
             <option>Categorias</option>
-            <option>Um</option>
-            <option>Dois</option>
-            <option>Três</option>as</option>
-            <option>Um</option>
-            <option>Dois</option>
-            <option>Quatro</option>
+            <% ProductCategory.all.each do |category| %>
+              <option value="<%= category.id %>"><%= category.name %></option>
+            <% end %>
           </select>
         </div>
         <input type="text" class="form-control" placeholder="Busque aqui seu produto">
@@ -49,10 +47,10 @@
       <% if admin_signed_in? %>
 
         <li class="nav-link">
-          <%= link_to 'Gerenciar Categorias', product_categories_path %>
+          <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'text-light text-decoration-none' %>
         </li>
         
-        <li class="nav-link active">
+        <li class="nav-link">
           <%= current_admin.name %>
         </li>
 
@@ -64,3 +62,4 @@
     </ul>
   </div>
 </nav>
+<br />

@@ -1,0 +1,11 @@
+<%= simple_form_for @product_category do |cat| %>
+  <%= cat.input :name %>
+  <%= cat.input :parent_id, as: :select, collection: @product_categories.map { |c| [c.show_with_ancestors, c.id] } %>
+  <div class="text-center little-expand">
+    <%= cat.button :submit, 'Salvar', class: 'btn btn-warning' %>
+  </div>
+<% end %>
+
+<div class="text-center expand">
+  <%= link_to 'Voltar', product_categories_path, class: 'btn btn-outline-primary mini-button' %>
+</div>
