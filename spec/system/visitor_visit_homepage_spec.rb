@@ -20,7 +20,6 @@ describe 'Visitante visita a app' do
                   )
     visit root_path
 
-    expect(Product.count).to be 2
     expect(page).to have_text 'Caneca Mon Amour'
     expect(page).to have_text 'TOC & Ex-TOC'
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
@@ -29,7 +28,7 @@ describe 'Visitante visita a app' do
     expect(page).to have_text 'Garrafa térmica inox, star wars'
   end
 
-  it "e não vê produtos" do
+  it "mas não existem produtos cadastrados" do
     visit root_path
 
     expect(page).to have_text 'Não existem produtos cadastrados' 
