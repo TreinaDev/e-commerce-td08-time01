@@ -12,12 +12,11 @@ class ProductCategoriesController < ApplicationController
   
   def create
     @product_category = ProductCategory.new(product_category_params)
-    if @product_category.save
-      redirect_to product_categories_path, notice: "Categoria de Produto criada com sucesso."
-    else
-      flash.now[:alert] = "Falha na criação da Categoria de Produto."
-      render :new
-    end
+
+    return redirect_to product_categories_path, notice: "Categoria de Produto criada com sucesso." if @product_category.save
+    
+    flash.now[:alert] = "Falha na criação da Categoria de Produto." if !@product_category.save
+    render :new
   end
 
   def edit
@@ -25,13 +24,12 @@ class ProductCategoriesController < ApplicationController
   end
 
   def update
-    product_category_params
-    if @product_category.update(product_category_params)
-      redirect_to product_categories_path, notice: "Categoria de Produto atualizada com sucesso."
-    else
-      flash.now[:alert] = "Falha na atualização da Categoria de Produto."
-      render :edit
-    end
+    product_category_params 
+
+    return redirect_to product_categories_path, notice: "Categoria de Produto atualizada com sucesso." if @product_category.update(product_category_params)
+   
+    flash.now[:alert] = "Falha na atualização da Categoria de Produto." if !@product_category.update(product_category_params)
+    render :edit
   end
 
   private

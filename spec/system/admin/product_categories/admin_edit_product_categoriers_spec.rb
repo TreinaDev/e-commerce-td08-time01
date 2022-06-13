@@ -49,6 +49,16 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     expect(page).to have_content('Falha na atualização da Categoria de Produto')
   end
 
+  it 'e não ainda não há categorias de produtos criadas' do
+    admin = create(:admin)
+
+    login_as(admin, scope: :admin)
+    visit root_path
+    click_on 'Gerenciar Categorias'
+
+    expect(page).to have_content('Nenhuma Categoria de Produto cadastrada até o momento')
+  end
+
   it 'e desiste de editar Categoria do Produto e volta ao index de Categorias de Produto' do
     admin = create(:admin)
     root_product = create(:product_category, :root)

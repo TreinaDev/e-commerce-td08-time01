@@ -28,6 +28,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     click_on 'Salvar'
 
     expect(page).to_not have_content('Categoria de Produto criada com sucesso')
+    expect(page).to have_content('Nome não pode ficar em branco')
   end
 
   it 'e desiste de criar Categoria do Produto e volta ao index de Categorias de Produto' do

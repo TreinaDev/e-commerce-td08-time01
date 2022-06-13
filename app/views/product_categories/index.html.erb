@@ -5,34 +5,41 @@
 </div>
 <br />
 
-<table class="table text-center align-middle m-auto" style="max-width: 900px">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Nome</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% count = 1 %>
-    <% @product_categories.each do |product_category| %>
-      <% if product_category.ancestors? %>
+<% if @product_categories.blank? %>
+  <div class="text-center buffer">Nenhuma Categoria de Produto cadastrada até o momento.</div>
+<% end %>
+
+<% if !@product_categories.blank?  %>
+
+  <table class="table text-center align-middle m-auto" style="max-width: 900px">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% count = 1 %>
+      <% @product_categories.each do |product_category| %>
+        <% if product_category.ancestors? %>
+          <tr>
+            <td><%= count %></td>
+            <td class="text-start"><%= product_category.show_ancestors %> > <strong><%= product_category.name %></strong></td>
+            <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' %></td>
+          </tr>
+        <% else %>
         <tr>
           <td><%= count %></td>
-          <td class="text-start"><%= product_category.show_ancestors %> > <strong><%= product_category.name %></strong></td>
+          <td class="text-start"><strong><%= product_category.name %></strong></td>
           <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' %></td>
         </tr>
-      <% else %>
-      <tr>
-        <td><%= count %></td>
-        <td class="text-start"><strong><%= product_category.name %></strong></td>
-        <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' %></td>
-      </tr>
+        <% end %>
+        <% count += 1 %>
       <% end %>
-      <% count += 1 %>
-    <% end %>
-  </tbody>
-</table>
-<div class="text-center buffer">
-  <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
-</div>
+    </tbody>
+  </table>
+  <div class="text-center buffer">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+  </div>
+<% end %>

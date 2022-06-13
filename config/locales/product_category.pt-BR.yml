@@ -8,3 +8,9 @@ pt-BR:
       product_category:
         name: "Nome"
         parent_id: "Categoria Pai"
+    errors:
+      models:
+        product_category:
+          attributes:
+            name:
+              blank: "não pode ficar em branco."
