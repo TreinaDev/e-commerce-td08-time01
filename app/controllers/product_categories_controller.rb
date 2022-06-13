@@ -1,4 +1,5 @@
 class ProductCategoriesController < ApplicationController
+  before_action :check_admin
   before_action :set_product_category, only: [:edit, :update]
   before_action :product_category_params, only: [:create, :update]
   before_action :product_categories, only: [:index, :new, :create, :update]
@@ -45,6 +46,10 @@ class ProductCategoriesController < ApplicationController
 
   def product_categories
     @product_categories = ProductCategory.sort_by_ancestry(ProductCategory.all)
+  end
+
+  def check_admin
+    redirect_to root_path unless current_admin
   end
 
 end

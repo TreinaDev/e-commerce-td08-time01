@@ -32,7 +32,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
 
   it 'e desiste de criar Categoria do Produto e volta ao index de Categorias de Produto' do
     admin = create(:admin)
-    root_product = create(:product_category, :root)
+    root_category = create(:product_category, :root)
 
     login_as(admin, scope: :admin)
     visit root_path
