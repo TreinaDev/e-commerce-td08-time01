@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Cart, type: :model do
+RSpec.describe CartItem, type: :model do
   describe '#valid?' do
     context '#belong_to' do
       it {should belong_to(:product)}

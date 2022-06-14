@@ -8,9 +8,9 @@ describe 'Usuário acessa carrinho de compras' do
     create(:product, name: 'Garrafa', sku: 'GRF9933')
     create(:product, name: 'Jarra', sku: 'JRA68755')
     create(:product, name: 'Pote', sku: 'PTE68755')
-    create(:cart, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart, product_id: 2, quantity: 7, user_id: 1)
-    create(:cart, product_id: 3, quantity: 5, user_id: 2)
+    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
+    create(:cart_item, product_id: 3, quantity: 5, user_id: 2)
 
     login_as(user, scope: :user)
     visit root_path
@@ -28,8 +28,8 @@ describe 'Usuário acessa carrinho de compras' do
     create(:product, name: 'Caneca')
     create(:product, name: 'Garrafa', sku: 'GRF9933')
     create(:product, name: 'Jarra', sku: 'JRA68755')
-    create(:cart, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart, product_id: 2, quantity: 7, user_id: 1)
+    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
 
     login_as(user, scope: :user)
     visit root_path
@@ -50,9 +50,9 @@ describe 'Usuário acessa carrinho de compras' do
     create(:product, name: 'Caneca')
     create(:product, name: 'Garrafa', sku: 'GRF9933')
     create(:product, name: 'Jarra', sku: 'JRA68755')
-    create(:cart, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart, product_id: 2, quantity: 7, user_id: 1)
-    create(:cart, product_id: 3, quantity: 5, user_id: 1)
+    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
+    create(:cart_item, product_id: 3, quantity: 5, user_id: 1)
 
     login_as(user, scope: :user)
     visit root_path

@@ -31,8 +31,8 @@ describe "Usuário adiciona produto ao carrinho" do
     create(:product, name: 'Caneca')
     create(:product, name: 'Garrafa', sku: 'GRF9933')
     create(:product, name: 'Jarra', sku: 'JRA68755')
-    create(:cart, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart, product_id: 2, quantity: 7, user_id: 1)
+    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
   
     login_as(user, scope: :user)
     visit root_path
@@ -41,6 +41,6 @@ describe "Usuário adiciona produto ao carrinho" do
     click_on "Adicionar ao carrinho"
     
     expect(page).to have_content "Só é possível a compra de um ou mais produtos."
-    expect(Cart.count).to eq 2
+    expect(CartItem.count).to eq 2
   end
 end
