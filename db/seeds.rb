@@ -7,10 +7,10 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Clean DB
-ProductCategory.destroy_all
-Product.destroy_all
-User.destroy_all
-Admin.destroy_all
+# ProductCategory.destroy_all
+# Product.destroy_all
+# User.destroy_all
+# Admin.destroy_all
 
 # Create products
 Product.create!(name: 'Caneca Mon Amour', 
@@ -47,7 +47,13 @@ moveis = ProductCategory.create(name: "Móveis")
 mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
 guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 
+# Create Carts
+Cart.create!(product: Product.first, quantity: 5, user: user )
+Cart.create!(product: Product.last, quantity: 7, user: user )
+
+
 p "Foram criados #{Admin.count} admins"
 p "Foram criados #{User.count} usuários"
 p "Foram criados #{Product.count} produtos"
 p "Foram criadas #{ProductCategory.count} categorias de produtos"
+p "Foram criadas #{Cart.count} instâncias de carrinho"
