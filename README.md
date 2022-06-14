@@ -1,17 +1,21 @@
 # README
+## Versão do Ruby
+![This app requires Ruby 3.1.0 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.0&color=B61D1D&style=for-the-badge&logo=ruby)
+  3.1.0
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependências de sistema
+  sqlite3
 
-Things you may want to cover:
+## Configuração
+  Clonar repositório  
+  `$ git clone git@github.com:TreinaDev/e-commerce-td08-time01.git`  
 
-* Ruby version
+  Navegar para a pasta do repositório  
+  `$ cd e-commerce-td08-time01.git`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
+  Instalar gems e depêndencias  
+  `$ bin/setup`   
+ 
 
 * Database initialization
 
