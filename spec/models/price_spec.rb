@@ -14,13 +14,13 @@ RSpec.describe Price, type: :model do
       .with_message('já está cadastrada em outra instância de Price para este produto')
     end
 
-    it 'data estimada de entrega não pode ser retroativa' do
+    it 'ao salvar um preço, o início da sua validade não pode estar no passado' do
       price = Price.new(validity_start: 1.day.ago)
 
       price.valid?
 
       expect(price.errors.include?(:validity_start)).to be true
-      expect(price.errors[:validity_start]).to include('deve ser depois de agora.')
+      expect(price.errors[:validity_start]).to include('não pode estar no passado')
     end
 
   end

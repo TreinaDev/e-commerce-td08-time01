@@ -8,6 +8,7 @@ RSpec.describe Product, type: :model do
       it { should validate_presence_of(:brand) }
       it { should validate_presence_of(:description) }
       it { should validate_presence_of(:sku) }
+      it { should validate_presence_of(:prices.first.price_in_brl)}
     end
 
     context 'for uniqueness' do
