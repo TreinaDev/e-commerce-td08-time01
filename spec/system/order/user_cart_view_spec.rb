@@ -15,9 +15,9 @@ describe 'Usuário acessa carrinho de compras' do
     visit root_path
     click_on "Meu Carrinho"
     
-    expect(page).to have_content "Produto: Caneca - Quantidade: 3"
-    expect(page).to have_content "Produto: Garrafa - Quantidade: 7"
-    expect(page).not_to have_content "Produto: Jarra - Quantidade: 5"
+    expect(page).to have_content "Produto Quantidade"
+    expect(page).to have_content "Garrafa 7"
+    expect(page).not_to have_content "Jarra 5"
   end
   
   it 'e adiciona um produto' do
@@ -36,8 +36,8 @@ describe 'Usuário acessa carrinho de compras' do
     click_on "Adicionar ao carrinho"
     click_on "Meu Carrinho"
     
-    expect(page).to have_content "Produto: Caneca - Quantidade: 3"
-    expect(page).to have_content "Produto: Garrafa - Quantidade: 7"
-    expect(page).to have_content "Produto: Jarra - Quantidade: 5"
+    expect(page).to have_content "Produto Quantidade"
+    expect(page).to have_content "Garrafa 7"
+    expect(page).to have_content "Jarra 5"
   end
 end

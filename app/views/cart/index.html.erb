@@ -1,7 +1,19 @@
-<h3>Meu Carrinho</h3>
+<h3 class='text-center'>Meu Carrinho</h3>
 
-<div>
-  <% @products.each do |p|%>
-    Produto: <%= p.product.name%> - Quantidade: <%= p.quantity%>
-  <%end%>
-</div>
+<table class="table text-center align-middle m-auto" style="max-width: 900px">
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |p|%>
+      <tr>
+        <td class="text-start"><%= p.product.name%></td>
+        <td class="text-center"> <strong> <%=p.quantity%> </strong></td>
+        <%# <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' </td> %>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
