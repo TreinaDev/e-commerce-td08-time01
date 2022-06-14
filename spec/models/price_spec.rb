@@ -24,7 +24,7 @@ RSpec.describe Price, type: :model do
     
 
     it 'é falso se, ao salvar um preço, o início da sua validade está no passado' do
-      price = Price.new(validity_start: 1.day.ago)
+      price = Price.new(validity_start: 1.day.ago, price_in_brl: 5)
 
       price.valid?
 
