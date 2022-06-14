@@ -233,6 +233,7 @@ GEM
     sqlite3 (1.4.2)
     strscan (3.0.3)
     thor (1.2.1)
+    timecop (0.9.5)
     timeout (0.3.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -272,6 +273,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   sqlite3 (~> 1.4)
+  timecop
   tzinfo-data
   webdrivers
 

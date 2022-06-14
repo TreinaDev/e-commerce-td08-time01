@@ -47,6 +47,7 @@ group :development, :test do
   gem "simplecov", require: false
   gem "factory_bot_rails"
   gem 'shoulda-matchers'
+  gem "timecop"
 end
 
 group :test do

@@ -6,15 +6,14 @@ describe "Visitante acessa página de detalhes de um produto" do
                               brand: 'TOC & Ex-TOC',
                               description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
                               sku: 'TOCCAN1234')
-    Price.create(product: product,
-                price_in_brl: 12,
-                validity_start: 22.days.ago)
-    Price.create(product: product,
-                price_in_brl: 14.99,
-                validity_start: 9.hours.ago)
-    Price.create(product: product,
-                price_in_brl: 18,
-                validity_start: 2.days.from_now)
+
+  
+    Timecop.freeze(1.month.ago) do
+      Price.create(product: product, price_in_brl: 12, validity_start: Time.current)
+      Price.create(product: product,  price_in_brl: 14.99, validity_start: 28.days.from_now)
+    end
+  
+    Price.create(product: product, price_in_brl: 18, validity_start: 2.days.from_now)
 
     visit root_path
     click_on 'Caneca Mon Amour'
