@@ -5,4 +5,8 @@ Rails.application.routes.draw do
 
   resources :products, only: [:show]
   resources :product_categories, only: [:index, :show, :new, :create, :edit, :update]
+
+  resources :users, shallow: true do
+    resources :cart, only: [:create]
+  end
 end
