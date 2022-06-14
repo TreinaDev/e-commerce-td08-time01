@@ -12,5 +12,10 @@
 
 <div>
   <%user_signed_in? ? (user_id = current_user.id) : (user_id = 0)%>  
-  <%= button_to 'Adicionar ao carrinho', user_cart_index_path(user_id), params: {'product_id' => @product.id} %>
+  <%= form_with url: user_cart_index_path(user_id) do |f|%>
+    <%= f.label :quantity, 'Quantidade'%>
+    <%= f.number_field :quantity%>
+    <%= f.hidden_field :product_id, value: @product.id%>
+    <%= f.submit 'Adicionar ao carrinho'%>
+  <%end%>
 </div>

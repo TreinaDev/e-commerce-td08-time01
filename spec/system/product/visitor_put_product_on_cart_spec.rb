@@ -19,6 +19,7 @@ describe "Usuário adiciona produto ao carrinho" do
     login_as(user, scope: :user)
     visit root_path
     click_on 'Caneca Mon Amour'
+    fill_in 'Quantidade', with: 1
     click_on 'Adicionar ao carrinho'
 
     expect(page).to have_content('Produto adicionado com sucesso') 

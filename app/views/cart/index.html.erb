@@ -1,0 +1,7 @@
+<h3>Meu Carrinho</h3>
+
+<div>
+  <% @products.each do |p|%>
+    Produto: <%= p.product.name%> - Quantidade: <%= p.quantity%>
+  <%end%>
+</div>
