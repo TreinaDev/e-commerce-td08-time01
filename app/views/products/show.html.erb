@@ -7,5 +7,16 @@
     <dd><%= @product.brand %></dd>
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
+    <dt>Preço:</dt>
+    <dd>R$ <%= number_to_currency(
+      @product.prices.where('validity_start <= :now', { now: Time.now })
+                      .order(validity_start: :asc)
+                      .last
+                      .price_in_brl, 
+      precision: 2) %></dd>
   <dl>
 </article>
+
+  <div class="text-center buffer">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+  </div>

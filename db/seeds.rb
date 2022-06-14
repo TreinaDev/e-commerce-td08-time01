@@ -24,6 +24,15 @@ Product.create!(name: 'Garrafa Star Wars',
                 sku: 'ZON0001'
 )
 
+Product.create!(name: 'Camisa Blue Sky', sku: 'VES1234',
+  brand: 'Vestil',description: 'Camisa de algodão com estampa de céu e nuvens.')
+  
+Product.create!(name: 'Camisa Green Forest', sku: 'VES4321',
+  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.')
+
+Product.create!(name: 'Camisa Large Sea', sku: 'VES2321',
+  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.')
+
 # Create log-ins
 admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
 user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
