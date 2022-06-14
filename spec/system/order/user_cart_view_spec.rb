@@ -40,23 +40,4 @@ describe 'Usuário acessa carrinho de compras' do
     expect(page).to have_content "Produto: Garrafa - Quantidade: 7"
     expect(page).to have_content "Produto: Jarra - Quantidade: 5"
   end
-
-  it 'e tenta adicionar um produto sem quantidade' do
-    user = create(:user)
-    create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    create(:product, name: 'Caneca')
-    create(:product, name: 'Garrafa', sku: 'GRF9933')
-    create(:product, name: 'Jarra', sku: 'JRA68755')
-    create(:cart, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart, product_id: 2, quantity: 7, user_id: 1)
-
-    login_as(user, scope: :user)
-    visit root_path
-    click_on "Jarra"
-    fill_in "Quantidade", with: '0'
-    click_on "Adicionar ao carrinho"
-    
-    expect(page).to have_content "Só é possível a compra de um ou mais produtos."
-    expect(Cart.count).to eq 2
-  end
 end
