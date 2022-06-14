@@ -1,5 +1,5 @@
 class CartController < ApplicationController
-  before_action :get_user_id
+  before_action :get_user_id, except: :destroy
 
   def create 
     product_id = params[:product_id]
@@ -15,6 +15,16 @@ class CartController < ApplicationController
 
   def index
     @products = Cart.where(user_id: @user_id)
+  end
+
+  def destroy
+    cart_to_destroy = Cart.find(params[:id])
+    user_id = cart_to_destroy.user_id
+    product_name = cart_to_destroy.product.name
+
+    cart_to_destroy.destroy
+
+    redirect_to user_cart_index_path(user_id), notice: "Produto retirado: #{product_name}."
   end
 
   private

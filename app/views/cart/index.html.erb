@@ -12,7 +12,7 @@
       <tr>
         <td class="text-start"><%= p.product.name%></td>
         <td class="text-center"> <strong> <%=p.quantity%> </strong></td>
-        <%# <td><%= link_to 'Editar', edit_product_category_path(product_category), class: 'btn btn-outline-warning mini-button' </td> %>
+        <td><%= button_to 'Retirar', cart_path(p.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
       </tr>
     <%end%>
   </tbody>
