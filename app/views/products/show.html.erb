@@ -11,7 +11,7 @@
 </article>
 
 <div>
-  <%user_signed_in? ? (user_id = current_user.id) : (user_id = 0)%>  
+  <%user_id = user_signed_in? ? current_user.id : user_id = 0%>  
   <%= form_with url: user_cart_items_path(user_id) do |f|%>
     <%= f.label :quantity, 'Quantidade'%>
     <%= f.number_field :quantity%>
