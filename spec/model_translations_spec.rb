@@ -8,4 +8,11 @@ describe 'I18n should be available for model' do
     expect(Price.human_attribute_name('product_id')).to eq 'Produto'
     expect(Price.human_attribute_name('validity_start')).to eq 'Início da validade'
   end
+
+  it 'ProductCategory' do
+    expect(ProductCategory.model_name.human).to eq 'Categoria de Produto'
+    expect(ProductCategory.human_attribute_name('name')).to eq 'Nome'
+    expect(ProductCategory.human_attribute_name('parent')).to eq 'Categoria Pai'
+    expect(ProductCategory.human_attribute_name('parent_id')).to eq 'Categoria Pai'
+  end
 end
