@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   resources :users, shallow: true do
     resources :cart_items, only: [:create, :index, :destroy]
+    resources :orders, only: [:new, :create]
   end
 end
