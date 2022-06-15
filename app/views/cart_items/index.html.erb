@@ -10,7 +10,7 @@
   <tbody>
     <% @cart.each do |ci|%>
       <tr>
-        <td class="text-start"><%= ci.product.name%></td>
+        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
         <td class="text-center"> <strong> <%=ci.quantity%> </strong></td>
         <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
       </tr>

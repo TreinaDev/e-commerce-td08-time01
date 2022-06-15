@@ -70,4 +70,26 @@ describe 'User enters cart page' do
     expect(page).to have_content "Garrafa 7"
     expect(page).to have_content "Jarra 5"
   end
+
+  it 'and enters product page through cart link' do
+    user = create(:user)
+    create(:product, name: 'Caneca')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product_id: 1)
+    end
+    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+
+    login_as(user, scope: :user)
+    visit root_path
+    click_on "Meu Carrinho"
+    within('tbody') do
+      first('tr').click_on("Caneca")
+    end
+    
+    expect(page).to have_text 'Caneca'
+    expect(page).to have_text 'TOC & Ex-TOC'
+    expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
+    expect(page).to have_text 'TOC1234'
+    expect(page).to have_text 'R$ 9,99' 
+  end
 end

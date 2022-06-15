@@ -61,8 +61,8 @@ mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: mo
 guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 
 # Create Carts
-Cart.create!(product: Product.first, quantity: 5, user: user )
-Cart.create!(product: Product.last, quantity: 7, user: user )
+CartItem.create!(product: Product.first, quantity: 5, user: user )
+CartItem.create!(product: Product.last, quantity: 7, user: user )
 
 
 p "Foram criados #{Admin.count} admins"
@@ -70,4 +70,4 @@ p "Foram criados #{User.count} usuários"
 p "Foram criados #{Product.count} produtos"
 p "Foram criados um total de #{Price.count} preços para #{Price.select(:product_id).distinct.count} produtos"
 p "Foram criadas #{ProductCategory.count} categorias de produtos"
-p "Foram criadas #{Cart.count} instâncias de carrinho"
+p "Foram criadas #{CartItem.count} instâncias de carrinho"
