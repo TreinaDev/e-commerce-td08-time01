@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
   describe '#valid?' do
-    context '#belong_to' do
+    context '#association' do
       it {should belong_to(:product)}
       it {should belong_to(:user)}
     end

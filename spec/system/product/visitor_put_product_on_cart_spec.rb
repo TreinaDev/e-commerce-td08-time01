@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe "Usuário adiciona produto ao carrinho" do
-  it "com sucesso" do
+describe "User adds product to cart" do
+  it "successfully" do
     create(:product, name: 'Caneca Mon Amour')
     user = create(:user)
     
@@ -14,7 +14,7 @@ describe "Usuário adiciona produto ao carrinho" do
     expect(page).to have_content('Produto adicionado com sucesso') 
   end
   
-  it "e deve estar autenticado" do
+  it "and is redirected to login page when logged out" do
     create(:product, name: 'Caneca Mon Amour')
   
     visit root_path
@@ -25,7 +25,7 @@ describe "Usuário adiciona produto ao carrinho" do
     expect(page).to have_content 'Bem vindo! Por favor registre-se ou entre em sua conta para continuar.'
   end
   
-  it 'e tenta adicionar um produto sem quantidade' do
+  it 'and is rejected for invalid quantity' do
     user = create(:user)
     create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
     create(:product, name: 'Caneca')

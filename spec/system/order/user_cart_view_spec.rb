@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário acessa carrinho de compras' do
-  it 'e vê lista de produtos' do
+describe 'User enters cart page' do
+  it 'and sees cart items' do
     user = create(:user)
     create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
     create(:product, name: 'Caneca')
@@ -23,7 +23,7 @@ describe 'Usuário acessa carrinho de compras' do
     expect(page).not_to have_content "Pote"
   end
   
-  it 'e adiciona um produto' do
+  it 'after adding a product' do
     user = create(:user)
     create(:product, name: 'Caneca')
     create(:product, name: 'Garrafa', sku: 'GRF9933')
@@ -44,7 +44,7 @@ describe 'Usuário acessa carrinho de compras' do
     expect(page).to have_content "Jarra 5"
   end
 
-  it 'e retira um produto' do
+  it 'and withdraws an item ' do
     user = create(:user)
     create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
     create(:product, name: 'Caneca')
