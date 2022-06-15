@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       product_category:
-        one: Categoria de Produto
-        other: Categorias de Produto
+        one: Categoria de Produtos
+        other: Categorias de Produtos
     attributes:
       product_category:
         name: "Nome"
