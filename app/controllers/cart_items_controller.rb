@@ -14,7 +14,7 @@ class CartItemsController < ApplicationController
   end
 
   def index
-    @products = CartItem.where(user_id: @user_id)
+    @cart = CartItem.where(user_id: @user_id)
   end
 
   def destroy
