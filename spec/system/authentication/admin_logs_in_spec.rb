@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Administrador deslogado acessa página de login' do
-   it 'e faz o login com sucesso' do
+describe 'Unlogged user logs in as an admin' do
+  it 'succesfully' do
     create(:admin, name: 'João do Rêgo')
 
     visit new_admin_session_path
@@ -15,13 +15,13 @@ describe 'Administrador deslogado acessa página de login' do
     expect(page).to have_content 'Bem vindo!'
   end
 
-  it 'e não faz o login com sucesso' do
+  it 'but it fails due to wrong credentials' do
     create(:admin, name: 'João do Rêgo', password: '123456')
       
     visit new_admin_session_path
     within 'form' do
       fill_in 'E-mail', with: 'joao@mercadores.com.br'
-      fill_in 'Senha', with: '12345'
+      fill_in 'Senha', with: '9999999'
       click_on 'Entrar'
     end
 
@@ -29,5 +29,4 @@ describe 'Administrador deslogado acessa página de login' do
     expect(page).to have_content 'E-mail ou senha inválidos'
     expect(page).not_to have_content 'João do Rêgo'
   end
-
 end

@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_201118) do
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.decimal "price_in_brl"
+    t.datetime "validity_start"
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_prices_on_product_id"
+  end
+
   create_table "product_categories", force: :cascade do |t|
     t.string "name"
     t.integer "product_category_id"
@@ -68,5 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_201118) do
 
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "users"
+  add_foreign_key "prices", "products"
   add_foreign_key "product_categories", "product_categories"
 end

@@ -1,9 +1,11 @@
 pt-BR:
   activerecord:
     models:
-      product: Produto
+      product: 
+        one: Produto
+        other: Produtos
     attributes:
-      user:
+      product:
         name: Nome
         brand: Marca
         description: Descrição

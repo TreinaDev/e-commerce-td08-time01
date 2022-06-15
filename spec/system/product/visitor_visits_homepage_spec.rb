@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe 'Visitante visita a app' do
-  it 'com sucesso' do
+describe 'Unlogged user visits home page' do
+  it 'succesfully' do
     visit root_path
 
     expect(page).to have_content 'Mercadores'
   end
 
-  it 'e vê produtos' do
+  it 'and sees products' do
     Product.create!(name: 'Caneca Mon Amour', 
                     brand: 'TOC & Ex-TOC',
                     description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
@@ -15,7 +15,7 @@ describe 'Visitante visita a app' do
                   )
     Product.create!(name: 'Garrafa Star Wars', 
                     brand: 'Zona Criativa',
-                    description: 'Garrafa térmica inox, star wars',
+                    description: 'Garrafa térmica inox com temática do filme Star Wars',
                     sku: 'ZON0001',
                   )
     visit root_path
@@ -25,10 +25,10 @@ describe 'Visitante visita a app' do
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
     expect(page).to have_text 'Garrafa Star Wars'
     expect(page).to have_text 'Zona Criativa'
-    expect(page).to have_text 'Garrafa térmica inox, star wars'
+    expect(page).to have_text 'Garrafa térmica inox com temática do filme Star Wars'
   end
 
-  it "mas não existem produtos cadastrados" do
+  it 'but there are no products to show' do
     visit root_path
 
     expect(page).to have_text 'Não existem produtos cadastrados' 

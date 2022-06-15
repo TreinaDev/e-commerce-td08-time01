@@ -28,6 +28,9 @@ describe 'User enters cart page' do
     create(:product, name: 'Caneca')
     create(:product, name: 'Garrafa', sku: 'GRF9933')
     create(:product, name: 'Jarra', sku: 'JRA68755')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product_id: 3)
+    end
     create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
     create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
 
