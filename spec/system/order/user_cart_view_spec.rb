@@ -3,14 +3,14 @@ require 'rails_helper'
 describe 'User enters cart page' do
   it 'and sees cart items' do
     user = create(:user)
-    create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    create(:product, name: 'Caneca')
-    create(:product, name: 'Garrafa', sku: 'GRF9933')
-    create(:product, name: 'Jarra', sku: 'JRA68755')
+    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
+    product_1 = create(:product, name: 'Caneca')
+    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
+    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
     create(:product, name: 'Pote', sku: 'PTE68755')
-    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
-    create(:cart_item, product_id: 3, quantity: 5, user_id: 2)
+    create(:cart_item, product: product_1, quantity: 3, user: user)
+    create(:cart_item, product: product_2, quantity: 7, user: user)
+    create(:cart_item, product: product_3, quantity: 5, user: user_2)
 
     login_as(user, scope: :user)
     visit root_path
@@ -25,14 +25,14 @@ describe 'User enters cart page' do
   
   it 'after adding a product' do
     user = create(:user)
-    create(:product, name: 'Caneca')
-    create(:product, name: 'Garrafa', sku: 'GRF9933')
-    create(:product, name: 'Jarra', sku: 'JRA68755')
+    product_1 = create(:product, name: 'Caneca')
+    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
+    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
     Timecop.freeze(1.month.ago) do
-      create(:price, product_id: 3)
+      create(:price, product: product_3)
     end
-    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
+    create(:cart_item, product: product_1, quantity: 3, user:  user)
+    create(:cart_item, product: product_2, quantity: 7, user:  user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -49,13 +49,12 @@ describe 'User enters cart page' do
 
   it 'and withdraws an item ' do
     user = create(:user)
-    create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    create(:product, name: 'Caneca')
-    create(:product, name: 'Garrafa', sku: 'GRF9933')
-    create(:product, name: 'Jarra', sku: 'JRA68755')
-    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
-    create(:cart_item, product_id: 2, quantity: 7, user_id: 1)
-    create(:cart_item, product_id: 3, quantity: 5, user_id: 1)
+    product_1 = create(:product, name: 'Caneca')
+    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
+    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
+    create(:cart_item, product: product_1, quantity: 3, user: user)
+    create(:cart_item, product: product_2, quantity: 7, user: user)
+    create(:cart_item, product: product_3, quantity: 5, user: user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -73,11 +72,11 @@ describe 'User enters cart page' do
 
   it 'and enters product page through cart link' do
     user = create(:user)
-    create(:product, name: 'Caneca')
+    product = create(:product, name: 'Caneca')
     Timecop.freeze(1.month.ago) do
-      create(:price, product_id: 1)
+      create(:price, product: product)
     end
-    create(:cart_item, product_id: 1, quantity: 3, user_id: 1)
+    create(:cart_item, product: product, quantity: 3, user: user)
 
     login_as(user, scope: :user)
     visit root_path
