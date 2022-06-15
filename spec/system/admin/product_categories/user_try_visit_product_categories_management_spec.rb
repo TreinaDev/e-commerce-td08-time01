@@ -1,17 +1,18 @@
 require 'rails_helper'
 
-describe 'Um usuário não autenticado como administrador tenta entrar Categorias de Produtos' do
-  it 'e o sistema o redireciona quando é um visitante' do
+describe 'Non-admin users get redirect out of the ProductCategory index' do
+  it 'when they are unlogged' do
     visit product_categories_path
+
     expect(current_path).to eq(root_path)
   end
 
-  it 'e o sistema o redireciona quando é um cliente autenticado' do
+  it 'when they are logged-in as a costumer' do
     user = create(:user)
 
     login_as(user, scope: :user)
     visit product_categories_path
+
     expect(current_path).to eq(root_path)
   end
-
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário deslogado acessa página de login' do
-  it 'e faz o login no site com sucesso' do
+describe 'Unlogged user logs in as a costumer' do
+  it 'succesfully' do
     user = create(:user, name: 'José da Silva')
 
     visit root_path
@@ -18,14 +18,14 @@ describe 'Usuário deslogado acessa página de login' do
     expect(page).to have_content 'Bem vindo!'
   end
 
-  it 'e não faz o login com sucesso' do
+  it 'but it fails due to wrong credentials' do
     create(:user, name: 'José da Silva', password: '123456')
       
     visit root_path
     click_on 'Entrar'
     within 'form' do
       fill_in 'E-mail', with: 'jose@meuemail.com'
-      fill_in 'Senha', with: '12345'
+      fill_in 'Senha', with: '9999999'
       click_on 'Entrar'
     end
 

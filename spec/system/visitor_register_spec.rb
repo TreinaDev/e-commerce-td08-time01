@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Visitante se registra na plataforma' do
-  it 'com sucesso' do
+describe 'Someone tries to create a costumer account' do
+  it 'and is succesful' do
     visit root_path
     click_on 'Registrar'
     fill_in 'Nome', with: 'Cláudio Roberto'
@@ -16,7 +16,7 @@ describe 'Visitante se registra na plataforma' do
     expect(User.count).to eq 1
   end
 
-  it 'sem sucesso' do
+  it 'it fails and they receive an error message' do
     visit root_path
     click_on 'Registrar'
     fill_in 'Nome', with: 'Cláudio Roberto'

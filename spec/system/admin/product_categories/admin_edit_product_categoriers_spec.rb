@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe 'Admin entra no gerenciamento de Categoria de Produtos' do
-  it 'e edita Categoria do Produto com sucesso' do
+describe 'Admin visits the page to edit a ProductCategory' do
+  it 'and edits it succesfully' do
     admin = create(:admin)
-    root_product = create(:product_category, :root)
-    product = create(:product_category, :child, parent: root_product)
+    root_category = create(:product_category, :root)
+    product = create(:product_category, :child, parent: root_category)
 
     login_as(admin, scope: :admin)
     visit root_path
@@ -17,7 +17,7 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     expect(page).to have_content('Cadeira Office')
   end
 
-  it 'e edita Categoria do Produto sem sucesso #1' do
+  it 'but the edition fails because the proposed input is unacceptable' do
     admin = create(:admin)
     root_product = create(:product_category, :root)
     product = create(:product_category, :child, parent: root_product)
@@ -33,35 +33,9 @@ describe 'Admin entra no gerenciamento de Categoria de Produtos' do
     expect(page).not_to have_content('Cadeira Office')
   end
 
-  it 'e edita Categoria do Produto sem sucesso #2' do
+  it 'gives up on editing and goes back' do
     admin = create(:admin)
-    root_product = create(:product_category, :root)
-    product1 = create(:product_category, :child, parent: root_product)
-    product2 = create(:product_category, name: 'Cadeira Office' , parent: root_product)
-
-    login_as(admin, scope: :admin)
-    visit root_path
-    click_on 'Gerenciar Categorias'
-    first(:link, 'Editar').click
-    fill_in 'Nome', with: 'Cadeira Office'
-    click_on 'Salvar'
-
-    expect(page).to have_content('Falha na atualização da Categoria de Produto')
-  end
-
-  it 'e não ainda não há categorias de produtos criadas' do
-    admin = create(:admin)
-
-    login_as(admin, scope: :admin)
-    visit root_path
-    click_on 'Gerenciar Categorias'
-
-    expect(page).to have_content('Nenhuma Categoria de Produto cadastrada até o momento')
-  end
-
-  it 'e desiste de editar Categoria do Produto e volta ao index de Categorias de Produto' do
-    admin = create(:admin)
-    root_product = create(:product_category, :root)
+    root_category = create(:product_category, :root)
 
     login_as(admin, scope: :admin)
     visit root_path
