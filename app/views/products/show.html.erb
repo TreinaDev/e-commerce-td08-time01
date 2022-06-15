@@ -8,12 +8,7 @@
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
     <dt>Preço:</dt>
-    <dd><%= number_to_currency(
-      @product.prices.where('validity_start <= ?', DateTime.now)
-                      .order(validity_start: :asc)
-                      .last
-                      .price_in_brl, 
-      precision: 2) %></dd>
+    <dd><%= number_to_currency(@current_price, precision: 2) %></dd>
   <dl>
 </article>
 
