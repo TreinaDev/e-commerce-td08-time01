@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin entra na página de cadastro' do
-  it 'e registra com sucesso' do
+describe 'Someone tries to create an admin account' do
+  it 'and is succesful' do
     visit new_admin_registration_path
     click_on 'Cadastrar-se'
     fill_in 'Nome', with: 'Manoel da Silva'
@@ -12,10 +12,10 @@ describe 'Admin entra na página de cadastro' do
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Manoel da Silva')
-    expect(Admin.count).to eq 1
+    expect(Admin.count).to be 1
   end
 
-  it 'e tenta registrar domínio diferente sem sucesso' do
+  it 'but is refused due to invalid email domain' do
     visit new_admin_registration_path
     click_on 'Cadastrar-se'
     fill_in 'Nome', with: 'Manoel da Silva'
@@ -26,6 +26,6 @@ describe 'Admin entra na página de cadastro' do
 
     expect(current_path).to eq(admin_registration_path)
     expect(page).to have_content('E-mail com domínio inválido')
-    expect(Admin.count).to eq 0
+    expect(Admin.count).to be 0
   end
 end

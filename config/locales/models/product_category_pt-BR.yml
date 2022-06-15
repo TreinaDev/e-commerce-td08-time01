@@ -2,11 +2,12 @@ pt-BR:
   activerecord:
     models:
       product_category:
-        one: Categoria de Produto
+        one: Categoria de Produtos
         other: Categorias de Produtos
     attributes:
       product_category:
         name: "Nome"
+        parent: "Categoria Pai"
         parent_id: "Categoria Pai"
     errors:
       models:

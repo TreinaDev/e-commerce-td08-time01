@@ -1,5 +1,9 @@
 pt-BR:
   activerecord:
+    models:
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       user:
         confirmation_sent_at: Confirmação enviada em
@@ -35,5 +39,3 @@ pt-BR:
               too_short: "muito pequena."
             email:
               invalid: "inválido."
-        
-        

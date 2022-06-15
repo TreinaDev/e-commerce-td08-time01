@@ -7,5 +7,11 @@
     <dd><%= @product.brand %></dd>
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
+    <dt>Preço:</dt>
+    <dd><%= number_to_currency(@current_price, precision: 2) %></dd>
   <dl>
 </article>
+
+  <div class="text-center buffer">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+  </div>
