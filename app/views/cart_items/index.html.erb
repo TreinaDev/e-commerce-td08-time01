@@ -1,0 +1,19 @@
+<h3 class='text-center'>Meu Carrinho</h3>
+
+<table class="table text-center align-middle m-auto" style="max-width: 900px">
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |ci|%>
+      <tr>
+        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
+        <td class="text-center"> <strong> <%=ci.quantity%> </strong></td>
+        <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

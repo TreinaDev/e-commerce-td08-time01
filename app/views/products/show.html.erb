@@ -12,6 +12,15 @@
   <dl>
 </article>
 
-  <div class="text-center buffer">
-    <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
-  </div>
+<div>
+  <%user_id = user_signed_in? ? current_user.id : user_id = 0%>  
+  <%= form_with url: user_cart_items_path(user_id) do |f|%>
+    <%= f.label :quantity, 'Quantidade'%>
+    <%= f.number_field :quantity%>
+    <%= f.hidden_field :product_id, value: @product.id%>
+    <%= f.submit 'Adicionar ao carrinho'%>
+  <%end%>
+</div>
+<div class="text-center buffer">
+  <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+</div>

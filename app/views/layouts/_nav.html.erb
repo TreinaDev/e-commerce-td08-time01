@@ -40,6 +40,10 @@
         <li>
 
         <li class="nav-link">
+          <%= link_to 'Meu Carrinho', user_cart_items_path(current_user.id), class: 'text-light text-decoration-none' %>
+        </li>
+
+        <li class="nav-link">
           <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-light mini-button' %>
         </li>
       <% end %>
