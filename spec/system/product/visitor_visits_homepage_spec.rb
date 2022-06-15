@@ -8,16 +8,16 @@ describe 'Unlogged user visits home page' do
   end
 
   it 'and sees products' do
-    Product.create!(name: 'Caneca Mon Amour', 
-                    brand: 'TOC & Ex-TOC',
-                    description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
-                    sku: 'TOC1234',
-                  )
-    Product.create!(name: 'Garrafa Star Wars', 
-                    brand: 'Zona Criativa',
-                    description: 'Garrafa térmica inox com temática do filme Star Wars',
-                    sku: 'ZON0001',
-                  )
+    category = create(:product_category, :root)
+    create(:product, name: 'Caneca Mon Amour',
+                     brand: 'TOC & Ex-TOC',
+                     description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
+                     product_category: category)
+    create(:product, name: 'Garrafa Star Wars', 
+                     brand: 'Zona Criativa',
+                     description: 'Garrafa térmica inox com temática do filme Star Wars',
+                     product_category: category)
+
     visit root_path
 
     expect(page).to have_text 'Caneca Mon Amour'
