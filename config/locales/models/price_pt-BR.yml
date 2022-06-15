@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      price:
+        one: Preço
+        other: Preços
+    attributes:
+      price:
+        price_in_brl: Preço em reais
+        product: Produto
+        product_id: Produto
+        validity_start: Início da validade
