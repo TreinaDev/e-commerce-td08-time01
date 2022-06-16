@@ -4,5 +4,6 @@ FactoryBot.define do
     brand { "TOC & Ex-TOC" }
     description { "Caneca em cerâmica com desenho de uma flecha do cupido" }
     sku { "TOC1234" }
+    status { "draft" }
   end
 end

@@ -1,5 +1,14 @@
 <article>
   <h3><%= @product.name %></h3>
+
+  <% if admin_signed_in? %>
+    <div id='status_buttons'>
+      <%= (button_to 'Suspender produto', 'route') unless @product.off_shelf? %>
+      <%= (button_to 'Tornar produto um rascunho', 'route') unless @product.draft? %>
+      <%= (button_to 'Colocar produto à venda', 'route') unless @product.on_shelf? %>
+    </div>
+  <% end %>
+
   <dl>
     <dt>SKU:</dt>
     <dd><%= @product.sku %></dd>
