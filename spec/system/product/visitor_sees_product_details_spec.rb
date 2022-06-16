@@ -21,6 +21,7 @@ describe 'Unlogged user sees details of a Product' do
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
     expect(page).to have_text 'TOCCAN1234'
     expect(page).to have_text 'R$ 14,99' 
+    expect(page).not_to have_text 'Status: à venda' 
   end
 
   it 'but is redirected to homepage because the product does not exists' do

@@ -35,9 +35,10 @@ describe 'Admin clicks on a button that should' do
     visit product_path(product1)
     click_on 'Suspender produto'
 
+    expect(current_path).to eq product_path(product1)
     expect(Product.first.status).to eq 'off_shelf'
     expect(Product.last.status).to eq 'draft' # unchanged
-    expect(current_path).to eq product_path(product1)
+    expect(page).to have_text('Status: suspenso')
     expect(page).to have_text('Status atualizado com sucesso')
     expect(page).not_to have_button('Suspender produto')
     expect(page).to have_button('Tornar produto um rascunho')

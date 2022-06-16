@@ -10,6 +10,10 @@
   <% end %>
 
   <dl>
+    <% if admin_signed_in? %>
+      <dt>Status:</dt>
+      <dd><%= t("activerecord.attributes.product.status.#{@product.status}") %></dd>
+    <% end %>
     <dt>SKU:</dt>
     <dd><%= @product.sku %></dd>
     <dt>Marca:</dt>
