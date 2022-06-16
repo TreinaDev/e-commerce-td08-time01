@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-describe 'Unlogged user visits show of a Product' do
+describe 'Unlogged user sees details of a Product' do
   it 'succesfully' do
-    product = Product.create!(name: 'Caneca Mon Amour', 
-                              brand: 'TOC & Ex-TOC',
-                              description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
-                              sku: 'TOCCAN1234')
+    product = create(:product, name: 'Caneca Mon Amour', 
+                               status: 'on_shelf',
+                               brand: 'TOC & Ex-TOC',
+                               description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
+                               sku: 'TOCCAN1234')
     Timecop.freeze(1.month.ago) do
       Price.create!(product: product, price_in_brl: 12, validity_start: 2.seconds.from_now)
       Price.create!(product: product,  price_in_brl: 14.99, validity_start: 28.days.from_now)
