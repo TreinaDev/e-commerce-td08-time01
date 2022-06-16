@@ -8,4 +8,10 @@ class ProductsController < ApplicationController
                              .last
                              .price_in_brl
   end
+  
+  def update_status
+    product = Product.find(params[:id])
+    product.update(status: params[:status])
+    redirect_to product, notice: 'Status atualizado com sucesso'
+  end
 end

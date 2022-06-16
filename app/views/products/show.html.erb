@@ -3,9 +3,9 @@
 
   <% if admin_signed_in? %>
     <div id='status_buttons'>
-      <%= (button_to 'Suspender produto', 'route') unless @product.off_shelf? %>
-      <%= (button_to 'Tornar produto um rascunho', 'route') unless @product.draft? %>
-      <%= (button_to 'Colocar produto à venda', 'route') unless @product.on_shelf? %>
+      <%= (button_to 'Suspender produto', update_status_product_path, params: { status: 'off_shelf'}) unless @product.off_shelf? %>
+      <%= (button_to 'Tornar produto um rascunho', update_status_product_path, params: { status: 'draft'}) unless @product.draft? %>
+      <%= (button_to 'Colocar produto à venda', update_status_product_path, params: { status: 'on_shelf'}) unless @product.on_shelf? %>
     </div>
   <% end %>
 
