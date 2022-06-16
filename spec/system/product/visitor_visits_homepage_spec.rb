@@ -8,7 +8,7 @@ describe 'Unlogged user visits home page' do
   end
 
   it 'and sees products' do
-    category = create(:product_category, :root)
+    category = create(:product_category, name: 'Garrafas & Canecas')
     create(:product, name: 'Caneca Mon Amour',
                      brand: 'TOC & Ex-TOC',
                      description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
@@ -26,6 +26,7 @@ describe 'Unlogged user visits home page' do
     expect(page).to have_text 'Garrafa Star Wars'
     expect(page).to have_text 'Zona Criativa'
     expect(page).to have_text 'Garrafa térmica inox com temática do filme Star Wars'
+    expect(page).to have_text 'Garrafas & Canecas'
   end
 
   it 'but there are no products to show' do

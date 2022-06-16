@@ -8,10 +8,11 @@
         <dl>
           <dt>Nome:</dt>
           <dd><%= link_to product.name, product %></dd>
-          <dt>Marca:</dt>
-          <dd><%= product.brand %></dd>
+          <dt>Marca:</dt> <dd><%= product.brand %></dd>
           <dt>Descrição: </dt>
           <dd><%= product.description %></dd>
+          <dt>Categoria: </dt>
+          <dd><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></dd>
         <dl>
       </article>
     <% end %>
