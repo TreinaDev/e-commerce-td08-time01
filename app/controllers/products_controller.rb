@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   end
   
   def update_status
+    return unless admin_signed_in?
     product = Product.find(params[:id])
     product.update(status: params[:status])
     redirect_to product, notice: 'Status atualizado com sucesso'

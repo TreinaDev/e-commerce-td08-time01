@@ -1,5 +1,27 @@
 require 'rails_helper'
 
+describe 'A request for status update is denied' do
+  it 'when done by an unlogged person' do
+    product = create(:product, status: 'draft')
+
+    post update_status_product_path(product), params: { status: 'on_shelf'}
+
+    expect(Product.first.status).to eq 'draft'
+  end
+
+  it 'when done by a costumer' do
+    user = create(:user)
+    product = create(:product, status: 'draft')
+
+  # por que esse teste falha se a linha abaixo é simplesmente
+  # login_as(user) ?
+    login_as(user, scope: :user)
+    post update_status_product_path(product), params: { status: 'on_shelf'}
+
+    expect(Product.first.status).to eq 'draft'
+  end
+end
+
 describe 'Admin clicks on a button that should' do
   it 'update product status to off_shelf' do
     admin = create(:admin)
