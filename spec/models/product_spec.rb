@@ -13,7 +13,7 @@ RSpec.describe Product, type: :model do
 
         product.valid?
 
-        expect(product.errors.full_messages).to include('Marca não pode ficar em branco')
+        expect(product.errors.full_messages).to include('Marca não pode estar em branco')
       end
 
       it 'should return true if product is a draft' do
@@ -35,7 +35,7 @@ RSpec.describe Product, type: :model do
 
         product.valid?
 
-        expect(product.errors.full_messages).to include('Descrição não pode ficar em branco')
+        expect(product.errors.full_messages).to include('Descrição não pode estar em branco')
       end
 
       it 'should return true if product is a draft' do
@@ -57,7 +57,7 @@ RSpec.describe Product, type: :model do
 
         product.valid?
 
-        expect(product.errors.full_messages).to include('SKU não pode ficar em branco')
+        expect(product.errors.full_messages).to include('SKU não pode estar em branco')
       end
 
       it 'should return true if product is a draft' do
