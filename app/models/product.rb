@@ -1,8 +1,6 @@
 class Product < ApplicationRecord
   has_many :prices
   belongs_to :product_category, optional: true
-
-  enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
   
   validates_presence_of :name, :brand, :description, :sku
   validates_uniqueness_of :sku
