@@ -1,17 +1,6 @@
-# The data can then be loaded with the 
-# $ bin/rails db:seed 
-#
 # Examples:
-#
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
-# Clean DB
-Price.destroy_all
-ProductCategory.destroy_all
-Product.destroy_all
-User.destroy_all
-Admin.destroy_all
 
 # Create products and prices
 product1 = Product.create!(status: 'on_shelf',
@@ -23,6 +12,8 @@ product2 = Product.create!(status: 'on_shelf',
   name: 'Garrafa Star Wars', brand: 'Zona Criativa', sku: 'ZON0001',
   description: 'Garrafa térmica inox, star wars')
 Price.create!(product: product2, price_in_brl: 25.99, validity_start: 1.second.from_now)
+Price.create!(product: product2, price_in_brl: 19.99, validity_start: 2.weeks.from_now)
+Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.from_now)
 
 product3 = Product.create!(status: 'off_shelf',
   name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
@@ -40,6 +31,7 @@ product5 = Product.create!(status: 'on_shelf',
 Price.create!(product: product5, price_in_brl: 89.00, validity_start: 1.second.from_now)
 
 # Create log-ins
+Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
 admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
 user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
 
@@ -65,7 +57,6 @@ guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 # Create Carts
 CartItem.create!(product: Product.first, quantity: 5, user: user )
 CartItem.create!(product: Product.last, quantity: 7, user: user )
-
 
 p "Foram criados #{Admin.count} admins"
 p "Foram criados #{User.count} usuários"
