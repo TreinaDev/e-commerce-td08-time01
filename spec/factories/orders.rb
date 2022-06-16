@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    user { nil }
-    address { "MyString" }
+    user 
+    address { "Rua da Entrega, 54" }
   end
 end
