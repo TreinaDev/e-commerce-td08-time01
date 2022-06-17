@@ -81,6 +81,6 @@ describe "User confirms order from cart" do
     fill_in "Endereço de entrega", with: ""
     click_on "Confirmar"
 
-    expect(page).to have_content "Endereço de entrega não pode ficar em branco"
+    expect(page).to have_content "Endereço de entrega não pode estar em branco"
   end
 end

@@ -4,15 +4,15 @@ describe 'User enters cart page' do
   it 'and sees cart items' do
     user = create(:user)
     user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
-    product_4 = create(:product, name: 'Pote', sku: 'PTE68755')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
+    product_4 = create(:product, name: 'Pote')
     Timecop.freeze(1.month.ago) do
-      create(:price, product: product_1, price_in_brl: "11.99")
-      create(:price, product: product_2, price_in_brl: "4.99")
-      create(:price, product: product_3, price_in_brl: "15.99")
-      create(:price, product: product_4, price_in_brl: "2.99")
+      create(:price, product: product_1, price_in_brl: '11.99')
+      create(:price, product: product_2, price_in_brl: '4.99')
+      create(:price, product: product_3, price_in_brl: '15.99')
+      create(:price, product: product_4, price_in_brl: '2.99')
     end
     create(:cart_item, product: product_1, quantity: 3, user: user)
     create(:cart_item, product: product_2, quantity: 7, user: user)
@@ -52,9 +52,9 @@ describe 'User enters cart page' do
   
   it 'after adding a product' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
     Timecop.freeze(1.month.ago) do
       create(:price, product: product_1, price_in_brl: "11.99")
       create(:price, product: product_2, price_in_brl: "4.99")
@@ -77,9 +77,9 @@ describe 'User enters cart page' do
 
   it 'and withdraws an item ' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
     Timecop.freeze(1.month.ago) do
       create(:price, product: product_1, price_in_brl: "11.99")
       create(:price, product: product_2, price_in_brl: "4.99")
@@ -106,7 +106,7 @@ describe 'User enters cart page' do
 
   it 'and enters product page through cart link' do
     user = create(:user)
-    product = create(:product, name: 'Caneca')
+    product = create(:product, name: 'Caneca', status: 'on_shelf')
     Timecop.freeze(1.month.ago) do
       create(:price, product: product)
     end
@@ -119,10 +119,6 @@ describe 'User enters cart page' do
       first('tr').click_on("Caneca")
     end
     
-    expect(page).to have_text 'Caneca'
-    expect(page).to have_text 'TOC & Ex-TOC'
-    expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
-    expect(page).to have_text 'TOC1234'
-    expect(page).to have_text 'R$ 9,99' 
+    expect(current_path).to eq product_path(product)
   end
 end
