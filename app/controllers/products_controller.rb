@@ -8,4 +8,10 @@ class ProductsController < ApplicationController
                              .last
                              .price_in_brl
   end
+
+  def by_category
+    #@products = Product.all
+    @products_by_category = Product.where(product_category_id: params[:format])
+    @product_category = ProductCategory.find(params[:format])
+  end
 end

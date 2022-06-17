@@ -23,7 +23,7 @@ RSpec.describe Product, type: :model do
     it 'should automatically add it when a new product is created' do
       hamlet = create(:product, sku: '').sku 
       
-      expect(hamlet).to be 
+      expect(hamlet).to be
     end
 
     it 'should not change the SKU if the product already had one' do

@@ -1,0 +1,20 @@
+<section>
+  <h3 class="text-center"><%= @product_category.show_with_ancestors %></h3>
+  <% if @products_by_category.empty? %>
+      <p>Não existem produtos cadastrados nesta categoria</p>
+  <% else %>
+    <% @products_by_category.each do |product| %>
+      <article>
+        <dl>
+          <dt>Nome:</dt>
+          <dd><%= link_to product.name, product %></dd>
+          <dt>Marca:</dt> <dd><%= product.brand %></dd>
+          <dt>Descrição: </dt>
+          <dd><%= product.description %></dd>
+          <dt>Categoria: </dt>
+          <dd><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></dd>
+        <dl>
+      </article>
+    <% end %>
+  <% end %>
+</section>
