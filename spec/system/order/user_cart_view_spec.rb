@@ -29,7 +29,7 @@ describe 'User enters cart page' do
     expect(page).not_to have_content "Pote 7 R$ 2,99"
   end
 
-  it 'and there is no cart items' do
+  it 'and there are no cart items' do
     user = create(:user)
     user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
     product_1 = create(:product, name: 'Jarra', sku: 'JRA68755')

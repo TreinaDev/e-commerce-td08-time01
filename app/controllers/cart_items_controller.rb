@@ -1,5 +1,6 @@
 class CartItemsController < ApplicationController
   before_action :get_user_id, except: :destroy
+  before_action :authenticate_user!, except: :create
   
   def index
     @cart = CartItem.where(user_id: @user_id, order_id: nil)

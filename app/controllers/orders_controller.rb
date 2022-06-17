@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :get_user, only: [:index, :new, :create]
   before_action :get_cart_and_sum, only: [:new, :create]
+  before_action :authenticate_user!
 
   def index
     @orders = Order.where(user_id: @user_id) 
