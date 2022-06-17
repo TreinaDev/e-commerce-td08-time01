@@ -12,18 +12,38 @@ describe "User enters orders page" do
       create(:price, product: product_2, price_in_brl: "4.99")
       create(:price, product: product_3, price_in_brl: "15.99")
     end
+    create(:cart_item, product: product_1, quantity: 3, user: user)
+    create(:cart_item, product: product_2, quantity: 7, user: user)
+    create(:cart_item, product: product_3, quantity: 5, user: user_2)
     order_1 = create(:order, user: user, status: 'pending')
-    order_2 = create(:order, user: user, status: 'aproved')
     order_3 = create(:order, user: user_2, status: 'pending')
-    create(:cart_item, product: product_1, quantity: 3, user: user, order: order_1)
-    create(:cart_item, product: product_2, quantity: 7, user: user, order: order_2)
-    create(:cart_item, product: product_3, quantity: 5, user: user_2, order: order_3)
 
     login_as(user, scope: :user)
     visit root_path
     click_on "Meus Pedidos"
 
-    expect(page).to have_content "Pedido  #{order_1.code} - Pendente"
-    expect(page).to have_content "Pedido  #{order_2.code} - Aprovado"
+    expect(page).to have_content "Pedido #{order_1.code} - Pendente"
+    expect(page).not_to have_content "Pedido #{order_3.code} - Pendente"
+  end
+
+  it "and enters a order page after some time" do
+    user = create(:user)
+    product = create(:product, name: 'Caneca')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product: product, price_in_brl: "11.99")
+      create(:price, product: product, price_in_brl: "4.99", validity_start: 15.days.from_now)
+    end
+    Timecop.freeze(20.days.ago) do
+      create(:cart_item, product: product, quantity: 3, user: user)
+      @order_1 = create(:order, user: user, status: 'pending')
+    end
+    
+    login_as(user, scope: :user)
+    visit root_path
+    click_on "Meus Pedidos"
+    click_on "#{@order_1.code}"
+
+    expect(page).to have_content "R$ 11,99"
+    expect(page).to have_content "Valor Total: R$ 35,97"
   end
 end

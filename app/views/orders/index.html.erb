@@ -1,0 +1,5 @@
+<% @orders.each do |o|%>
+  <div>
+    Pedido <%= link_to o.code, order_path(o.id) %> - <%=I18n.t "order_status.#{o.status}"%>
+  </div>
+<%end%>

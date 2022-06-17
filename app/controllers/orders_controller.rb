@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :get_user, only: [:index, :new]
+
+  def index
+    @orders = Order.where(user_id: @user_id) 
+  end
+  
   def new
-    @user_id = params[:user_id]
     @cart = CartItem.where(user_id: @user_id, order_id: nil)
     @sum = 0
     @cart.each do |ci| 
@@ -18,11 +23,7 @@ class OrdersController < ApplicationController
     @cart = @order.cart_items
     @sum = 0
     @cart.each do |ci| 
-      @sum += ci.product.prices
-                .where('validity_start <= ?', DateTime.current)
-                .order(validity_start: :asc)
-                .last
-                .price_in_brl * ci.quantity
+      @sum += ci.price_on_purchase * ci.quantity
     end
   end
   
@@ -30,7 +31,6 @@ class OrdersController < ApplicationController
     @order_params = params.require(:order).permit(:address, :user_id)
     @order = Order.new(@order_params)
     if @order.save
-      CartItem.where(order_id: nil).each {|ci| ci.update(order_id: @order.id)}
       flash[:notice] = "Pedido efetuado com sucesso"
       redirect_to @order
     else
@@ -38,5 +38,10 @@ class OrdersController < ApplicationController
       render 'new'
     end
   end
-  
+
+  private
+
+  def get_user
+    @user_id = params[:user_id]
+  end
 end
