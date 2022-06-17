@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find_by(id: params[:id])
     return redirect_to root_path, alert: 'Produto não encontrado' if @product.nil?
+    return redirect_to root_path, alert: 'Produto não encontrado' unless admin_signed_in? || @product.on_shelf?
+
     @current_price = @product.prices
                              .where('validity_start <= ?', DateTime.current)
                              .order(validity_start: :asc)

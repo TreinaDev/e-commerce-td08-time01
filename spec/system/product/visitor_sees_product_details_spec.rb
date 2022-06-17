@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Unlogged user sees details of a Product' do
-  it 'succesfully' do
+describe 'Unlogged user tries to see details of a Product' do
+  it 'and is succesful' do
     product = create(:product, name: 'Caneca Mon Amour', 
                                status: 'on_shelf',
                                brand: 'TOC & Ex-TOC',
@@ -29,5 +29,27 @@ describe 'Unlogged user sees details of a Product' do
     
     expect(current_path).to eq root_path
     expect(page).to have_text 'Produto não encontrado'
+  end
+
+  context 'but is redirected to homepage because the product' do
+    it 'is a draft' do
+      create(:product, status: 'draft')
+
+      visit product_path(1)
+      
+      expect(current_path).to eq root_path
+      expect(page).to have_text 'Produto não encontrado'
+    end
+
+    it 'is off shelf' do
+      user = create(:user)
+      create(:product, status: 'off_shelf')
+      
+      login_as(user, scope: :user)
+      visit product_path(1)
+      
+      expect(current_path).to eq root_path
+      expect(page).to have_text 'Produto não encontrado'
+    end
   end
 end

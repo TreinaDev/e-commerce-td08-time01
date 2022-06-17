@@ -13,8 +13,6 @@ describe 'A request for status update is denied' do
     user = create(:user)
     product = create(:product, status: 'draft')
 
-  # por que esse teste falha se a linha abaixo é simplesmente
-  # login_as(user) ?
     login_as(user, scope: :user)
     post update_status_product_path(product), params: { status: 'on_shelf'}
 
