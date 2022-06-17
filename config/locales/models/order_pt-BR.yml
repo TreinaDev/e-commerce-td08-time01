@@ -7,7 +7,7 @@ pt-BR:
     attributes:
       order:
         address: Endereço de entrega
-  order_status:
-    pending: Pendente
-    approved: Aprovado
-    canceled: Cancelado
+        statuses:
+          pending: Pendente
+          approved: Aprovado
+          canceled: Cancelado

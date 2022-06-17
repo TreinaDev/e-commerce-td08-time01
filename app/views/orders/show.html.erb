@@ -1,4 +1,4 @@
-<h3 class='text-center'>Meu Pedido</h3>
+<h3 class='text-center'>Pedido <%=@order.code%></h3>
 <table class="table text-center align-middle m-auto" style="max-width: 900px">
   <thead>
     <tr>
@@ -26,8 +26,8 @@
       <td class="text-center"> <strong><%=@order.address%></strong></td>
     </tr>
     <tr>
-      <td colspan="2" class="text-center"> <strong>Pedido</strong></td>
-      <td class="text-center"> <strong><%=@order.code%></strong></td>
+      <td colspan="2" class="text-center"> <strong><%=Order.human_attribute_name(:status)%>:</strong></td>
+      <td class="text-center"> <strong><%=Order.human_enum_name(:status, @order.status)%></strong></td>
     </tr>
   </tbody>
 </table>
