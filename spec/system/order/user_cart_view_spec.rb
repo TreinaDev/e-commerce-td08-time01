@@ -27,10 +27,7 @@ describe 'User enters cart page' do
     user = create(:user)
     product_1 = create(:product, name: 'Caneca')
     product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')
-    Timecop.freeze(1.month.ago) do
-      create(:price, product: product_3)
-    end
+    product_3 = create(:product, name: 'Jarra', sku: 'JRA68755').set_price(5.55)
     create(:cart_item, product: product_1, quantity: 3, user:  user)
     create(:cart_item, product: product_2, quantity: 7, user:  user)
 
@@ -72,10 +69,7 @@ describe 'User enters cart page' do
 
   it 'and enters product page through cart link' do
     user = create(:user)
-    product = create(:product, name: 'Caneca')
-    Timecop.freeze(1.month.ago) do
-      create(:price, product: product)
-    end
+    product = create(:product, name: 'Caneca').set_price(8.44)
     create(:cart_item, product: product, quantity: 3, user: user)
 
     login_as(user, scope: :user)

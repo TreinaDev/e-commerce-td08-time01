@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   
   has_many :prices
 
-  def set_price(price_in_brl, validity_start = 1.second.from_now)
+  def set_price(price_in_brl, validity_start = 1.second.ago)
     Price.create!(price_in_brl: price_in_brl,
                   validity_start: validity_start,
                   product_id: self.id)

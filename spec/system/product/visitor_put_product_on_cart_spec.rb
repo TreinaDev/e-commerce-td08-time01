@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe "User adds product to cart" do
   it "successfully" do
-    product = create(:product, name: 'Caneca Mon Amour')
-    Timecop.freeze(1.month.ago) do
-      create(:price, product: product)
-    end
+    product = create(:product, name: 'Caneca Mon Amour').set_price(4.44)
     user = create(:user)
     
     login_as(user, scope: :user)
@@ -18,10 +15,7 @@ describe "User adds product to cart" do
   end
   
   it "and is redirected to login page when logged out" do
-    product = create(:product, name: 'Caneca Mon Amour')
-    Timecop.freeze(1.month.ago) do
-      create(:price, product: product)
-    end
+    product = create(:product, name: 'Caneca Mon Amour').set_price(4.44)
   
     visit root_path
     click_on 'Caneca Mon Amour'
@@ -33,10 +27,7 @@ describe "User adds product to cart" do
   
   it 'and is rejected for invalid quantity' do
     user = create(:user)
-    product = create(:product, name: 'Caneca')
-    Timecop.freeze(1.month.ago) do
-      create(:price, product: product)
-    end
+    product = create(:product, name: 'Caneca').set_price(4.44)
   
     login_as(user, scope: :user)
     visit root_path
