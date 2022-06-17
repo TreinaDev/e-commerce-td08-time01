@@ -10,6 +10,8 @@
 Price.destroy_all
 ProductCategory.destroy_all
 Product.destroy_all
+CartItem.destroy_all
+Order.destroy_all
 User.destroy_all
 Admin.destroy_all
 
@@ -60,9 +62,12 @@ moveis = ProductCategory.create(name: "Móveis")
 mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
 guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 
-# Create Carts
-CartItem.create!(product: Product.first, quantity: 5, user: user )
-CartItem.create!(product: Product.last, quantity: 7, user: user )
+# Create Carts and Orders
+CartItem.create!(product: product1, quantity: 5, user: user )
+CartItem.create!(product: product2, quantity: 7, user: user )
+Order.create!(address: 'Rua da entrega, 75', user: user)
+CartItem.create!(product: product3, quantity: 5, user: user )
+CartItem.create!(product: product1, quantity: 7, user: user )
 
 
 p "Foram criados #{Admin.count} admins"
@@ -70,4 +75,5 @@ p "Foram criados #{User.count} usuários"
 p "Foram criados #{Product.count} produtos"
 p "Foram criados um total de #{Price.count} preços para #{Price.select(:product_id).distinct.count} produtos"
 p "Foram criadas #{ProductCategory.count} categorias de produtos"
-p "Foram criadas #{CartItem.count} instâncias de carrinho"
+p "Foram criadas #{CartItem.count} instâncias de item de carrinho"
+p "Foram criadas #{Order.count} instâncias de pedidos"
