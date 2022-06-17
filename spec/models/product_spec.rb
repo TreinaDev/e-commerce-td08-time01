@@ -46,4 +46,31 @@ RSpec.describe Product, type: :model do
       expect(diff_between_time_asked_and_time_persisted).to be < 2.seconds
     end
   end
+
+  describe '#current_price' do
+    it 'should choose the correct current Price of a Product' do
+      Timecop.freeze(1.year.ago) do
+        product = create(:product).set_price(5.99)
+        product.set_price(10.51, 11.months.from_now)
+      end
+      product = Product.first.set_price(14.99, 2.months.from_now)
+
+      expect(product.current_price).to eq 10.51
+    end
+
+    it 'should return nil if the product has no prices at all' do
+      product = create(:product)
+
+      expect(product.prices).to be_empty
+      expect(product.current_price).to be nil
+    end
+
+    it 'should return nil if the product only has prices with validity start in the future' do
+      product = create(:product)
+      price = create(:price, price_in_brl: 22.22, validity_start: 2.months.from_now, product: product)
+
+      expect(product.prices).to include(price)
+      expect(product.current_price).to be nil
+    end
+  end
 end

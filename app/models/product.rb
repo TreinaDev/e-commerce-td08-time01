@@ -11,4 +11,15 @@ class Product < ApplicationRecord
                   product_id: self.id)
     return self
   end
+
+  def current_price
+    return nil if self.prices.empty?
+    return nil if self.prices.where('validity_start <= ?', DateTime.current).empty?
+    
+    self.prices
+        .where('validity_start <= ?', DateTime.current)
+        .order(validity_start: :asc)
+        .last
+        .price_in_brl
+  end
 end
