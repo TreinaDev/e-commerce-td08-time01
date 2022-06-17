@@ -85,10 +85,7 @@ describe 'User enters cart page' do
       first('tr').click_on("Caneca")
     end
     
+    expect(current_path).to eq product_path(product)
     expect(page).to have_text 'Caneca'
-    expect(page).to have_text 'TOC & Ex-TOC'
-    expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
-    expect(page).to have_text 'TOC1234'
-    expect(page).to have_text 'R$ 9,99' 
   end
 end

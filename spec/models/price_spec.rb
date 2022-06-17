@@ -15,13 +15,19 @@ RSpec.describe Price, type: :model do
         .with_message('já está cadastrada em outra instância de Price para este produto')
     end
 
-    it 'is expected to validate that :validity_start cannot be set in the past' do
-      price = Price.new(validity_start: 1.day.ago, price_in_brl: 5)
+    it 'is expected to validate that :validity_start cannot be set in the distant past' do
+      price = build(:price, validity_start: 1.day.ago, price_in_brl: 5)
 
       price.valid?
 
       expect(price.errors.include?(:validity_start)).to be true
       expect(price.errors[:validity_start]).to include('não pode estar no passado')
+    end
+
+    it 'is expected to validate that :validity_start can be set up to 2s in the past' do
+      price = build(:price, validity_start: Time.current, price_in_brl: 5, product: build(:product))
+
+      expect(price).to be_valid
     end
   end
 end
