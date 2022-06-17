@@ -28,6 +28,27 @@ describe 'User enters cart page' do
     expect(page).not_to have_content "Jarra 5 R$ 15,99"
     expect(page).not_to have_content "Pote 7 R$ 2,99"
   end
+
+  it 'and there is no cart items' do
+    user = create(:user)
+    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
+    product_1 = create(:product, name: 'Jarra', sku: 'JRA68755')
+    product_2 = create(:product, name: 'Pote', sku: 'PTE68755')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product: product_1, price_in_brl: "15.99")
+      create(:price, product: product_2, price_in_brl: "2.99")
+    end
+    create(:cart_item, product: product_1, quantity: 7, user: user_2)
+    create(:cart_item, product: product_2, quantity: 5, user: user_2)
+
+    login_as(user, scope: :user)
+    visit root_path
+    click_on "Meu Carrinho"
+    
+    expect(page).to have_content "Adicione um produto ao carrinho!"
+    expect(page).not_to have_content "Jarra 5 R$ 15,99"
+    expect(page).not_to have_content "Pote 7 R$ 2,99"
+  end
   
   it 'after adding a product' do
     user = create(:user)

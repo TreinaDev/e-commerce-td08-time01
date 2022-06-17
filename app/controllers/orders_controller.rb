@@ -1,20 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :get_user, only: [:index, :new]
+  before_action :get_user, only: [:index, :new, :create]
+  before_action :get_cart_and_sum, only: [:new, :create]
 
   def index
     @orders = Order.where(user_id: @user_id) 
   end
   
   def new
-    @cart = CartItem.where(user_id: @user_id, order_id: nil)
-    @sum = 0
-    @cart.each do |ci| 
-      @sum += ci.product.prices
-                .where('validity_start <= ?', DateTime.current)
-                .order(validity_start: :asc)
-                .last
-                .price_in_brl * ci.quantity
-    end
     @order = Order.new
   end
 
@@ -43,5 +35,17 @@ class OrdersController < ApplicationController
 
   def get_user
     @user_id = params[:user_id]
+  end
+
+  def get_cart_and_sum
+    @cart = CartItem.where(user_id: @user_id, order_id: nil)
+    @sum = 0
+    @cart.each do |ci| 
+      @sum += ci.product.prices
+                .where('validity_start <= ?', DateTime.current)
+                .order(validity_start: :asc)
+                .last
+                .price_in_brl * ci.quantity
+    end
   end
 end

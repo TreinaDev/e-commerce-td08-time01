@@ -46,4 +46,14 @@ describe "User enters orders page" do
     expect(page).to have_content "R$ 11,99"
     expect(page).to have_content "Valor Total: R$ 35,97"
   end
+
+  it "and there is no orders" do
+    user = create(:user)
+    
+    login_as(user, scope: :user)
+    visit root_path
+    click_on "Meus Pedidos"
+
+    expect(page).to have_content "Você ainda não possui nenhum pedido."
+  end
 end
