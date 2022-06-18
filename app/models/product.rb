@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   validates_format_of :sku, with: /\A[A-Z0-9]+\z/, message: 'deve ter apenas letras e números', if: Proc.new { |p| p.sku.present? }
   
   before_validation :fill_sku, on: :create
-  
+
   belongs_to :product_category, optional: true
 
   has_many :prices
@@ -14,5 +14,23 @@ class Product < ApplicationRecord
 
   def fill_sku
     self.sku = SecureRandom.alphanumeric(9).upcase unless self.sku.present?
+  end
+
+  def set_price(price_in_brl, validity_start = 1.second.ago)
+    Price.create!(price_in_brl: price_in_brl,
+                  validity_start: validity_start,
+                  product_id: self.id)
+    return self
+  end
+
+  def current_price
+    return nil if self.prices.empty?
+    return nil if self.prices.where('validity_start <= ?', DateTime.current).empty?
+    
+    self.prices
+        .where('validity_start <= ?', DateTime.current)
+        .order(validity_start: :asc)
+        .last
+        .price_in_brl
   end
 end

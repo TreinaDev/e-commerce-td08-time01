@@ -72,8 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_121724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_category_id"
-    t.index ["product_category_id"], name: "index_products_on_product_category_id"
     t.integer "status", default: 5
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 
   create_table "users", force: :cascade do |t|
