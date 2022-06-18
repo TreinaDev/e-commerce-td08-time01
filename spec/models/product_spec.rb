@@ -3,39 +3,9 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   describe '#valid?' do
     it { should validate_presence_of(:name) }
-    xit { should validate_presence_of(:brand) }
-    xit { should validate_presence_of(:description) }
-    xit { should validate_presence_of(:sku).on(:build) }
     it { should validate_uniqueness_of(:sku) }
-    xit { should_not allow_value('CAT38710').for(:sku) }
-    xit { should_not allow_value('7U0330P3JD').for(:sku) }
-    it { should_not allow_value('/..?').for(:sku).with_message('deve ter apenas letras e números') }
-    xit { should validate_length_of(:sku).is_equal_to(9) } 
-  end
-
-  describe '#generate_sku' do
-    it 'should generate a random alphanumeric SKU code' do
-       sku = Product.new.fill_sku
-
-       expect(sku.length).to be 9
-    end
-
-    it 'should automatically add it when a new product is created' do
-      hamlet = create(:product, sku: '').sku 
-      
-      expect(hamlet).to be
-    end
-
-    xit 'should not change the SKU if the product already had one' do
-      product = create(:product, name: 'Colar amarelo')
-      original_product_sku = product.sku
-      product.update(name: 'Pulseira verde')
-      sku_after_save = product.sku
-      expect(original_product_sku).to eq sku_after_save
-      it { should validate_uniqueness_of(:sku) }
-      it { should allow_value('7U030P3JD').for(:sku) }
-      it { should_not allow_value('/_-.?').for(:sku).with_message('deve ter apenas letras e números') }
-    end
+    it { should allow_value('7U030P3JD').for(:sku) }
+    it { should_not allow_value('/_-.?').for(:sku).with_message('deve ter apenas letras e números') }
 
     context 'with blank brand' do
       it 'should return false if product is on shelf' do
@@ -101,6 +71,68 @@ RSpec.describe Product, type: :model do
 
         expect(product).to be_valid
       end
+    end
+  end
+
+  describe '#set_price' do
+    xit 'should create a Price with validity start as now if no datetime is passed' do
+      product = create(:product).set_price(15)
+      another_product = create(:product).set_price(8.51)
+
+      price = Price.first
+      another_price = Price.last
+
+      expect(price.price_in_brl).to eq 15
+      expect(price.product_id).to be product.id
+      expect(product.prices).to include(price)
+      expect(product.prices).not_to include(another_price)
+      expect(another_price.price_in_brl).to eq 8.51
+      expect(another_price.product_id).to be another_product.id
+      expect(another_product.prices).to include(another_price)
+      expect(another_product.prices).not_to include(price)
+    end
+
+    it 'should create a Price with validity start in the future if a datetime is passed' do
+      product = create(:product).set_price(51.01, 2.months.from_now)
+
+      price = Price.first
+      creation_lag =  2.months.from_now - price.validity_start
+      diff_between_time_asked_and_time_persisted = creation_lag < 0 ? creation_lag * (-1) : creation_lag
+      # while the creation_lag is always positive, calculating its absolute value helps 
+      # expose bugs (ie: asked to create validity_start 2 months from now, created 3 months 
+      # from now, diff = - 1 months (negative), which is less than 2 seconds and would pass the test)
+
+      expect(price.price_in_brl).to eq 51.01
+      expect(price.product_id).to be product.id
+      expect(product.prices).to include(price)
+      expect(diff_between_time_asked_and_time_persisted).to be < 2.seconds
+    end
+  end
+
+  describe '#current_price' do
+    xit 'should choose the correct current Price of a Product' do
+      Timecop.freeze(1.year.ago) do
+        product = create(:product).set_price(5.99)
+        product.set_price(10.51, 11.months.from_now)
+      end
+      product = Product.first.set_price(14.99, 2.months.from_now)
+
+      expect(product.current_price).to eq 10.51
+    end
+
+    it 'should return nil if the product has no prices at all' do
+      product = create(:product)
+
+      expect(product.prices).to be_empty
+      expect(product.current_price).to be nil
+    end
+
+    it 'should return nil if the product only has prices with validity start in the future' do
+      product = create(:product)
+      price = create(:price, price_in_brl: 22.22, validity_start: 2.months.from_now, product: product)
+
+      expect(product.prices).to include(price)
+      expect(product.current_price).to be nil
     end
   end
 end

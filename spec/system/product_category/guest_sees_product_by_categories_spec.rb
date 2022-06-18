@@ -15,7 +15,7 @@ describe 'Guest user visit a product category' do
 
     visit root_path
     click_on product1.name
-    within '.breadcrumb' do 
+    within '.catnav' do 
       click_on category1.name
     end
 
@@ -40,7 +40,7 @@ describe 'Guest user visit a product category' do
 
     visit root_path
     click_on product1.name
-    within '.breadcrumb' do 
+    within '.catnav' do 
       click_on category1.name
     end
 
@@ -52,7 +52,7 @@ describe 'Guest user visit a product category' do
     expect(page).to have_content('Garrafa Térmica Inox 500ml')
   end
 
-  it 'and the category doesn\'t have any product yet' do
+  it 'and the category doesn\'t have any product registered yet' do
     category = create(:product_category, name: 'Cozinha')
 
     visit by_category_products_path(category)
