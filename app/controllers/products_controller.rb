@@ -10,6 +10,9 @@ class ProductsController < ApplicationController
     sanitized_and_split_query_array = Product.sanitize_sql_like(params[:query]).split.map { |keyword| '%' + keyword + '%' }
     @products = sanitized_and_split_query_array.reduce([]) { |memo, query|
       memo << Product.where('name LIKE ?', query)
+      memo << Product.where('description LIKE ?', query)
+      memo << Product.where('brand LIKE ?', query)
+      memo << Product.where('sku LIKE ?', query)
     }.flatten
     @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
     render 'home/index'
