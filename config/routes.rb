@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:show] do
     post 'update_status', on: :member
+    get 'search', on: :collection
   end
   resources :product_categories, only: [:index, :show, :new, :create, :edit, :update]
 

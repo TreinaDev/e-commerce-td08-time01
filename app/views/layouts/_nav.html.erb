@@ -16,10 +16,10 @@
             <% end %>
           </select>
         </div>
-        <input type="text" class="form-control" placeholder="Busque aqui seu produto">
-        <button class="btn btn-warning input-group-text shadow-none px-4">
-          Procurar
-        </button>
+        <%= form_with url: search_products_path, method: :get, class: "d-flex" do |form| %>
+          <%= form.text_field :query, class: "form-control", placeholder: "Busque aqui seu produto" %>
+          <%= form.submit "Procurar", class: "btn btn-warning input-group-text shadow-none px-4" %>
+        <% end %>
       </div>
     </div>
 
