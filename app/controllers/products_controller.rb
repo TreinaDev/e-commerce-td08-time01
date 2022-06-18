@@ -24,6 +24,6 @@ class ProductsController < ApplicationController
     else
       error_details = product.errors.full_messages.join(', ').downcase
       redirect_to product, alert: "Houve um erro. Para colocar um produto à venda, #{error_details}."
-    end  
+    end
   end
 end

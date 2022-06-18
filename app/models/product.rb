@@ -16,6 +16,7 @@ class Product < ApplicationRecord
     self.sku = SecureRandom.alphanumeric(9).upcase unless self.sku.present?
   end
 
+  
   def set_price(price_in_brl, validity_start = 1.second.ago)
     Price.create!(price_in_brl: price_in_brl,
                   validity_start: validity_start,
@@ -34,3 +35,4 @@ class Product < ApplicationRecord
         .price_in_brl
   end
 end
+

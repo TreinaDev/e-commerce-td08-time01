@@ -52,7 +52,7 @@ RSpec.describe Product, type: :model do
     end
 
     context 'with blank sku' do
-      xit 'should return false if product is on shelf' do
+     xit 'should return false if product is on shelf' do
         product = build(:product, sku: '', status: 'on_shelf')
 
         product.valid?
