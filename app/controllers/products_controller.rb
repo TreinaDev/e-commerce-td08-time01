@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Search.products(params[:query])
+    @products = Search.new(params[:query]).inside_products
     @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
     render 'home/index'
   end
