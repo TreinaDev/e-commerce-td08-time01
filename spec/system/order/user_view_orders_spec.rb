@@ -23,6 +23,8 @@ describe "User enters orders page" do
     click_on "Meus Pedidos"
 
     expect(page).to have_content "Pedido #{order_1.code} - Pendente"
+    expect(page).to have_link "Detalhes do Pedido"
+    expect(page).to have_content "Caneca Garrafa"
     expect(page).not_to have_content "Pedido #{order_2.code} - Pendente"
   end
 

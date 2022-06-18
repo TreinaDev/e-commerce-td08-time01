@@ -60,8 +60,8 @@ describe "User confirms order from cart" do
     expect(page).to have_content "Jarra 5 R$ 15,99 R$ 79,95"
     expect(page).not_to have_button "Retirar"
     expect(page).to have_content "Valor Total: R$ 150,85"
-    expect(page).to have_content "Endereço de entrega: Rua da entrega, 45" 
-    expect(page).to have_content "Status: Pendente"
+    expect(page).to have_content "Endereço de entrega:\nRua da entrega, 45" 
+    expect(page).to have_content "Status:\nPendente"
     expect(page).to have_link "Voltar"
   end
 
@@ -72,7 +72,6 @@ describe "User confirms order from cart" do
       create(:price, product: product_1)
     end
     create(:cart_item, product: product_1, quantity: 3, user: user)
-    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('123ASD45')
 
     login_as(user, scope: :user)
     visit root_path

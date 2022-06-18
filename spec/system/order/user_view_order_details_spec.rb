@@ -16,7 +16,7 @@ describe 'User enters order detail page' do
     login_as(user, scope: :user)
     visit root_path
     click_on "Meus Pedidos"
-    click_on "#{@order_1.code}"
+    click_on "Detalhes do Pedido"
 
     expect(page).to have_content "R$ 11,99 R$ 35,97"
     expect(page).to have_content "Valor Total: R$ 35,97"
