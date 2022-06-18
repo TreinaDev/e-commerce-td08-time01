@@ -7,9 +7,13 @@ class ProductsController < ApplicationController
   end
 
   def by_category
-    #@products = Product.all
-    @products_by_category = Product.where(product_category_id: params[:format])
     @product_category = ProductCategory.find(params[:format])
+    @products_by_category = []
+    @product_category.subtree.each do |subcat|
+      subcat.products.each do |product|
+        @products_by_category << product
+      end
+    end
   end
   
   def update_status
