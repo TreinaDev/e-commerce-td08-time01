@@ -52,7 +52,7 @@ RSpec.describe Product, type: :model do
     end
 
     context 'with blank sku' do
-     xit 'should return false if product is on shelf' do
+     it 'should return false if product is on shelf' do
         product = build(:product, sku: '', status: 'on_shelf')
 
         product.valid?
@@ -75,7 +75,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#set_price' do
-    xit 'should create a Price with validity start as now if no datetime is passed' do
+    it 'should create a Price with validity start as now if no datetime is passed' do
       product = create(:product).set_price(15)
       another_product = create(:product).set_price(8.51)
 
@@ -110,7 +110,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#current_price' do
-    xit 'should choose the correct current Price of a Product' do
+    it 'should choose the correct current Price of a Product' do
       Timecop.freeze(1.year.ago) do
         product = create(:product).set_price(5.99)
         product.set_price(10.51, 11.months.from_now)
