@@ -1,0 +1,32 @@
+<h3 class='text-center'>Pedido <%=@order.code%></h3>
+<table class="table text-center align-middle m-auto" style="max-width: 900px">
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |ci|%>
+      <tr>
+        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
+        <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
+        <td class="text-center"> <strong> <%=number_to_currency(ci.price_on_purchase, precision: 2)%> </strong></td>
+      </tr>
+    <%end%>
+    <tr>
+      <td></td>
+      <td class="text-center"> <strong>Valor Total:</strong></td>
+      <td class="text-center"> <strong><%=number_to_currency(@sum)%></strong></td>
+    </tr>
+    <tr>
+      <td colspan="2" class="text-center"> <strong>Endereço de entrega:</strong></td>
+      <td class="text-center"> <strong><%=@order.address%></strong></td>
+    </tr>
+    <tr>
+      <td colspan="2" class="text-center"> <strong><%=Order.human_attribute_name(:status)%>:</strong></td>
+      <td class="text-center"> <strong><%=Order.human_enum_name(:status, @order.status)%></strong></td>
+    </tr>
+  </tbody>
+</table>

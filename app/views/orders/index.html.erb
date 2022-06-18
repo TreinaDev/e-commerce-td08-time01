@@ -1,0 +1,11 @@
+<% if @orders.empty? %>
+  <p class='text center'>
+    <strong> Você ainda não possui nenhum pedido. </strong>
+  </p>
+<% else %>
+  <% @orders.each do |o|%>
+    <div>
+      Pedido <%= link_to o.code, order_path(o.id) %> - <%= Order.human_enum_name(:status, o.status)%>
+    </div>
+  <%end%>
+<% end %>

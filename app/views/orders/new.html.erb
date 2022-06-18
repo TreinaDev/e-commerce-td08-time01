@@ -1,0 +1,44 @@
+<h3 class='text-center'>Meu Pedido</h3>
+
+<table class="table text-center align-middle m-auto" style="max-width: 900px">
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |ci|%>
+      <tr>
+        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
+        <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
+        <td class="text-center"> <strong> <%=number_to_currency(ci.product.prices
+                                               .where('validity_start <= ?', DateTime.current)
+                                               .order(validity_start: :asc)
+                                               .last
+                                               .price_in_brl, precision: 2)%> </strong></td>
+        <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+      </tr>
+    <%end%>
+    <tr>
+      <td></td>
+      <td class="text-center"> <strong>Valor Total:</strong></td>
+      <td class="text-center"> <strong><%=number_to_currency(@sum)%></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="text center standard-width m-auto">
+  <%= simple_form_for @order, url: user_orders_path(@user_id) do |cat| %>
+    <%= cat.input :address %>
+    <%= cat.input :user_id, :as => :hidden, :input_html => {value: @user_id} %>
+    <div class="text-center little-buffer">
+      <%= cat.button :submit, 'Confirmar', class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+
+  <div class="text-center buffer">
+    <%= link_to 'Voltar', user_cart_items_path(@user_id), class: 'btn btn-outline-primary mini-button' %>
+  </div>
+</div>

@@ -4,10 +4,16 @@ describe 'User enters cart page' do
   it 'and sees cart items' do
     user = create(:user)
     user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa')
-    product_3 = create(:product, name: 'Jarra')
-    create(:product, name: 'Pote')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
+    product_4 = create(:product, name: 'Pote')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product: product_1, price_in_brl: '11.99')
+      create(:price, product: product_2, price_in_brl: '4.99')
+      create(:price, product: product_3, price_in_brl: '15.99')
+      create(:price, product: product_4, price_in_brl: '2.99')
+    end
     create(:cart_item, product: product_1, quantity: 3, user: user)
     create(:cart_item, product: product_2, quantity: 7, user: user)
     create(:cart_item, product: product_3, quantity: 5, user: user_2)
@@ -16,20 +22,43 @@ describe 'User enters cart page' do
     visit root_path
     click_on "Meu Carrinho"
     
-    expect(page).to have_content "Produto Quantidade"
-    expect(page).to have_content "Caneca 3"
-    expect(page).to have_content "Garrafa 7"
-    expect(page).not_to have_content "Jarra 5"
-    expect(page).not_to have_content "Pote"
+    expect(page).to have_content "Produto Quantidade Preço"
+    expect(page).to have_content "Caneca 3 R$ 11,99"
+    expect(page).to have_content "Garrafa 7 R$ 4,99"
+    expect(page).not_to have_content "Jarra 5 R$ 15,99"
+    expect(page).not_to have_content "Pote 7 R$ 2,99"
+  end
+
+  it 'and there are no cart items' do
+    user = create(:user)
+    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
+    product_1 = create(:product, name: 'Jarra', sku: 'JRA68755')
+    product_2 = create(:product, name: 'Pote', sku: 'PTE68755')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product: product_1, price_in_brl: "15.99")
+      create(:price, product: product_2, price_in_brl: "2.99")
+    end
+    create(:cart_item, product: product_1, quantity: 7, user: user_2)
+    create(:cart_item, product: product_2, quantity: 5, user: user_2)
+
+    login_as(user, scope: :user)
+    visit root_path
+    click_on "Meu Carrinho"
+    
+    expect(page).to have_content "Adicione um produto ao carrinho!"
+    expect(page).not_to have_content "Jarra 5 R$ 15,99"
+    expect(page).not_to have_content "Pote 7 R$ 2,99"
   end
   
   it 'after adding a product' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa', sku: 'GRF993311')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA687550')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
     Timecop.freeze(1.month.ago) do
-      create(:price, product: product_3)
+      create(:price, product: product_1, price_in_brl: "11.99")
+      create(:price, product: product_2, price_in_brl: "4.99")
+      create(:price, product: product_3, price_in_brl: "15.99")
     end
     create(:cart_item, product: product_1, quantity: 3, user:  user)
     create(:cart_item, product: product_2, quantity: 7, user:  user)
@@ -41,17 +70,21 @@ describe 'User enters cart page' do
     click_on "Adicionar ao carrinho"
     click_on "Meu Carrinho"
     
-    expect(page).to have_content "Produto Quantidade"
-    expect(page).to have_content "Caneca 3"
-    expect(page).to have_content "Garrafa 7"
-    expect(page).to have_content "Jarra 5"
+    expect(page).to have_content "Caneca"
+    expect(page).to have_content "Garrafa"
+    expect(page).to have_content "Jarra"
   end
 
   it 'and withdraws an item ' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca')
-    product_2 = create(:product, name: 'Garrafa', sku: 'GRF993311')
-    product_3 = create(:product, name: 'Jarra', sku: 'JRA687550')
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf')
+    Timecop.freeze(1.month.ago) do
+      create(:price, product: product_1, price_in_brl: "11.99")
+      create(:price, product: product_2, price_in_brl: "4.99")
+      create(:price, product: product_3, price_in_brl: "15.99")
+    end
     create(:cart_item, product: product_1, quantity: 3, user: user)
     create(:cart_item, product: product_2, quantity: 7, user: user)
     create(:cart_item, product: product_3, quantity: 5, user: user)
@@ -64,15 +97,16 @@ describe 'User enters cart page' do
     end
     
     expect(page).to have_content "Produto retirado: Caneca."
-    expect(page).to have_content "Produto Quantidade"
-    expect(page).not_to have_content "Caneca 3"
-    expect(page).to have_content "Garrafa 7"
-    expect(page).to have_content "Jarra 5"
+    within('tbody') do
+      expect(page).not_to have_content "Caneca"
+    end
+    expect(page).to have_content "Garrafa"
+    expect(page).to have_content "Jarra"
   end
 
   it 'and enters product page through cart link' do
     user = create(:user)
-    product = create(:product, name: 'Caneca', sku: 'XPTO12345')
+    product = create(:product, name: 'Caneca', status: 'on_shelf')
     Timecop.freeze(1.month.ago) do
       create(:price, product: product)
     end
@@ -88,7 +122,7 @@ describe 'User enters cart page' do
     expect(page).to have_text 'Caneca'
     expect(page).to have_text 'TOC & Ex-TOC'
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
-    expect(page).to have_text 'XPTO12345'
     expect(page).to have_text 'R$ 9,99' 
+    expect(current_path).to eq product_path(product)
   end
 end

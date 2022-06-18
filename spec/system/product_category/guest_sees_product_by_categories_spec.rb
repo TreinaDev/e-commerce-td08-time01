@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Guest user visit a product category' do
   it 'and sees products within this category' do
     category1 = create(:product_category, name: 'Cozinha')
-    product1 = create(:product, name: 'Conjunto Pratos de Porcelana', product_category: category1)
-    product2 = create(:product, name: 'Garrafa Térmica Inox 500ml', product_category: category1)
+    product1 = create(:product, name: 'Conjunto Pratos de Porcelana', product_category: category1, status: :on_shelf)
+    product2 = create(:product, name: 'Garrafa Térmica Inox 500ml', product_category: category1, status: :on_shelf)
     category2 = create(:product_category, name: 'Carro e Acessórios')
     product3 = create(:product, name: 'Pneu Aro 15', product_category: category2)
     Timecop.freeze(1.day.ago) do

@@ -6,7 +6,7 @@ describe 'Guest visit product page' do
     product_category_root = create(:product_category, name: 'Cozinha')
     product_category_child = create(:product_category, name: 'Acessórios', parent: product_category_root)
     product_category_grandchild = create(:product_category, name: 'Garrafa Térmica', parent: product_category_child)
-    product = create(:product, product_category: product_category_grandchild)
+    product = create(:product, product_category: product_category_grandchild, status: :on_shelf)
     Timecop.freeze(1.day.ago) do
       price = create(:price, product: product, price_in_brl: 10.00)
     end
@@ -22,7 +22,7 @@ describe 'Guest visit product page' do
   end
 
   it 'and product haven\'t product category' do
-    product = create(:product)
+    product = create(:product, status: :on_shelf)
 
     Timecop.freeze(1.day.ago) do
       price = create(:price, product: product, price_in_brl: 10.00)

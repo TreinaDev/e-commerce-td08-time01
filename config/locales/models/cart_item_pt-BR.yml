@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      cart_item:
+        one: Item
+        other: Carrinho
+    attributes:
+      cart_item:
+        quantity: Quantidade

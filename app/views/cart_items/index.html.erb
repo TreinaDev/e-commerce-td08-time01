@@ -1,19 +1,33 @@
 <h3 class='text-center'>Meu Carrinho</h3>
 
-<table class="table text-center align-middle m-auto" style="max-width: 900px">
-  <thead>
-    <tr>
-      <th>Produto</th>
-      <th>Quantidade</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart.each do |ci|%>
+<% if @cart.empty?%>
+  <strong>Adicione um produto ao carrinho!</strong>
+<% else %>
+  <table class="table text-center align-middle m-auto" style="max-width: 900px">
+    <thead>
       <tr>
-        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
-        <td class="text-center"> <strong> <%=ci.quantity%> </strong></td>
-        <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
       </tr>
-    <%end%>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @cart.each do |ci|%>
+        <tr>
+          <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
+          <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
+          <td class="text-center"> <strong> <%=number_to_currency(ci.product.prices
+                                                .where('validity_start <= ?', DateTime.current)
+                                                .order(validity_start: :asc)
+                                                .last
+                                                .price_in_brl, precision: 2)%> </strong></td>
+          <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+
+  <div class="text-center buffer">
+    <%= link_to 'Finalizar Pedido', new_user_order_path(@cart.last.user_id), class: 'btn btn-outline-primary mini-button' %>
+  </div>
+<% end %>
