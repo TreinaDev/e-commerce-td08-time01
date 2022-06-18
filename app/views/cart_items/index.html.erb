@@ -11,6 +11,7 @@
         <th>Produto</th>
         <th>Quantidade</th>
         <th>Preço</th>
+        <th>Quantidade X Preço</th>
       </tr>
     </thead>
     <tbody>
@@ -18,11 +19,8 @@
         <tr>
           <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
           <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
-          <td class="text-center"> <strong> <%=number_to_currency(ci.product.prices
-                                                .where('validity_start <= ?', DateTime.current)
-                                                .order(validity_start: :asc)
-                                                .last
-                                                .price_in_brl, precision: 2)%> </strong></td>
+          <td class="text-center"> <strong> <%=number_to_currency(ci.product.current_price, precision: 2)%> </strong></td>
+          <td class="text-center"> <strong> <%=number_to_currency(ci.product.current_price * ci.quantity, precision: 2)%> </strong></td>
           <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
         </tr>
       <%end%>

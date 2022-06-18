@@ -16,11 +16,11 @@ describe 'User enters cart page' do
     visit root_path
     click_on "Meu Carrinho"
     
-    expect(page).to have_content "Produto Quantidade Preço"
-    expect(page).to have_content "Caneca 3 R$ 11,99"
-    expect(page).to have_content "Garrafa 7 R$ 4,99"
-    expect(page).not_to have_content "Jarra 5 R$ 15,99"
-    expect(page).not_to have_content "Pote 7 R$ 2,99"
+    expect(page).to have_content "Produto Quantidade Preço Quantidade X Preço"
+    expect(page).to have_content "Caneca 3 R$ 11,99 R$ 35,97"
+    expect(page).to have_content "Garrafa 7 R$ 4,99 R$ 34,93"
+    expect(page).not_to have_content "Jarra 5 R$ 15,99 R$ 79,95"
+    expect(page).not_to have_content "Pote 7 R$ 2,99 R$ 20,93"
   end
 
   it 'and there are no cart items' do

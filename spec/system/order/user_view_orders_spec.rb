@@ -16,14 +16,14 @@ describe "User enters orders page" do
     create(:cart_item, product: product_2, quantity: 7, user: user)
     create(:cart_item, product: product_3, quantity: 5, user: user_2)
     order_1 = create(:order, user: user, status: 'pending')
-    order_3 = create(:order, user: user_2, status: 'pending')
+    order_2 = create(:order, user: user_2, status: 'pending')
 
     login_as(user, scope: :user)
     visit root_path
     click_on "Meus Pedidos"
 
     expect(page).to have_content "Pedido #{order_1.code} - Pendente"
-    expect(page).not_to have_content "Pedido #{order_3.code} - Pendente"
+    expect(page).not_to have_content "Pedido #{order_2.code} - Pendente"
   end
 
   it "and there are no orders" do

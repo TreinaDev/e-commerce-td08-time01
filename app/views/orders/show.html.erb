@@ -5,6 +5,7 @@
       <th>Produto</th>
       <th>Quantidade</th>
       <th>Preço</th>
+      <th>Quantidade X Preço</th>
     </tr>
   </thead>
   <tbody>
@@ -13,20 +14,58 @@
         <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
         <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
         <td class="text-center"> <strong> <%=number_to_currency(ci.price_on_purchase, precision: 2)%> </strong></td>
+        <td class="text-center"> <strong> <%=number_to_currency(ci.price_on_purchase * ci.quantity, precision: 2)%> </strong></td>
       </tr>
     <%end%>
     <tr>
-      <td></td>
-      <td class="text-center"> <strong>Valor Total:</strong></td>
+      <td colspan="3" class="text-center"> <strong>Valor Total:</strong></td>
       <td class="text-center"> <strong><%=number_to_currency(@sum)%></strong></td>
-    </tr>
-    <tr>
-      <td colspan="2" class="text-center"> <strong>Endereço de entrega:</strong></td>
-      <td class="text-center"> <strong><%=@order.address%></strong></td>
-    </tr>
-    <tr>
-      <td colspan="2" class="text-center"> <strong><%=Order.human_attribute_name(:status)%>:</strong></td>
-      <td class="text-center"> <strong><%=Order.human_enum_name(:status, @order.status)%></strong></td>
     </tr>
   </tbody>
 </table>
+
+
+<div class="container px-4">
+  <div class="row gx-5">
+    <div class="col">
+      <div class="p-3 border bg-light">
+        
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Endereço de entrega:</div>
+              <%=@order.address%>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Solicitante:</div>
+              <%=@order.user.name%>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light">
+
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Pedido feito em:</div>
+              <%=@order.created_at%>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold"><%=Order.human_attribute_name(:status)%>:</div>
+              <%=Order.human_enum_name(:status, @order.status)%>
+            </div>
+          </li>
+        </ul>
+      
+      </div>
+    </div>
+  </div>
+</div>
