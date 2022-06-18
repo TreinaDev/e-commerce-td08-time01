@@ -20,7 +20,7 @@ describe 'Guest user visit a product category' do
     end
 
     expect(current_path).to eq by_category_products_path(category1)
-    expect(page).to have_content('Categoria: Cozinha')
+    expect(page).to have_content('Cozinha')
     expect(page).to have_content('Conjunto Pratos de Porcelana')
     expect(page).to have_content('Garrafa Térmica Inox 500ml')
     expect(page).not_to have_content('Categoria: Carro e Acessórios')
