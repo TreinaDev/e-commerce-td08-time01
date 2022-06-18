@@ -9,7 +9,7 @@ class Price < ApplicationRecord
   private
 
   def validity_start_is_future
-    if validity_start.present? && validity_start < DateTime.now
+    if validity_start.present? && validity_start < 2.seconds.ago
       errors.add(:validity_start, 'não pode estar no passado')
     end
   end
