@@ -43,5 +43,13 @@ feature 'Using the search function on the navbar,' do
       expect(page).not_to have_text(product3.name)
       expect(page).not_to have_text(product4.name)
     end
+
+    it 'returns message if no products are found' do
+      visit root_path
+      fill_in 'Busque aqui seu produto', with: 'chocolate branco'
+      click_on 'Procurar'
+
+      expect(page).to have_text('Nenhum resultado encontrado para: chocolate branco')
+    end
   end
 end

@@ -1,7 +1,7 @@
 <section>
   <h1>Produtos</h1>
   <% if @products.empty? %>
-      <p>Não existem produtos cadastrados</p>
+      <p><%= @message_if_empty %></p>
   <% else %>
     <% @products.each do |product| %>
       <article>
