@@ -1,7 +1,9 @@
 <h3 class='text-center'>Meu Carrinho</h3>
 
 <% if @cart.empty?%>
-  <strong>Adicione um produto ao carrinho!</strong>
+  <p class='text-center'>
+    <strong>Adicione um produto ao carrinho!</strong>
+  </p>
 <% else %>
   <table class="table text-center align-middle m-auto" style="max-width: 900px">
     <thead>
@@ -31,3 +33,7 @@
     <%= link_to 'Finalizar Pedido', new_user_order_path(@cart.last.user_id), class: 'btn btn-outline-primary mini-button' %>
   </div>
 <% end %>
+
+<div class="text-center buffer">
+  <%= link_to 'Voltar', :back, class: 'btn btn-outline-primary mini-button' %>
+</div>

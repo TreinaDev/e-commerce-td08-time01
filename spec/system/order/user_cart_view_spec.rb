@@ -45,8 +45,8 @@ describe 'User enters cart page' do
     product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
     product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
     product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
-    create(:cart_item, product: product_1, quantity: 3, user:  user)
-    create(:cart_item, product: product_2, quantity: 7, user:  user)
+    create(:cart_item, product: product_1, user:  user)
+    create(:cart_item, product: product_2, user:  user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -66,9 +66,9 @@ describe 'User enters cart page' do
     product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
     product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
     product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
-    create(:cart_item, product: product_1, quantity: 3, user: user)
-    create(:cart_item, product: product_2, quantity: 7, user: user)
-    create(:cart_item, product: product_3, quantity: 5, user: user)
+    create(:cart_item, product: product_1, user: user)
+    create(:cart_item, product: product_2, user: user)
+    create(:cart_item, product: product_3, user: user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -88,7 +88,7 @@ describe 'User enters cart page' do
   it 'and enters product page through cart link' do
     user = create(:user)
     product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
-    create(:cart_item, product: product, quantity: 3, user: user)
+    create(:cart_item, product: product, user: user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -99,5 +99,52 @@ describe 'User enters cart page' do
     
     expect(current_path).to eq product_path(product)
     expect(page).to have_text 'Caneca'
+  end
+
+  context 'and goes back to previous page' do
+    it 'which was a product detail page' do
+      user = create(:user)
+      product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
+      create(:cart_item, product: product, user: user)
+  
+      login_as(user, scope: :user)
+      visit root_path
+      click_on "Caneca"
+      click_on "Meu Carrinho"
+      click_on "Voltar"
+
+      expect(current_path).to eq product_path(product)
+      expect(page).to have_text 'Caneca'
+    end
+
+    it 'which was the orders index page' do
+      user = create(:user)
+  
+      login_as(user, scope: :user)
+      visit root_path
+      click_on "Meus Pedidos"
+      click_on "Meu Carrinho"
+      click_on "Voltar"
+
+      expect(current_path).to eq user_orders_path(user)
+      expect(page).to have_text 'Você ainda não possui nenhum pedido.'
+    end
+
+    it 'unsuccessfully, as it was the generate order page and the cart had been emptied' do
+      user = create(:user)
+      product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
+      create(:cart_item, product: product, user: user)
+  
+      login_as(user, scope: :user)
+      visit root_path
+      click_on "Meu Carrinho"
+      click_on "Finalizar Pedido"
+      click_on "Voltar"
+      click_on "Retirar"
+      click_on "Voltar"
+
+      expect(current_path).to eq user_cart_items_path(user)
+      expect(page).to have_text 'Adicione um produto ao carrinho!'
+    end
   end
 end

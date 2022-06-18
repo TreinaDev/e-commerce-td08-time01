@@ -16,17 +16,17 @@ Price.create!(product: product2, price_in_brl: 19.99, validity_start: 2.weeks.fr
 Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.from_now)
 
 product3 = Product.create!(status: 'off_shelf',
-  name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
+  name: 'Camisa Blue Sky', sku: 'VBS1234', brand: 'Vestil',
   description: 'Camisa de algodão com estampa de céu e nuvens.')
 Price.create!(product: product3, price_in_brl: 20.00, validity_start: 1.second.from_now)
 
 product4 = Product.create!(status: 'draft',
-  name: 'Camisa Green Forest', sku: 'VES4321',
+  name: 'Camisa Green Forest', sku: 'VGF5841',
   brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.')
 Price.create!(product: product4, price_in_brl: 90.00, validity_start: 1.second.from_now)
 
 product5 = Product.create!(status: 'on_shelf',
-  name: 'Camisa Large Sea', sku: 'VES2321',
+  name: 'Camisa Large Sea', sku: 'VLS4421',
   brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.')
 Price.create!(product: product5, price_in_brl: 89.00, validity_start: 1.second.from_now)
 

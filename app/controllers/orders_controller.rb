@@ -42,11 +42,7 @@ class OrdersController < ApplicationController
     @cart = CartItem.where(user_id: @user_id, order_id: nil)
     @sum = 0
     @cart.each do |ci| 
-      @sum += ci.product.prices
-                .where('validity_start <= ?', DateTime.current)
-                .order(validity_start: :asc)
-                .last
-                .price_in_brl * ci.quantity
+      @sum += ci.product.current_price * ci.quantity
     end
   end
 end
