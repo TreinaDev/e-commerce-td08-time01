@@ -6,12 +6,15 @@ Mercadores é uma loja virtual que permite a compra de produtos mediante pagamen
 
 ## Domínio
 
-Um **produto** (`Product`) é o que se vende. Ele pode ter status *em rascunho* (`draft`), *à venda*(`on_shelf`) e *suspenso* (`off_shelf`). Apenas produtos à venda aparecem para os usuários finais.  
+Um **produto** (`Product`) é o que se vende. Ele pode ter status *em rascunho* (`draft`), *à venda* (`on_shelf`) ou *suspenso* (`off_shelf`). Apenas produtos à venda aparecem para os usuários finais.  
   
 Desses produtos que aparecem, um usuário pode colocá-los num carrinho e gerar um **pedido** (`Order`), que é posteriormente processado pelo [serviço de pagamentos](https://github.com/TreinaDev/pagamentos-td08-time01).  
   
-Os **preço**s (`Price`) de um produto podem ser atualizados automaticamente de acordo com uma data previamente indicada por algum admin do sistema.
-
+Os **preços** (`Price`) de um produto podem ser atualizados automaticamente de acordo com uma data previamente indicada por algum admin do sistema.  
+  
+Os produtos são organizados em **categorias** (`ProductCategory`), que tem uma organização do tipo árvore.  
+  
+Esta aplicação prevê 3 tipos de usuários: **administradores** (`Admin`), que são empregados do e-commerce gerenciando a oferta de produtos, seus preços e também os pedidos; **consumidores** (`User`), os clientes da plataforma quando estão logados; e **visitantes**, qualquer usuário não logado.  
 
 ## Versão do Ruby
 ![This app requires Ruby 3.1.0 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.0&color=B61D1D&style=for-the-badge&logo=ruby)  
@@ -64,7 +67,7 @@ Esta é a equipe 1, composta por 9 pessoas divididas na frente de **e-commerce**
 - [Davide Almeida](https://github.com/davide-almeida)
 - [Jhonny Toledo](https://github.com/Jhonny4975)
 - [Júnior Beto](https://github.com/b-sep)
-- [kyrir](https://github.com/kyriri)
+- [kyriri](https://github.com/kyriri)
 - [Lucas Borges](https://github.com/LucasDLAB)
 - [Maciel Júnior](https://github.com/macieljuniormax)
 - [Philipe Leandro](https://github.com/philipeleandro)
