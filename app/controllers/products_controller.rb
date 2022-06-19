@@ -5,6 +5,16 @@ class ProductsController < ApplicationController
     return redirect_to root_path, alert: 'Produto não encontrado' unless admin_signed_in? || @product.on_shelf?
     @current_price = @product.current_price
   end
+
+  def by_category
+    @product_category = ProductCategory.find(params[:format])
+    @products_by_category = []
+    @product_category.subtree.each do |subcat|
+      subcat.products.each do |product|
+        @products_by_category << product
+      end
+    end
+  end
   
   def update_status
     return unless admin_signed_in?
