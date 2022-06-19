@@ -1,4 +1,4 @@
-# Mercadores - Um site de regate de pontos
+# Mercadores - Um site de resgate de pontos
 
 :warning:  projeto em desenvolvimento  
   
