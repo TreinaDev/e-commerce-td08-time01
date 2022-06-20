@@ -1,6 +1,6 @@
 <h1 class="text-center little-buffer">Produtos</h1>
 <% if @products.empty? %>
-    <p>Não existem produtos cadastrados</p>
+    <p><%= @message_if_empty %></p>
 <% else %>
   <section class="container">
     <div class="row">

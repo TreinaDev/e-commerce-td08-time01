@@ -15,6 +15,13 @@ class ProductsController < ApplicationController
   def create
   end
 
+  def search
+    @products = Search.new(params[:query]).inside_products
+    @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
+    @message_if_empty = "Nenhum resultado encontrado para: #{params[:query]}"
+    render 'home/index'
+  end
+  
   def by_category
     @product_category = ProductCategory.find(params[:format])
     @products_by_category = []
