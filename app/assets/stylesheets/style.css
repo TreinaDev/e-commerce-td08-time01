@@ -34,3 +34,13 @@ main {
 .standard-width {
   max-width: 900px;
 }
+
+body {
+  font-family: 'Anek Latin', sans-serif;
+  font-size: 1.05em
+}
+
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
