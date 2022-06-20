@@ -10,15 +10,15 @@ describe 'User enters order detail page' do
     end
     Timecop.freeze(20.days.ago) do
       create(:cart_item, product: product, quantity: 3, user: user)
-      @order_1 = create(:order, user: user, status: 'pending')
+      @order_1 = create(:order, user: user)
     end
     
     login_as(user, scope: :user)
     visit root_path
     click_on "Meus Pedidos"
-    click_on "#{@order_1.code}"
+    click_on "Detalhes do Pedido"
 
-    expect(page).to have_content "R$ 11,99"
+    expect(page).to have_content "R$ 11,99 R$ 35,97"
     expect(page).to have_content "Valor Total: R$ 35,97"
   end
 end

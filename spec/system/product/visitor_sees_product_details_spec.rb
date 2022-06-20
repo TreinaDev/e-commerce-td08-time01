@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe 'Unlogged user tries to see details of a Product' do
-  it 'and is succesful' do
+  # Correção de palavra
+  it 'and is successful' do
     product = create(:product, name: 'Caneca Mon Amour', 
                                status: 'on_shelf',
                                brand: 'TOC & Ex-TOC',
@@ -23,15 +24,15 @@ describe 'Unlogged user tries to see details of a Product' do
     expect(page).to have_text 'R$ 14,99' 
     expect(page).not_to have_text 'Status: à venda' 
   end
-
-  it 'but is redirected to homepage because the product does not exists' do
-    visit product_path(1)
-    
-    expect(current_path).to eq root_path
-    expect(page).to have_text 'Produto não encontrado'
-  end
-
+  # Sugestão de mudança 
   context 'but is redirected to homepage because the product' do
+    it 'does not exist' do
+      visit product_path(1)
+      
+      expect(current_path).to eq root_path
+      expect(page).to have_text 'Produto não encontrado'
+    end
+
     it 'is a draft' do
       create(:product, status: 'draft')
 
