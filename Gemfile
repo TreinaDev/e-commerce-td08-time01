@@ -7,6 +7,7 @@ ruby "3.1.0"
 gem 'devise'
 gem 'ancestry'
 gem 'simple_form'
+gem 'cpf_cnpj'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
