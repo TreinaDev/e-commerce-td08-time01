@@ -3,6 +3,7 @@ class ProductCategory < ApplicationRecord
   validates :name, uniqueness: true
   
   has_ancestry
+  has_many :products
 
   def show_with_ancestors
     self.ancestors.map(&:name).join(' > ').to_s + ' > ' + self.name

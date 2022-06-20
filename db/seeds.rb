@@ -2,7 +2,44 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-puts "\n---- cria um monte de cacarecos  ------"
+
+puts "\n----- cria cadastros de usuários ------"
+
+Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
+admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
+user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
+
+puts '----- cria categorias de produtos -----'
+
+eletronicos = ProductCategory.create(name: "Eletrônicos")
+informatica = ProductCategory.create(name: "Informática", parent: eletronicos)
+notebooks = ProductCategory.create(name: "Notebooks", parent: informatica)
+ultrafinos = ProductCategory.create(name: "Notebooks", parent: notebooks)
+macbook = ProductCategory.create(name: "Notebooks", parent: macbook)
+desktops = ProductCategory.create(name: "Desktops", parent: informatica)
+smartphones = ProductCategory.create(name: "Smartphones", parent: eletronicos)
+
+eletrodomesticos = ProductCategory.create(name: "Eletrodomésticos")
+lavar_e_secar = ProductCategory.create(name: "Lavar e Secar", parent: eletrodomesticos)
+geladeiras = ProductCategory.create(name: "Geladeiras", parent: eletrodomesticos)
+fogao = ProductCategory.create(name: "Fogão", parent: eletrodomesticos)
+ar_e_ventilacao = ProductCategory.create(name: "Ar e Ventilação", parent: eletrodomesticos)
+
+moveis = ProductCategory.create(name: "Móveis")
+mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
+guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
+
+utilidades_domesticas = ProductCategory.create(name: "Utilidades Domésticas")
+cafe_e_cha = ProductCategory.create(name: "Café e Chá", parent: utilidades_domesticas)
+garrafas_termicas = ProductCategory.create(name: "Garrafas Térmicas", parent: cafe_e_cha)
+copos_e_canecas = ProductCategory.create(name: "Copos e Canecas", parent: utilidades_domesticas)
+canecas = ProductCategory.create(name: "Canecas", parent: copos_e_canecas)
+
+vestuario = ProductCategory.create(name: "Vestuário")
+camisas = ProductCategory.create(name: "Camisas", parent: vestuario)
+camisas_basicas = ProductCategory.create(name: "Camisas Básicas", parent: camisas)
+
+puts "---- cria um monte de cacarecos  ------"
 
 names_and_descriptions = [
   # ['', ''], 
@@ -41,56 +78,28 @@ puts '----- cria mais produtos e preços -----'
 
 product1 = Product.create!(status: 'on_shelf',
   name: 'Caneca Mon Amour', brand: 'TOC & Ex-TOC', sku: 'TOC1234',
-  description: 'Caneca em cerâmica com desenho de uma flecha do cupido').set_price(10)
-
+  description: 'Caneca em cerâmica com desenho de uma flecha do cupido', product_category: canecas).set_price(10)
+  
 product2 = Product.create!(status: 'on_shelf',
   name: 'Garrafa Star Wars', brand: 'Zona Criativa', sku: 'ZON0001',
-  description: 'Garrafa térmica inox, star wars')
+  description: 'Garrafa térmica inox, star wars', product_category: garrafas_termicas)
 Price.create!(product: product2, price_in_brl: 25.99, validity_start: Time.current)
 Price.create!(product: product2, price_in_brl: 19.99, validity_start: 2.weeks.from_now)
 Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.from_now)
 
 product3 = Product.create!(status: 'off_shelf',
   name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
-  description: 'Camisa de algodão com estampa de céu e nuvens.').set_price(20)
+  description: 'Camisa de algodão com estampa de céu e nuvens.', product_category: camisas_basicas).set_price(20)
 
 product4 = Product.create!(status: 'draft',
   name: 'Camisa Green Forest', sku: 'VES4321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.').set_price(90)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.', product_category: camisas_basicas).set_price(90)
 
 product5 = Product.create!(status: 'on_shelf',
   name: 'Camisa Large Sea', sku: 'VES2321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.').set_price(89)
-
-
-puts '----- cria cadastros de usuários ------'
-
-Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
-admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
-user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
-
-puts '----- cria categorias de produtos -----'
-
-eletronicos = ProductCategory.create(name: "Eletrônicos")
-informatica = ProductCategory.create(name: "Informática", parent: eletronicos)
-notebooks = ProductCategory.create(name: "Notebooks", parent: informatica)
-ultrafinos = ProductCategory.create(name: "Notebooks", parent: notebooks)
-macbook = ProductCategory.create(name: "Notebooks", parent: macbook)
-desktops = ProductCategory.create(name: "Desktops", parent: informatica)
-smartphones = ProductCategory.create(name: "Smartphones", parent: eletronicos)
-
-eletrodomesticos = ProductCategory.create(name: "Eletrodomésticos")
-lavar_e_secar = ProductCategory.create(name: "Lavar e Secar", parent: eletrodomesticos)
-geladeiras = ProductCategory.create(name: "Geladeiras", parent: eletrodomesticos)
-fogao = ProductCategory.create(name: "Fogão", parent: eletrodomesticos)
-ar_e_ventilacao = ProductCategory.create(name: "Ar e Ventilação", parent: eletrodomesticos)
-
-moveis = ProductCategory.create(name: "Móveis")
-mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
-guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_price(89)
 
 puts '----------- cria pedidos --------------'
-
 CartItem.create!(product: product1, quantity: 5, user: user )
 CartItem.create!(product: product2, quantity: 7, user: user )
 Order.create!(address: 'Rua da entrega, 75', user: user)

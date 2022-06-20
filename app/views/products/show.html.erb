@@ -1,3 +1,16 @@
+
+<nav aria-label="breadcrumb" class="catnav">
+  <ol class="breadcrumb">
+    <%= 'Sem categoria' if @product.product_category.nil? %>
+    <% if !@product.product_category.nil? %>
+      <% @product.product_category.ancestors.each do |ancestor_category|  %>
+        <li class="breadcrumb-item"><%= link_to ancestor_category.name, by_category_products_path(ancestor_category) %></li>
+      <% end  %>
+      <li class="breadcrumb-item active" aria-current="page"><%= link_to @product.product_category.name, by_category_products_path(@product.product_category.id) %></li>
+    <% end %>
+  </ol>
+</nav>
+
 <article>
   <h3><%= @product.name %></h3>
 

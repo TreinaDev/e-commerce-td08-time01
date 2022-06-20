@@ -18,11 +18,7 @@ class Order < ApplicationRecord
   def process_cart
     CartItem.where(order_id: nil, user: self.user).each do |ci|
       ci.update(order_id: self.id)
-      ci.update(price_on_purchase: ci.product.prices
-                                     .where('validity_start <= ?', DateTime.current)
-                                     .order(validity_start: :asc)
-                                     .last
-                                     .price_in_brl)
+      ci.update(price_on_purchase: ci.product.current_price)
     end
   end
 
