@@ -8,7 +8,7 @@ describe 'Unlogged user logs in as a costumer' do
     within('nav') do
       click_on 'Entrar'
     end
-    within('form') do
+    within('.form-signin') do
       fill_in 'E-mail', with: 'jose@meuemail.com'
       fill_in 'Senha', with: '123456'
       click_on 'Entrar'
@@ -23,7 +23,7 @@ describe 'Unlogged user logs in as a costumer' do
       
     visit root_path
     click_on 'Entrar'
-    within 'form' do
+    within '.form-signin' do
       fill_in 'E-mail', with: 'jose@meuemail.com'
       fill_in 'Senha', with: '9999999'
       click_on 'Entrar'

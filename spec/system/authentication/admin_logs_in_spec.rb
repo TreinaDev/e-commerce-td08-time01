@@ -5,7 +5,7 @@ describe 'Unlogged user logs in as an admin' do
     create(:admin, name: 'João do Rêgo')
 
     visit new_admin_session_path
-    within 'form' do
+    within '.form-signin' do
       fill_in 'E-mail', with: 'joao@mercadores.com.br'
       fill_in 'Senha', with: '123456'
       click_on 'Entrar'
@@ -19,7 +19,7 @@ describe 'Unlogged user logs in as an admin' do
     create(:admin, name: 'João do Rêgo', password: '123456')
       
     visit new_admin_session_path
-    within 'form' do
+    within '.form-signin' do
       fill_in 'E-mail', with: 'joao@mercadores.com.br'
       fill_in 'Senha', with: '9999999'
       click_on 'Entrar'

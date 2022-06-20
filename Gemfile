@@ -3,11 +3,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
-# Application Gems
+# Authentication system
 gem 'devise'
+
+# Self-referecing system
 gem 'ancestry'
+
+# Helper to make edit forms easier
 gem 'simple_form'
 gem 'cpf_cnpj'
+
+# Manage HTTP requests
+gem 'faraday'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
@@ -47,7 +54,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "simplecov", require: false
   gem "factory_bot_rails"
-  gem 'shoulda-matchers'
+  gem "shoulda-matchers"
   gem "timecop"
 end
 
