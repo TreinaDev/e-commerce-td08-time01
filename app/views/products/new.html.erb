@@ -1,0 +1,18 @@
+<h1 class="text-center">Novo Produto</h1>
+<div class="text center standard-width m-auto">
+  <%= simple_form_for @product do |p| %>
+    <%= p.input :name %>
+    <%= p.input :brand %>
+    <%= p.input :sku %>
+    <%= p.input :description %>
+    <%= p.input :product_category_id, as: :select, collection: @product_categories.map { |c| [c.show_with_ancestors, c.id] } %>
+    <%= p.input :prices, as: :decimal %>
+    <div class="text-center little-buffer">
+      <%= p.button :submit, 'Salvar', class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+
+  <div class="text-center buffer">
+    <%= link_to 'Voltar', product_categories_path, class: 'btn btn-outline-primary mini-button' %>
+  </div>
+</div>

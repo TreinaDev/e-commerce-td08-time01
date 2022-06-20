@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :products, only: [:show] do
+  resources :products, only: [:show, :new, :create] do
     get 'by_category', on: :collection
     post 'update_status', on: :member
   end

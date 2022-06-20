@@ -6,6 +6,15 @@ class ProductsController < ApplicationController
     @current_price = @product.current_price
   end
 
+  def new
+    @product = Product.new
+    @price = Price.new
+    @product_categories = ProductCategory.all
+  end
+
+  def create
+  end
+
   def by_category
     @product_category = ProductCategory.find(params[:format])
     @products_by_category = []
