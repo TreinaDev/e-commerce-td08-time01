@@ -15,4 +15,11 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :destroy]
     resources :orders, only: [:index, :show, :new, :create]
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :customer, only: [:show]
+    end
+  end
+
 end

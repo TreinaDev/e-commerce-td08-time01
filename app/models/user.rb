@@ -7,14 +7,14 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, message: ' inválido.' }
   validates :email, uniqueness: true
-  validate :valid_cpf
+  validate :valid_cpf_cnpj
 
 
   private
 
-  def valid_cpf(cpf = self.cpf)
-    if !CPF.valid?(cpf)
-      errors.add(:cpf, "inválido.")
+  def valid_cpf_cnpj(cpf_cnpj = self.identify_number)
+    if !CPF.valid?(cpf_cnpj)
+      errors.add(:identify_number, "inválido.")
     end
   end
 

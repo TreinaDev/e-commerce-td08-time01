@@ -8,7 +8,7 @@ describe 'Someone tries to create a costumer account' do
     click_on 'Registrar'
     fill_in 'Nome', with: 'Cláudio Roberto'
     fill_in 'E-mail', with: 'claudio@meuemail.com'
-    fill_in 'CPF', with: cpf
+    fill_in 'CPF/CNPJ', with: cpf
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar senha', with: '123456'
     click_on 'Cadastrar-se'
@@ -17,7 +17,7 @@ describe 'Someone tries to create a costumer account' do
     expect(page).to have_content 'Cláudio Roberto'
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
     expect(User.count).to eq 1
-    expect(User.last.cpf).to eq '69907388041'
+    expect(User.last.identify_number).to eq '69907388041'
   end
 
   it 'and fail when cpf is invalid' do
@@ -27,13 +27,13 @@ describe 'Someone tries to create a costumer account' do
     click_on 'Registrar'
     fill_in 'Nome', with: 'Cláudio Roberto'
     fill_in 'E-mail', with: 'claudio@meuemail.com'
-    fill_in 'CPF', with: cpf
+    fill_in 'CPF/CNPJ', with: cpf
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar senha', with: '123456'
     click_on 'Cadastrar-se'
 
     expect(current_path).to eq users_path
-    expect(page).to have_content 'CPF inválido.'
+    expect(page).to have_content 'CPF/CNPJ inválido.'
   end
 
   it 'it fails and they receive an error message' do

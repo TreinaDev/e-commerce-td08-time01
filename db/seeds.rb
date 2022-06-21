@@ -7,7 +7,7 @@ puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
 admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
-user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
+user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '69907388041')
 
 puts '----- cria categorias de produtos -----'
 
