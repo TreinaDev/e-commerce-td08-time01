@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post 'payment_results', to: 'payments#results'
+      patch 'payment_results', to: 'payments#results'
     end
   end
 end

@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :cart_items
   validates_presence_of :address
-  validate :must_have_cart
+  validate :must_have_cart, on: :create
 
   before_create :set_code
   after_create :process_cart
