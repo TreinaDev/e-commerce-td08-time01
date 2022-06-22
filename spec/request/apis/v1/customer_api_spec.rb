@@ -5,7 +5,7 @@ describe 'User API', type: :request do
     it 'success' do
       user = create(:user, name: 'Joaquim José', identify_number: '58611596021', email: 'joaquim@email.com')
 
-      get "/api/v1/customer/#{user.id}"
+      get "/api/v1/customers/#{user.id}"
 
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
