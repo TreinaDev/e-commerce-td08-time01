@@ -14,7 +14,8 @@ class User < ApplicationRecord
   private
 
   def valid_cpf_cnpj(cpf_cnpj = self.identify_number)
-    if cpf_cnpj.length == 11
+    if cpf_cnpj.nil?
+    elsif cpf_cnpj.length == 11
       errors.add(:identify_number, "inválido.") if !CPF.valid?(cpf_cnpj)
     elsif cpf_cnpj.length == 14
       errors.add(:identify_number, "inválido.") if !CNPJ.valid?(cpf_cnpj)
