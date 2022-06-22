@@ -6,11 +6,13 @@
 Ao gerar um pedido, um código único é atrelado a ele e uma requisição de transação é enviada para o time que processa pagamentos. O pedido estará em pendência de pagamento até que uma resposta de aprovação ou recusa seja enviada por esta URL.  
 
 ### Payload
-```
-transaction: { 
-  "code": "4567-QWER",
-  "status": "completed",
-  "error_type": "" 
+```json
+{
+  "transaction": { 
+    "code": "4567-QW4R",
+    "status": "completed",
+    "error_type": "" 
+  }
 }
 ```
 | parâmetro | descrição | valores reconhecidos | 
