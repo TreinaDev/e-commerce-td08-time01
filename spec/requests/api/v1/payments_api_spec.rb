@@ -62,7 +62,7 @@ describe 'PATCH api/v1/payment_results' do
     
     expect(response.status).to eq 422
     expect(response.content_type).to include 'application/json'
-    expect(body).to eq 'O tipo de erro é obrigatório quando a transação foi recusada (status: "canceled").'
+    expect(body).to eq 'O tipo de erro não pode ficar em branco quando a transação foi recusada (status: "canceled").'
   end
 
   it 'returns 500 if some error occurs inside the server' do

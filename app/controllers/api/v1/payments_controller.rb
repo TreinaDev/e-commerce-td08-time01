@@ -8,7 +8,7 @@ class Api::V1::PaymentsController < Api::V1::ApiController
     return render json: 'Transação desconhecida.', status: :not_found if order.nil?
     return render json: 'Status inválido.', status: :unprocessable_entity unless ['approved', 'canceled'].include?(status)
     if status == 'canceled' && error_type.empty?
-      return render json: 'O tipo de erro é obrigatório quando a transação foi recusada (status: "canceled").', status: :unprocessable_entity 
+      return render json: 'O tipo de erro não pode ficar em branco quando a transação foi recusada (status: "canceled").', status: :unprocessable_entity 
     end
 
     order.update!(status: status, error_type: error_type)

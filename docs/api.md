@@ -29,10 +29,12 @@ Retorna `"Mensagem recebida com sucesso."`
 ![404: Not found](https://img.shields.io/badge/Code:%20404-NOT%20FOUND-red "404: Not found")  
 Retorna `"Transação desconhecida."` porque o código da transação não foi localizado como pertencendo a nenhum pedido.  
    
+     
 ![422: Unprocessable entity](https://img.shields.io/badge/Code:%20422-UNPROCESSABLE%20ENTITY-red "422: Unprocessable entity")  
 Retorna `"Status inválido."` quando conteúdo de status não é um valor reconhecido.  
     
-Retorna `"O tipo de erro é obrigatório quando a transação foi recusada (status: "canceled")."` quando um status "canceled" é acompanhado de um "error_type" vazio (`''`).  
+Retorna `"O tipo de erro não pode ficar em branco quando a transação foi recusada (status: "canceled")."` quando um status "canceled" é acompanhado de um "error_type" vazio (`''`).  
    
+     
 ![500: Internal Server Error](https://img.shields.io/badge/Code:%20500-INTERNAL%20SERVER%20ERROR-red "500: Internal Server Error")  
 Retorna `"Alguma coisa deu errado, por favor contate o suporte."` porque houve um erro dentro do servidor da aplicação.  
