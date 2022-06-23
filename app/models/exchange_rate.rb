@@ -1,7 +1,9 @@
+class NoExchangeRateError < StandardError; end
+
 class ExchangeRate
   PAYMENTS_ROOT = 'http://localhost:4000'
   VARIABLE_HOLDING_EXCHANGE_RATE = "brl_coin"
-  @@current_rate = nil
+  @@current_rate = 1
 
   def self.current
     @@current_rate
@@ -13,6 +15,7 @@ class ExchangeRate
 
   def self.get
     response = Faraday.get("#{PAYMENTS_ROOT}/api/v1/exchage_rates")
+    raise NoExchangeRateError, 'Unable to retrieve exchange rate' unless response.status == 200
     @@current_rate = JSON.parse(response.body)[VARIABLE_HOLDING_EXCHANGE_RATE] 
   end
 end

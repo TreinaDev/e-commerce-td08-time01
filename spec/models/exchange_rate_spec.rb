@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ExchangeRate, type: :model do
   describe '.current' do
     it 'should return a value' do
-      expect(ExchangeRate.current).to be nil
+      expect(ExchangeRate.current).to be 1
     end
 
     it 'should be allowed to be set externarly' do
@@ -23,6 +23,14 @@ RSpec.describe ExchangeRate, type: :model do
       ExchangeRate.get
 
       expect(ExchangeRate.current).to eq 10
+    end
+
+    it 'should raise an error if the rate is unreachable' do
+      ExchangeRate.current = 1
+      fake_response = double('faraday_response', status: 500)
+      allow(Faraday).to receive(:get).and_return(fake_response)
+
+      expect{ ExchangeRate.get }.to raise_error(NoExchangeRateError)
     end
   end
 end
