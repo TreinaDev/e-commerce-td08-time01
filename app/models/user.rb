@@ -10,6 +10,29 @@ class User < ApplicationRecord
 
   validate :valid_cpf_cnpj
 
+  after_create :send_payment_client
+
+  def to_payment_client
+    client_type = self.identify_number.length == 11 ? "client_person" : "client_company"
+    identify_number_type = self.identify_number.length == 11 ? "cpf" : "cnpj"
+
+    payment_client = {
+      "client": {
+        "client_type": client_type,
+        "client_person_attributes": {
+                    "full_name": self.name,
+                    "#{ identify_number_type }": self.identify_number
+        } 
+      }
+    }
+
+    payment_client.as_json
+  end
+
+  def send_payment_client
+    client = self.to_payment_client
+    Faraday.post('http://localhost:4000/api/v1/clients', client)
+  end
 
   private
 
@@ -23,23 +46,5 @@ class User < ApplicationRecord
       errors.add(:identify_number, "precisa ter 11 ou 14 caracteres.")
     end
   end
-  
-
  
-  
- #  def valid_cpf(cpf_cnpj = self.identify_number)
- #    if !CPF.valid?(cpf_cnpj)
- #      errors.add(:identify_number, "inválido.")
- #    end
- #  end
- #
- #  def cnpj_validator
- #    if CNPJ.valid?(cnpj, strict: true) == true
- #      register_id = CNPJ.new(cnpj)
- #      self.cnpj = register_id.formatted
- #    else
- #      errors.add(:cnpj, 'não é válido')
- #    end
- #  end
-
 end
