@@ -108,7 +108,7 @@ CartItem.create!(product: product4, quantity: 3, user: user )
 order = Order.create!(address: 'Rua da Paz, 42 - Belém, PA', user: user)
 order.approved!
 CartItem.create!(product: product5, quantity: 6, user: user )
-order.canceled!
+order.update!(status: 'canceled', error_type: 'insufficient_funds')
 
 puts "\nSumário"
 puts "Foram criados #{Admin.count} admins"
