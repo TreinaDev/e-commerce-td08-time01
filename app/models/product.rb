@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   end
 
   def current_price
-    self.current_price_in_brl
+    self.current_price_in_brl * ExchangeRate.current
   end
 
   def current_price_in_brl

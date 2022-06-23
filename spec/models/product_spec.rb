@@ -135,4 +135,13 @@ RSpec.describe Product, type: :model do
       expect(product.current_price_in_brl).to be nil
     end
   end
+
+  describe '#current_price' do
+    it 'should return the current price in BRL converted to Rubi' do
+      product = create(:product).set_brl_price(5.99)
+      ExchangeRate.current = 10
+
+      expect(product.current_price).to eq 59.9
+    end
+  end
 end
