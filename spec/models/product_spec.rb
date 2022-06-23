@@ -109,7 +109,7 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  describe '#current_price' do
+  describe '#current_price_in_brl' do
     it 'should choose the correct current Price of a Product' do
       Timecop.freeze(1.year.ago) do
         product = create(:product).set_brl_price(5.99)
@@ -117,14 +117,14 @@ RSpec.describe Product, type: :model do
       end
       product = Product.first.set_brl_price(14.99, 2.months.from_now)
 
-      expect(product.current_price).to eq 10.51
+      expect(product.current_price_in_brl).to eq 10.51
     end
 
     it 'should return nil if the product has no prices at all' do
       product = create(:product)
 
       expect(product.prices).to be_empty
-      expect(product.current_price).to be nil
+      expect(product.current_price_in_brl).to be nil
     end
 
     it 'should return nil if the product only has prices with validity start in the future' do
@@ -132,7 +132,7 @@ RSpec.describe Product, type: :model do
       price = create(:price, price_in_brl: 22.22, validity_start: 2.months.from_now, product: product)
 
       expect(product.prices).to include(price)
-      expect(product.current_price).to be nil
+      expect(product.current_price_in_brl).to be nil
     end
   end
 end

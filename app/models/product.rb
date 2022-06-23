@@ -18,6 +18,10 @@ class Product < ApplicationRecord
   end
 
   def current_price
+    self.current_price_in_brl
+  end
+
+  def current_price_in_brl
     return nil if self.prices.empty?
     return nil if self.prices.where('validity_start <= ?', DateTime.current).empty?
     
