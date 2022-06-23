@@ -71,14 +71,14 @@ names_and_descriptions.each do | pair |
                 description: pair[1], 
                 brand: brands[rand(brands.size)],
                 sku: ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**7).to_i.to_s,
-  ).set_price(14 * (1 + rand(100)/100.0).truncate(2))
+  ).set_brl_price(14 * (1 + rand(100)/100.0).truncate(2))
 end
 
 puts '----- cria mais produtos e preços -----'
 
 product1 = Product.create!(status: 'on_shelf',
   name: 'Caneca Mon Amour', brand: 'TOC & Ex-TOC', sku: 'TOC1234',
-  description: 'Caneca em cerâmica com desenho de uma flecha do cupido', product_category: canecas).set_price(10)
+  description: 'Caneca em cerâmica com desenho de uma flecha do cupido', product_category: canecas).set_brl_price(10)
   
 product2 = Product.create!(status: 'on_shelf',
   name: 'Garrafa Star Wars', brand: 'Zona Criativa', sku: 'ZON0001',
@@ -89,15 +89,15 @@ Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.fr
 
 product3 = Product.create!(status: 'off_shelf',
   name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
-  description: 'Camisa de algodão com estampa de céu e nuvens.', product_category: camisas_basicas).set_price(20)
+  description: 'Camisa de algodão com estampa de céu e nuvens.', product_category: camisas_basicas).set_brl_price(20)
 
 product4 = Product.create!(status: 'draft',
   name: 'Camisa Green Forest', sku: 'VES4321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.', product_category: camisas_basicas).set_price(90)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.', product_category: camisas_basicas).set_brl_price(90)
 
 product5 = Product.create!(status: 'on_shelf',
   name: 'Camisa Large Sea', sku: 'VES2321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_price(89)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_brl_price(89)
 
 puts '----------- cria pedidos --------------'
 CartItem.create!(product: product1, quantity: 5, user: user )

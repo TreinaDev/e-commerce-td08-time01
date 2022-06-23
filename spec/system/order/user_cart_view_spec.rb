@@ -4,10 +4,10 @@ describe 'User enters cart page' do
   it 'and sees cart items' do
     user = create(:user)
     user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
-    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
-    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
-    product_4 = create(:product, name: 'Pote', status: 'draft').set_price(2.99)
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(11.99)
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_brl_price(4.99)
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_brl_price(15.99)
+    product_4 = create(:product, name: 'Pote', status: 'draft').set_brl_price(2.99)
     create(:cart_item, product: product_1, quantity: 3, user: user)
     create(:cart_item, product: product_2, quantity: 7, user: user)
     create(:cart_item, product: product_3, quantity: 5, user: user_2)
@@ -26,8 +26,8 @@ describe 'User enters cart page' do
   it 'and there are no cart items' do
     user = create(:user)
     user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
-    product_1 = create(:product, name: 'Jarra').set_price(15.99)
-    product_2 = create(:product, name: 'Pote').set_price(2.99)
+    product_1 = create(:product, name: 'Jarra').set_brl_price(15.99)
+    product_2 = create(:product, name: 'Pote').set_brl_price(2.99)
     create(:cart_item, product: product_1, quantity: 7, user: user_2)
     create(:cart_item, product: product_2, quantity: 5, user: user_2)
 
@@ -42,9 +42,9 @@ describe 'User enters cart page' do
   
   it 'after adding a product' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
-    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
-    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(11.99)
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_brl_price(4.99)
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_brl_price(15.99)
     create(:cart_item, product: product_1, user:  user)
     create(:cart_item, product: product_2, user:  user)
 
@@ -63,9 +63,9 @@ describe 'User enters cart page' do
 
   it 'and withdraws an item' do
     user = create(:user)
-    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
-    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
-    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
+    product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(11.99)
+    product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_brl_price(4.99)
+    product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_brl_price(15.99)
     create(:cart_item, product: product_1, user: user)
     create(:cart_item, product: product_2, user: user)
     create(:cart_item, product: product_3, user: user)
@@ -87,7 +87,7 @@ describe 'User enters cart page' do
 
   it 'and enters product page through cart link' do
     user = create(:user)
-    product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
+    product = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(8.44)
     create(:cart_item, product: product, user: user)
 
     login_as(user, scope: :user)
@@ -108,7 +108,7 @@ describe 'User enters cart page' do
   context 'and goes back to previous page' do
     it 'which was a product detail page' do
       user = create(:user)
-      product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
+      product = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(8.44)
       create(:cart_item, product: product, user: user)
   
       login_as(user, scope: :user)
@@ -136,7 +136,7 @@ describe 'User enters cart page' do
 
     it 'unsuccessfully, as it was the generate order page and the cart had been emptied' do
       user = create(:user)
-      product = create(:product, name: 'Caneca', status: 'on_shelf').set_price(8.44)
+      product = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(8.44)
       create(:cart_item, product: product, user: user)
   
       login_as(user, scope: :user)

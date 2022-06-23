@@ -74,10 +74,10 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  describe '#set_price' do
+  describe '#set_brl_price' do
     it 'should create a Price with validity start as now if no datetime is passed' do
-      product = create(:product).set_price(15)
-      another_product = create(:product).set_price(8.51)
+      product = create(:product).set_brl_price(15)
+      another_product = create(:product).set_brl_price(8.51)
 
       price = Price.first
       another_price = Price.last
@@ -93,7 +93,7 @@ RSpec.describe Product, type: :model do
     end
 
     it 'should create a Price with validity start in the future if a datetime is passed' do
-      product = create(:product).set_price(51.01, 2.months.from_now)
+      product = create(:product).set_brl_price(51.01, 2.months.from_now)
 
       price = Price.first
       creation_lag =  2.months.from_now - price.validity_start
@@ -112,10 +112,10 @@ RSpec.describe Product, type: :model do
   describe '#current_price' do
     it 'should choose the correct current Price of a Product' do
       Timecop.freeze(1.year.ago) do
-        product = create(:product).set_price(5.99)
-        product.set_price(10.51, 11.months.from_now)
+        product = create(:product).set_brl_price(5.99)
+        product.set_brl_price(10.51, 11.months.from_now)
       end
-      product = Product.first.set_price(14.99, 2.months.from_now)
+      product = Product.first.set_brl_price(14.99, 2.months.from_now)
 
       expect(product.current_price).to eq 10.51
     end

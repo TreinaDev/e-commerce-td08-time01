@@ -10,7 +10,7 @@ class Product < ApplicationRecord
 
   enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
 
-  def set_price(price_in_brl, validity_start = 1.second.ago)
+  def set_brl_price(price_in_brl, validity_start = 1.second.ago)
     Price.create!(price_in_brl: price_in_brl,
                   validity_start: validity_start,
                   product_id: self.id)
