@@ -32,6 +32,10 @@ Navegar para a pasta do repositório
 Preparar a aplicação   
 `$ bin/setup`   
 
+## API
+
+A documentação da API está disponível [aqui](docs/api.md).  
+
 ## Demonstração
 
 Para fazer um simulado do funcionamento da aplicação, é interessante popular o banco de dados. Isso pode ser feito rodando o comando abaixo no diretório do projeto:    

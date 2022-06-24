@@ -101,11 +101,18 @@ product5 = Product.create!(status: 'on_shelf',
   brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_price(89)
 
 puts '----------- cria pedidos --------------'
+
 CartItem.create!(product: product1, quantity: 5, user: user )
 CartItem.create!(product: product2, quantity: 7, user: user )
 Order.create!(address: 'Rua da entrega, 75', user: user)
-CartItem.create!(product: product3, quantity: 5, user: user )
 
+CartItem.create!(product: product3, quantity: 1, user: user )
+CartItem.create!(product: product4, quantity: 3, user: user )
+order = Order.create!(address: 'Rua da Paz, 42 - Belém, PA', user: user)
+order.approved!
+
+CartItem.create!(product: product5, quantity: 6, user: user )
+order.update!(status: 'canceled', error_type: 'insufficient_funds')
 
 puts "\nSumário"
 puts "Foram criados #{Admin.count} admins"
