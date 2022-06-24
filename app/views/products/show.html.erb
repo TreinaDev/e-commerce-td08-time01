@@ -34,7 +34,7 @@
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
     <dt>Preço:</dt>
-    <dd><%= number_to_currency(@current_price, precision: 2) %></dd>
+    <dd><%= number_to_currency(@product.current_price_in_rubis, precision: 2) %></dd>
   <dl>
 </article>
 

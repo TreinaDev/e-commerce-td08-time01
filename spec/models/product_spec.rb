@@ -136,12 +136,12 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  describe '#current_price' do
+  describe '#current_price_in_rubis' do
     it 'should return the current price in BRL converted to Rubis' do
       product = create(:product).set_brl_price(5.99)
       ExchangeRate.current = 2
 
-      expect(product.current_price).to eq 11.98
+      expect(product.current_price_in_rubis).to eq 11.98
 
       # because the ExchangeRate is a PORO, its value is not automatically reset
       # after each test, and it might make tests break according to the 

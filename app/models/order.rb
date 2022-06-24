@@ -16,9 +16,9 @@ class Order < ApplicationRecord
   end
 
   def process_cart
-    CartItem.where(order_id: nil, user: self.user).each do |ci|
-      ci.update(order_id: self.id)
-      ci.update(price_on_purchase: ci.product.current_price)
+    CartItem.where(order_id: nil, user: self.user).each do |item|
+      item.update(order_id: self.id)
+      item.update(price_on_purchase: item.product.current_price_in_rubis)
     end
   end
 

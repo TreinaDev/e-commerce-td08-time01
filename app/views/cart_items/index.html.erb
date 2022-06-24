@@ -15,13 +15,13 @@
       </tr>
     </thead>
     <tbody>
-      <% @cart.each do |ci|%>
+      <% @cart.each do |item|%>
         <tr>
-          <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
-          <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
-          <td class="text-center"> <strong> <%=number_to_currency(ci.product.current_price, precision: 2)%> </strong></td>
-          <td class="text-center"> <strong> <%=number_to_currency(ci.product.current_price * ci.quantity, precision: 2)%> </strong></td>
-          <td><%= button_to 'Retirar', cart_item_path(ci.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+          <td class="text-start"> <%= link_to item.product.name, product_path(item.product.id) %></td>
+          <td class="text-center"> <strong> <%=item.quantity%>  </strong></td> 
+          <td class="text-center"> <strong> <%=number_to_currency(item.product.current_price_in_rubis, precision: 2)%> </strong></td>
+          <td class="text-center"> <strong> <%=number_to_currency(item.product.current_price_in_rubis * item.quantity, precision: 2)%> </strong></td>
+          <td><%= button_to 'Retirar', cart_item_path(item.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
         </tr>
       <%end%>
     </tbody>
