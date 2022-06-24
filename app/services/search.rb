@@ -14,7 +14,7 @@ class Search < ApplicationService
       memo << Product.where('description LIKE ?', query)
       memo << Product.where('brand LIKE ?', query)
       memo << Product.where('sku LIKE ?', query)
-    }.flatten
+    }.flatten.uniq.sort_by(&:name)
   end
 
   def sanitize_query(str)
