@@ -103,8 +103,7 @@ puts '----------- cria pedidos --------------'
 CartItem.create!(product: product1, quantity: 5, user: user )
 CartItem.create!(product: product2, quantity: 7, user: user )
 Order.create!(address: 'Rua da entrega, 75', user: user)
-CartItem.create!(product: product3, quantity: 5, user: user )
-CartItem.create!(product: product1, quantity: 7, user: user )
+CartItem.create!(product: product3, quantity: 2, user: user )
 
 
 puts "\nSumário"

@@ -14,7 +14,8 @@ class ExchangeRate
   end
 
   def self.get
-    response = Faraday.get("#{PAYMENTS_ROOT}/api/v1/exchage_rates")
+    response = Faraday.get("#{PAYMENTS_ROOT}/api/v1/exchange_rates/search/",
+                           { "register_date": "#{I18n.l Date.current, format: :api_query}" })
     raise NoExchangeRateError, 'Unable to retrieve exchange rate' unless response.status == 200
     @@current_rate = JSON.parse(response.body)[VARIABLE_HOLDING_EXCHANGE_RATE] 
   end
