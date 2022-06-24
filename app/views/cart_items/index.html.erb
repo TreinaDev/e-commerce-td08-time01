@@ -19,8 +19,8 @@
         <tr>
           <td class="text-start"> <%= link_to item.product.name, product_path(item.product.id) %></td>
           <td class="text-center"> <strong> <%=item.quantity%>  </strong></td> 
-          <td class="text-center"> <strong> <%=number_to_currency(item.product.current_price_in_rubis, precision: 2)%> </strong></td>
-          <td class="text-center"> <strong> <%=number_to_currency(item.product.current_price_in_rubis * item.quantity, precision: 2)%> </strong></td>
+          <td class="text-center"> <strong> <%= number_with_delimiter(item.product.current_price_in_rubis) %> <%= image_tag 'rubi', height: '16' %></strong></td>
+          <td class="text-center"> <strong> <%= number_with_delimiter(item.product.current_price_in_rubis * item.quantity) %> <%= image_tag 'rubi', height: '16' %></strong></td>
           <td><%= button_to 'Retirar', cart_item_path(item.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
         </tr>
       <%end%>

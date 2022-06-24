@@ -17,10 +17,10 @@ describe 'User enters cart page' do
     click_on "Meu Carrinho"
     
     expect(page).to have_content "Produto Quantidade Preço Quantidade X Preço"
-    expect(page).to have_content "Caneca 3 R$ 11,99 R$ 35,97"
-    expect(page).to have_content "Garrafa 7 R$ 4,99 R$ 34,93"
-    expect(page).not_to have_content "Jarra 5 R$ 15,99 R$ 79,95"
-    expect(page).not_to have_content "Pote 7 R$ 2,99 R$ 20,93"
+    expect(page).to have_content "Caneca 3 11,99 35,97"
+    expect(page).to have_content "Garrafa 7 4,99 34,93"
+    expect(page).not_to have_content "Jarra 5 15,99 79,95"
+    expect(page).not_to have_content "Pote 7 2,99 20,93"
   end
 
   it 'and there are no cart items' do
@@ -36,8 +36,8 @@ describe 'User enters cart page' do
     click_on "Meu Carrinho"
     
     expect(page).to have_content "Adicione um produto ao carrinho!"
-    expect(page).not_to have_content "Jarra 5 R$ 15,99"
-    expect(page).not_to have_content "Pote 7 R$ 2,99"
+    expect(page).not_to have_content "Jarra 5 15,99"
+    expect(page).not_to have_content "Pote 7 2,99"
   end
   
   it 'after adding a product' do
@@ -100,7 +100,7 @@ describe 'User enters cart page' do
     expect(page).to have_text 'Caneca'
     expect(page).to have_text 'TOC & Ex-TOC'
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
-    expect(page).to have_text 'R$ 8,44' 
+    expect(page).to have_text '8,44' 
     expect(current_path).to eq product_path(product)
     expect(page).to have_text 'Caneca'
   end

@@ -18,7 +18,7 @@ describe 'User enters order detail page' do
     click_on "Meus Pedidos"
     click_on "Detalhes do Pedido"
 
-    expect(page).to have_content "R$ 11,99 R$ 35,97"
-    expect(page).to have_content "Valor Total: R$ 35,97"
+    expect(page).to have_content "11,99 35,97"
+    expect(page).to have_content "Valor Total:   35,97"
   end
 end

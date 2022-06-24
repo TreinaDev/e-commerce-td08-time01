@@ -21,7 +21,7 @@ describe 'Unlogged user tries to see details of a Product' do
     expect(page).to have_text 'TOC & Ex-TOC'
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
     expect(page).to have_text 'TOCCAN123'
-    expect(page).to have_text 'R$ 14,99' 
+    expect(page).to have_text '14,99' 
     expect(page).not_to have_text 'Status: à venda' 
   end
   # Sugestão de mudança 
