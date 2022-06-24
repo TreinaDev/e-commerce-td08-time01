@@ -15,12 +15,14 @@ class User < ApplicationRecord
   def to_payment_client
     client_type = self.identify_number.length == 11 ? "client_person" : "client_company"
     identify_number_type = self.identify_number.length == 11 ? "cpf" : "cnpj"
+    client_attributes_type = self.identify_number.length == 11 ? "client_person_attributes" : "client_company_attributes"
+    client_name = self.identify_number.length == 11 ? "full_name" : "company_name"
 
     payment_client = {
       "client": {
         "client_type": client_type,
-        "client_person_attributes": {
-                    "full_name": self.name,
+        "#{ client_attributes_type }": {
+                    "#{ client_name }": self.name,
                     "#{ identify_number_type }": self.identify_number
         } 
       }

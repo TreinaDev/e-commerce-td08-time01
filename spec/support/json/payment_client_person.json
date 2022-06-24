@@ -1,0 +1,8 @@
+{
+  "client_type": "client_person",
+  "balance": 0.0,
+  "client_person": {
+    "full_name": "Joaquim José",
+    "cpf": "58611596021"
+  }
+}
