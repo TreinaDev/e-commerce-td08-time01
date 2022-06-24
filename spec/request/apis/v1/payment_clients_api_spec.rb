@@ -39,7 +39,6 @@ describe 'Payment Clients API', type: :request do
       #Act
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/clients', customer).and_return(fake_response)
       response = Faraday.post('http://localhost:4000/api/v1/clients', customer)
-      debugger
       response_body = JSON.parse(response.body)
 
       #Assert
