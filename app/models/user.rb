@@ -32,10 +32,13 @@ class User < ApplicationRecord
   end
 
   def send_payment_client
-    client = self.to_payment_client
-    Faraday.post('http://localhost:4000/api/v1/clients', client)
+    begin
+      client = self.to_payment_client
+      Faraday.post('http://localhost:4000/api/v1/clients', client)
+    rescue
+    end
   end
-
+ 
   private
 
   def valid_cpf_cnpj(cpf_cnpj = self.identify_number)
