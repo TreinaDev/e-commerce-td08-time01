@@ -9,12 +9,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @cart.each do |ci|%>
+    <% @cart.each do |item|%>
       <tr>
-        <td class="text-start"> <%= link_to ci.product.name, product_path(ci.product.id) %></td>
-        <td class="text-center"> <strong> <%=ci.quantity%>  </strong></td> 
-        <td class="text-center"> <strong> <%=number_to_currency(ci.price_on_purchase, precision: 2)%> </strong></td>
-        <td class="text-center"> <strong> <%=number_to_currency(ci.price_on_purchase * ci.quantity, precision: 2)%> </strong></td>
+        <td class="text-start"> <%= link_to item.product.name, product_path(item.product.id) %></td>
+        <td class="text-center"> <strong> <%=item.quantity%>  </strong></td> 
+        <td class="text-center"> <strong> <%=number_to_currency(item.price_on_purchase, precision: 2)%> </strong></td>
+        <td class="text-center"> <strong> <%=number_to_currency(item.price_on_purchase * item.quantity, precision: 2)%> </strong></td>
       </tr>
     <%end%>
     <tr>
@@ -61,6 +61,7 @@
             <div class="ms-2 me-auto">
               <div class="fw-bold"><%=Order.human_attribute_name(:status)%>:</div>
               <%=Order.human_enum_name(:status, @order.status)%>
+              <%= "- saldo insuficiente para quitar pedido." if @order.error_type == 'insufficient_funds' %>
             </div>
           </li>
         </ul>

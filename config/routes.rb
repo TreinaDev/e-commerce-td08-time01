@@ -16,4 +16,9 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :create]
   end
 
+  namespace :api do
+    namespace :v1 do
+      patch 'payment_results', to: 'payments#results'
+    end
+  end
 end
