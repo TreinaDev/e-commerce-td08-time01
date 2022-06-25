@@ -9,6 +9,10 @@ Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Clau
 admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
 user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
 
+puts '--------- cria taxa de câmbio ---------'
+
+ExchangeRate.create!(rate: 2, registered_at_source_for: 1.day.ago)
+
 puts '----- cria categorias de produtos -----'
 
 eletronicos = ProductCategory.create(name: "Eletrônicos")
@@ -100,6 +104,7 @@ product5 = Product.create!(status: 'on_shelf',
   brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_brl_price(89)
 
 puts '----------- cria pedidos --------------'
+
 CartItem.create!(product: product1, quantity: 5, user: user )
 CartItem.create!(product: product2, quantity: 7, user: user )
 Order.create!(address: 'Rua da entrega, 75', user: user)
@@ -107,10 +112,11 @@ CartItem.create!(product: product3, quantity: 2, user: user )
 
 
 puts "\nSumário"
-puts "Foram criados #{Admin.count} admins"
-puts "Foram criados #{User.count} cadastros de clientes"
-puts "Foram criados #{Product.count} produtos"
-puts "Foram criados um total de #{Price.count} preços para #{Price.select(:product_id).distinct.count} produtos"
-puts "Foram criadas #{ProductCategory.count} categorias de produtos"
-puts "Foram colocados #{CartItem.count} itens em carrinhos"
-puts "Foram criados #{Order.count} pedidos"
+puts "Foram criadas #{ExchangeRate.all.size} taxas de câmbio"
+puts "Foram criados #{Admin.all.size} admins"
+puts "Foram criados #{User.all.size} cadastros de clientes"
+puts "Foram criados #{Product.all.size} produtos"
+puts "Foram criados um total de #{Price.all.size} preços para #{Price.select(:product_id).distinct.all.size} produtos"
+puts "Foram criadas #{ProductCategory.all.size} categorias de produtos"
+puts "Foram colocados #{CartItem.all.size} itens em carrinhos"
+puts "Foram criados #{Order.all.size} pedidos"
