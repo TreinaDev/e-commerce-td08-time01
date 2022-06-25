@@ -1,0 +1,8 @@
+{
+  "client_type": "client_company",
+  "balance": 0.0,
+  "client_company": {
+    "company_name": "Indústrias Stark",
+    "cnpj": "42115446000101"
+  }
+}

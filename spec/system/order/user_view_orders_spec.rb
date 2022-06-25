@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "User enters orders page" do
   it "and views own orders" do
     user = create(:user)
-    user_2 = create(:user, name: 'Maciel', email: 'maciel@meuemail.com')
+    user_2 = create(:user, name: 'Maciel', email: 'maciel@meuemail.com', identify_number: '46273169098')
     product_1 = create(:product, name: 'Caneca')
     product_2 = create(:product, name: 'Garrafa', sku: 'GRF9933')
     product_3 = create(:product, name: 'Jarra', sku: 'JRA68755')

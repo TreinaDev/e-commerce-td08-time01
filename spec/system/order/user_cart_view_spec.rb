@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User enters cart page' do
   it 'and sees cart items' do
     user = create(:user)
-    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
+    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com', identify_number: '47350564082' )
     product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_price(11.99)
     product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_price(4.99)
     product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_price(15.99)
@@ -25,7 +25,7 @@ describe 'User enters cart page' do
 
   it 'and there are no cart items' do
     user = create(:user)
-    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com')
+    user_2 = create(:user, name: 'Jaime', email: 'jaime@meuemail.com', identify_number: '08325478080')
     product_1 = create(:product, name: 'Jarra').set_price(15.99)
     product_2 = create(:product, name: 'Pote').set_price(2.99)
     create(:cart_item, product: product_1, quantity: 7, user: user_2)

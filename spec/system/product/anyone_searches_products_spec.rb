@@ -51,5 +51,28 @@ feature 'Using the search function on the navbar,' do
 
       expect(page).to have_text('Nenhum resultado encontrado para: chocolate branco')
     end
+
+    it 'shows each result only once' do
+      product = create(:product, status: 'on_shelf', name: 'Pracha de surf',
+                                 description: 'Wetsuit para Surf', brand: 'Surf me')
+
+      visit root_path
+      fill_in 'Busque aqui seu produto', with: 'surf'
+      click_on 'Procurar'
+
+      expect(page).to have_text(product.name, count: 1)
+    end
+
+    it 'returns results orders by product name' do
+      product1 = create(:product, status: 'on_shelf', name: 'Pracha de surf')
+      product2 = create(:product, status: 'on_shelf', name: 'Surfaces and textures')
+      product3 = create(:product, status: 'on_shelf', name: 'Leash de Kitesurf')
+
+      visit root_path
+      fill_in 'Busque aqui seu produto', with: 'surf'
+      click_on 'Procurar'
+
+      expect(page.text.index('Leash de Kitesurf')).to be < page.text.index('Pracha de surf')
+    end
   end
 end

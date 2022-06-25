@@ -7,68 +7,69 @@ puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
 admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
-user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos')
+user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '69907388041')
 
 puts '----- cria categorias de produtos -----'
 
 eletronicos = ProductCategory.create(name: "Eletrônicos")
-informatica = ProductCategory.create(name: "Informática", parent: eletronicos)
-notebooks = ProductCategory.create(name: "Notebooks", parent: informatica)
-ultrafinos = ProductCategory.create(name: "Notebooks", parent: notebooks)
-macbook = ProductCategory.create(name: "Notebooks", parent: macbook)
-desktops = ProductCategory.create(name: "Desktops", parent: informatica)
-smartphones = ProductCategory.create(name: "Smartphones", parent: eletronicos)
+  smartphones = ProductCategory.create(name: "Smartphones", parent: eletronicos)
+  informatica = ProductCategory.create(name: "Informática", parent: eletronicos)
+    desktops = ProductCategory.create(name: "Desktops", parent: informatica)
+    notebooks = ProductCategory.create(name: "Notebooks", parent: informatica)
+      ultrafinos = ProductCategory.create(name: "Notebooks", parent: notebooks)
+        macbook = ProductCategory.create(name: "Notebooks", parent: macbook)
 
 eletrodomesticos = ProductCategory.create(name: "Eletrodomésticos")
-lavar_e_secar = ProductCategory.create(name: "Lavar e Secar", parent: eletrodomesticos)
-geladeiras = ProductCategory.create(name: "Geladeiras", parent: eletrodomesticos)
-fogao = ProductCategory.create(name: "Fogão", parent: eletrodomesticos)
-ar_e_ventilacao = ProductCategory.create(name: "Ar e Ventilação", parent: eletrodomesticos)
+  lavar_e_secar = ProductCategory.create(name: "Lavar e Secar", parent: eletrodomesticos)
+  geladeiras = ProductCategory.create(name: "Geladeiras", parent: eletrodomesticos)
+  fogao = ProductCategory.create(name: "Fogão", parent: eletrodomesticos)
+  ar_e_ventilacao = ProductCategory.create(name: "Ar e Ventilação", parent: eletrodomesticos)
 
 moveis = ProductCategory.create(name: "Móveis")
-mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
-guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
+  mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
+  guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 
 utilidades_domesticas = ProductCategory.create(name: "Utilidades Domésticas")
-cafe_e_cha = ProductCategory.create(name: "Café e Chá", parent: utilidades_domesticas)
-garrafas_termicas = ProductCategory.create(name: "Garrafas Térmicas", parent: cafe_e_cha)
-copos_e_canecas = ProductCategory.create(name: "Copos e Canecas", parent: utilidades_domesticas)
-canecas = ProductCategory.create(name: "Canecas", parent: copos_e_canecas)
+  cafe_e_cha = ProductCategory.create(name: "Café e Chá", parent: utilidades_domesticas)
+    garrafas_termicas = ProductCategory.create(name: "Garrafas Térmicas", parent: cafe_e_cha)
+  copos_e_canecas = ProductCategory.create(name: "Copos e Canecas", parent: utilidades_domesticas)
+    canecas = ProductCategory.create(name: "Canecas", parent: copos_e_canecas)
 
 vestuario = ProductCategory.create(name: "Vestuário")
-camisas = ProductCategory.create(name: "Camisas", parent: vestuario)
-camisas_basicas = ProductCategory.create(name: "Camisas Básicas", parent: camisas)
+  camisas = ProductCategory.create(name: "Camisas", parent: vestuario)
+    camisas_basicas = ProductCategory.create(name: "Camisas Básicas", parent: camisas)
 
 puts "---- cria um monte de cacarecos  ------"
 
 names_and_descriptions = [
   # ['', ''], 
-  ['Caneca Sabre de Luz', 'Caneca em cerâmica com desenho de sabre de luz que se acende quando a caneca está quente.'],
-  ['Xícara Levitadora', 'Par de duas xícaras em vidro transparente com parede dupla. Parece que seu café está flutuando!'],
-  ['Conjunto Tóquio', 'Conjunto para chá em estilo japonês, feito inteiramente em ecoplástico e composto de 4 xícaras pequenas sem alça.'],
-  ['Pano das Galáxias', 'Pano de prato 100% algodão, na cor preta com desenhos de estrelas e cometas.'],
-  ['Caneca-bolo', 'Caneca em cerâmica com impressão de receita de bolo de caneca. Acompanha sachê com mistura para bolo, basta acrescentar água.'],
-  ['Copo Sujo', 'Conjunto de 4 copos de 200ml iguaizinhos ao do boteco da esquina.'],
-  ['Copo Sujo Super Power', 'Conjunto de 2 copos como os do boteco da esquina, mas de 400ml.'],
-  ['Protetor de mesa Bar do Lado', 'Conjunto de 5 protetores de mesa, também conhecidos como coasters, com impressões de rótulos de cervejas famosas'],
-  ['Copo Colapsável EcoOffice', 'Nunca mais fique sem copo no bebedouro de galão! Este copo de 300ml se contrai a um disco que cabe em qualquer bolso. Aproveite esta novidade!'],
-  ['Codando Loucamente', 'Caneca com os dizeres "Talking is cheap, show me the code" em formatação de código'], 
-  ['Adesivos Grumpy Bear', 'Cartela de adesivos do Brown, o urso rabugento mais fofo que você conhece, e seu novo contatinho Cony a Coelha. Mas não conte pra ninguém que eles estão saindo, ainda é segredo!'], 
-  ['Fancy Napkings Silk Edition', 'Um lindo lenço branco rendado, em estilo vintage'], 
-  ['Love Book - A Luz', 'Fofíssima luminária led para livros, com garra para prender na capa, em forma de coração (que você nunca vai usar mesmo porque o último livro que você leu foi para prestar vestibular)'], 
-  ['Pires Chá das 5', 'Pires de reposição para a Xícara Chá das 5'], 
-  ['Xícara Chá das 5', 'Elegante xícara em fina cerâmica, para momentos elegantes ao tomar chá ou café.'], 
-  ['Moonbucks', 'No melhor estilo das grandes lojas de café, este copo para bebidas quentes tem uma tampa de pequeno orifício, que permite tomar café em movimento sem se sujar.'], 
-  ['Caneca Coffee Lovers', 'Eu moo, tu fazes o café, nós tomamos! Esta caneca não pode faltar na sua mesa de café da manhã!'], 
-  ['Caneca Térmica Hot Forever', 'Linda caneca térmica em aço inox, para compor um belo ambiente de trabalho na sua mesa de home office e ser ostentada furtivamente durante suas vídeo-conferências'], 
+  [canecas, 'Caneca Sabre de Luz', 'Caneca em cerâmica com desenho de sabre de luz que se acende quando a caneca está quente.'],
+  [cafe_e_cha, 'Xícara Levitadora', 'Par de duas xícaras em vidro transparente com parede dupla. Parece que seu café está flutuando!'],
+  [cafe_e_cha, 'Conjunto Tóquio', 'Conjunto para chá em estilo japonês, feito inteiramente em ecoplástico e composto de 4 xícaras pequenas sem alça.'],
+  [utilidades_domesticas, 'Pano das Galáxias', 'Pano de prato 100% algodão, na cor preta com desenhos de estrelas e cometas.'],
+  [canecas, 'Caneca-bolo', 'Caneca em cerâmica com impressão de receita de bolo de caneca. Acompanha sachê com mistura para bolo, basta acrescentar água.'],
+  [copos_e_canecas, 'Copo Sujo', 'Conjunto de 4 copos de 200ml iguaizinhos ao do boteco da esquina.'],
+  [copos_e_canecas, 'Copo Sujo Super Power', 'Conjunto de 2 copos como os do boteco da esquina, mas de 400ml.'],
+  [utilidades_domesticas, 'Protetor de mesa Bar do Lado', 'Conjunto de 5 protetores de mesa, também conhecidos como coasters, com impressões de rótulos de cervejas famosas'],
+  [copos_e_canecas, 'Copo Colapsável EcoOffice', 'Nunca mais fique sem copo no bebedouro de galão! Este copo de 300ml se contrai a um disco que cabe em qualquer bolso. Aproveite esta novidade!'],
+  [canecas, 'Codando Loucamente', 'Caneca com os dizeres "Talking is cheap, show me the code" em formatação de código'], 
+  [nil, 'Adesivos Grumpy Bear', 'Cartela de adesivos do Brown, o urso rabugento mais fofo que você conhece, e seu novo contatinho Cony a Coelha. Mas não conte pra ninguém que eles estão saindo, ainda é segredo!'], 
+  [vestuario, 'Fancy Napkings Silk Edition', 'Um lindo lenço branco rendado, em estilo vintage'], 
+  [utilidades_domesticas, 'Love Book - A Luz', 'Fofíssima luminária led para livros, com garra para prender na capa, em forma de coração (que você nunca vai usar mesmo porque o último livro que você leu foi para prestar vestibular)'], 
+  [cafe_e_cha, 'Pires Chá das 5', 'Pires de reposição para a Xícara Chá das 5'], 
+  [cafe_e_cha, 'Xícara Chá das 5', 'Elegante xícara em fina cerâmica, para momentos elegantes ao tomar chá ou café.'], 
+  [copos_e_canecas, 'Moonbucks', 'No melhor estilo das grandes lojas de café, este copo para bebidas quentes tem uma tampa de pequeno orifício, que permite tomar café em movimento sem se sujar.'], 
+  [canecas, 'Caneca Coffee Lovers', 'Eu moo, tu fazes o café, nós tomamos! Esta caneca não pode faltar na sua mesa de café da manhã!'], 
+  [garrafas_termicas, 'Caneca Térmica Hot Forever', 'Linda caneca térmica em aço inox, para compor um belo ambiente de trabalho na sua mesa de home office e ser ostentada furtivamente durante suas vídeo-conferências'], 
 ]
 
 brands = ['Pensaminarium', 'Vesúvia', 'TOC & ex-TOC']
 
-names_and_descriptions.each do | pair |
+names_and_descriptions.each do | info |
   Product.create(status: 'on_shelf',
-                name: pair[0], 
-                description: pair[1], 
+                product_category: info[0],
+                name: info[1], 
+                description: info[2], 
                 brand: brands[rand(brands.size)],
                 sku: ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**7).to_i.to_s,
   ).set_price(14 * (1 + rand(100)/100.0).truncate(2))
@@ -100,12 +101,18 @@ product5 = Product.create!(status: 'on_shelf',
   brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_price(89)
 
 puts '----------- cria pedidos --------------'
+
 CartItem.create!(product: product1, quantity: 5, user: user )
 CartItem.create!(product: product2, quantity: 7, user: user )
 Order.create!(address: 'Rua da entrega, 75', user: user)
-CartItem.create!(product: product3, quantity: 5, user: user )
-CartItem.create!(product: product1, quantity: 7, user: user )
 
+CartItem.create!(product: product3, quantity: 1, user: user )
+CartItem.create!(product: product4, quantity: 3, user: user )
+order = Order.create!(address: 'Rua da Paz, 42 - Belém, PA', user: user)
+order.approved!
+
+CartItem.create!(product: product5, quantity: 6, user: user )
+order.update!(status: 'canceled', error_type: 'insufficient_funds')
 
 puts "\nSumário"
 puts "Foram criados #{Admin.count} admins"

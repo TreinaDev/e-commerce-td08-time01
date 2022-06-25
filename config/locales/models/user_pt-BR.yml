@@ -14,6 +14,7 @@ pt-BR:
         current_sign_in_at: Atualmente logado em
         current_sign_in_ip: IP do acesso atual
         email: E-mail
+        identify_number: CPF/CNPJ
         encrypted_password: Senha criptografada
         failed_attempts: Tentativas sem sucesso
         last_sign_in_at: Último acesso em
