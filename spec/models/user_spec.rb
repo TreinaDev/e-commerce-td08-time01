@@ -12,8 +12,9 @@ RSpec.describe User, type: :model do
     it { should_not allow_value('@email.com').for(:email) }
   end
 
-  describe '.send_payment_client' do
-    it  'should post to API when client is client_person' do
+  describe '#sync_user_on_payment' do
+    context 'should make a POST to create user at Payments app'
+    it  'when the client is a natural person (with CPF)' do
       json_data = File.read(Rails.root.join('spec/support/json/payment_client_person.json'))
       user = create(:user, name: 'Joaquim José', identify_number: '58611596021', email: 'joaquim@email.com')
       fake_response = double('faraday_response', status: 201, body: json_data)
@@ -29,7 +30,7 @@ RSpec.describe User, type: :model do
       }
 
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/clients', client.as_json).and_return(fake_response)
-      result = user.send_payment_client
+      result = user.sync_user_on_payment
       json_parse = JSON.parse(result.body)
       
       expect(json_parse["client_type"]).to eq "client_person"
@@ -38,7 +39,7 @@ RSpec.describe User, type: :model do
       expect(json_parse["client_person"]["cpf"]).to eq "58611596021"
     end
 
-    it  'should post to API when client is client_company' do
+    it  'when the client is a company (with CNPJ)' do
       json_data = File.read(Rails.root.join('spec/support/json/payment_client_company.json'))
       user = create(:user, name: 'Indústrias Stark', identify_number: '42115446000101', email: 'tony@industriasstark.com')
       fake_response = double('faraday_response', status: 201, body: json_data)
@@ -54,7 +55,7 @@ RSpec.describe User, type: :model do
       }
 
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/clients', client.as_json).and_return(fake_response)
-      result = user.send_payment_client
+      result = user.sync_user_on_payment
       json_parse = JSON.parse(result.body)
       
       expect(json_parse["client_type"]).to eq "client_company"

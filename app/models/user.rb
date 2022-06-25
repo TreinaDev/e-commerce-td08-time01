@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validate :valid_cpf_cnpj
 
-  after_create :send_payment_client
+  after_create :sync_user_on_payment
 
   def to_payment_client
     client_type = self.identify_number.length == 11 ? "client_person" : "client_company"
@@ -31,7 +31,7 @@ class User < ApplicationRecord
     payment_client.as_json
   end
 
-  def send_payment_client
+  def sync_user_on_payment
     begin
       client = self.to_payment_client
       Faraday.post('http://localhost:4000/api/v1/clients', client)
