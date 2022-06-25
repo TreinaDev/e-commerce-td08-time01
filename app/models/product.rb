@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
   def current_price_in_rubis
     return nil if self.current_price_in_brl.nil?
-    self.current_price_in_brl * ExchangeRate.current
+    (self.current_price_in_brl * ExchangeRate.current).ceil
   end
 
   def current_price_in_brl
