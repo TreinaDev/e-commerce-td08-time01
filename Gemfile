@@ -11,6 +11,7 @@ gem 'ancestry'
 
 # Helper to make edit forms easier
 gem 'simple_form'
+gem 'cpf_cnpj'
 
 # Manage HTTP requests
 gem 'faraday'
