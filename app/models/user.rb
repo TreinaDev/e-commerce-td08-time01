@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, message: ' inválido.' }
-  validates :email, uniqueness: true
+  validates :email, :identify_number, uniqueness: true
 
   validate :valid_cpf_cnpj
 
