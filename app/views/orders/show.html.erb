@@ -13,15 +13,15 @@
       <tr>
         <td class="text-start"> <%= link_to item.product.name, product_path(item.product.id) %></td>
         <td class="text-center"> <strong> <%= item.quantity %>  </strong></td> 
-        <td class="text-center"> <strong> <%= number_with_delimiter(item.price_on_purchase) %> <%= image_tag 'rubi', height: '16' %></strong></td>
-        <td class="text-center"> <strong> <%= number_with_delimiter(item.price_on_purchase * item.quantity) %> <%= image_tag 'rubi', height: '16' %></strong></td>
+        <td class="text-center"> <strong> <%= number_with_delimiter(item.price_on_purchase).to_i %> <%= image_tag 'rubi', height: '16' %></strong></td>
+        <td class="text-center"> <strong> <%= number_with_delimiter(item.price_on_purchase * item.quantity).to_i %> <%= image_tag 'rubi', height: '16' %></strong></td>
       </tr>
     <%end%>
     <tr>
       <td colspan="4" class="text-center"> 
       <strong>Valor Total:</strong>
       &nbsp;
-      <strong><%= number_with_delimiter(@sum) %> <%= image_tag 'rubi', height: '16' %></strong>
+      <strong><%= number_with_delimiter(@sum).to_i %> <%= image_tag 'rubi', height: '16' %></strong>
       </td>
     </tr>
   </tbody>

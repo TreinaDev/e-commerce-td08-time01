@@ -79,8 +79,8 @@ RSpec.describe Product, type: :model do
       product = create(:product).set_brl_price(15)
       another_product = create(:product).set_brl_price(8.51)
 
-      price = Price.first
-      another_price = Price.last
+      price = product.prices.last
+      another_price = another_product.prices.last
 
       expect(price.price_in_brl).to eq 15
       expect(price.product_id).to be product.id
@@ -95,7 +95,7 @@ RSpec.describe Product, type: :model do
     it 'should create a Price with validity start in the future if a datetime is passed' do
       product = create(:product).set_brl_price(51.01, 2.months.from_now)
 
-      price = Price.first
+      price = product.prices.last
       creation_lag =  2.months.from_now - price.validity_start
       diff_between_time_asked_and_time_persisted = creation_lag < 0 ? creation_lag * (-1) : creation_lag
       # while the creation_lag is always positive, calculating its absolute value helps 
@@ -122,14 +122,25 @@ RSpec.describe Product, type: :model do
     end
 
     it 'should return nil if the product has no prices at all' do
-      product = create(:product)
+      # for this test we cannot use FactoryBot to create a product
+      # because on the FactoryBot, it automatically creates a price
+      # after a Product is created
+      product = Product.create!(name: 'Garrafa Star Wars',
+                                sku: 'JG6857JF8',
+                                brand: 'Zona Criativa',
+                                description: 'Garrafa térmica inox com temática do filme Star Wars')
 
       expect(product.prices).to be_empty
       expect(product.current_price_in_brl).to be nil
     end
 
     it 'should return nil if the product only has prices with validity start in the future' do
-      product = create(:product)
+      # idem above, concerning no use of FactoryBot
+      product = Product.create!(name: 'Garrafa Star Wars',
+                                sku: 'JG6857JF8',
+                                brand: 'Zona Criativa',
+                                description: 'Garrafa térmica inox com temática do filme Star Wars')
+
       price = create(:price, price_in_brl: 22.22, validity_start: 2.months.from_now, product: product)
 
       expect(product.prices).to include(price)

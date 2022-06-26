@@ -14,9 +14,7 @@ RSpec.describe ExchangeRate, type: :model do
           "register_date": "2022-06-21"}' )
       allow(Faraday).to receive(:get).and_return(fake_response)
 
-      ExchangeRate.get
-
-      expect(ExchangeRate.count).to be 1
+      expect { ExchangeRate.get }.to change { ExchangeRate.count }.by 1
       expect(ExchangeRate.last.rate).to eq 2
       expect(ExchangeRate.last.registered_at_source_for).to eq Date.new(2022, 06, 21)
     end
