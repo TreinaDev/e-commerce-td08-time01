@@ -6,6 +6,7 @@ class Order < ApplicationRecord
 
   before_create :set_code
   after_create :process_cart
+  after_create :request_payment
 
   enum status: {pending: 0, approved: 5, canceled: 9}
   
@@ -24,5 +25,12 @@ class Order < ApplicationRecord
 
   def must_have_cart
     return errors.add(:pedido, 'deve possuir carrinho.') if CartItem.where(order_id: nil, user: self.user).empty?
+  end
+
+  def request_payment
+    Transaction.request(user_tax_number: self.user.identify_number,
+                        order_id: self.id,
+                        value: self.cart_items.pluck(:price_on_purchase).sum,
+                        transaction_type: 'transaction_order')
   end
 end

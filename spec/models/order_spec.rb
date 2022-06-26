@@ -25,4 +25,19 @@ RSpec.describe Order, type: :model do
       end
     end
   end
+
+  describe '.save' do
+    it 'should automatically send a transaction request' do
+      fake_response = double('faraday_response', status: 201, 
+                                                 body: '{ "transaction_code": "nsurg745n" }')
+      allow(Faraday).to receive(:post).and_return(fake_response)
+      user = create(:user)
+      create(:cart_item, user: user)
+      order = build(:order, user: user)
+
+      order.save!
+
+      expect(Order.last.transaction_code).to eq 'nsurg745n'
+    end
+  end
 end
