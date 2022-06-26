@@ -35,6 +35,9 @@ describe "User confirms order from cart" do
   end
 
   it "and generates order succesfully" do
+    allow(Faraday).to receive(:post).and_return(double('faraday_response', status: 201, body: '{ "transaction_code": "nsurg745n" }'))
+    # above: mock for API call when creating an order
+    
     create(:exchange_rate, rate: 2)
     user = create(:user)
     product_1 = create(:product, name: 'Caneca').set_brl_price(15)
