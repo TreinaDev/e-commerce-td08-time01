@@ -11,9 +11,9 @@ class Transaction < ApplicationService
 
   def initialize(user_tax_number:, value:, transaction_type:, order_id: nil)
     raise IncompleteData, "It is mandatory to provide the user's CPF or CNPJ" unless user_tax_number.present?
-    raise IncompleteData, 'It is mandatory to provide a value for the transaction' unless value > 0
+    raise IncompleteData, 'It is mandatory to provide a value for the transaction' unless value.present?
     raise WrongTypeofParameter, "Transaction type should be one of the following: #{API_TRANSACTION_TYPES.join(', ')}" unless API_TRANSACTION_TYPES.include? transaction_type
-    raise WrongTypeofParameter, 'Value should be a number' unless value.is_a?(Numeric)
+    raise WrongTypeofParameter, 'Transaction value should be a number' unless value.is_a?(Numeric)
 
     @user_tax_number = user_tax_number
     @order_id = order_id
