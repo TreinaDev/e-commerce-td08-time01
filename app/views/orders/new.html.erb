@@ -26,11 +26,11 @@
       </tr>
     <%end%>
     <tr>
-      <td></td>
-      <td class="text-center"> <strong>Valor Total:</strong></td>
-      <td class="text-center"> 
+      <td colspan="4" class="text-center"> 
+        <strong>Valor Total:</strong>
+        &nbsp;
         <%= image_tag 'rubi', height: '16' %>
-        <strong><%= number_with_delimiter(@sum) %></strong> 
+        <strong><%= number_with_delimiter(@sum).to_i %></strong> 
       </td>
     </tr>
   </tbody>
