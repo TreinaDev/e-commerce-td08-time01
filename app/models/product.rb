@@ -10,14 +10,19 @@ class Product < ApplicationRecord
 
   enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
 
-  def set_price(price_in_brl, validity_start = 1.second.ago)
+  def set_brl_price(price_in_brl, validity_start = 1.second.ago)
     Price.create!(price_in_brl: price_in_brl,
                   validity_start: validity_start,
                   product_id: self.id)
     return self
   end
 
-  def current_price
+  def current_price_in_rubis
+    return nil if self.current_price_in_brl.nil?
+    (self.current_price_in_brl * ExchangeRate.current).ceil
+  end
+
+  def current_price_in_brl
     return nil if self.prices.empty?
     return nil if self.prices.where('validity_start <= ?', DateTime.current).empty?
     

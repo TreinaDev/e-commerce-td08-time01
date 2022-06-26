@@ -93,6 +93,7 @@ pt-BR:
     - dez
     formats:
       default: "%d/%m/%Y"
+      api_query: "%d-%m-%Y"
       long: "%d de %B de %Y"
       short: "%d de %B"
     order:

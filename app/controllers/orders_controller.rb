@@ -15,8 +15,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @cart = @order.cart_items
     @sum = 0
-    @cart.each do |ci| 
-      @sum += ci.price_on_purchase * ci.quantity
+    @cart.each do |item| 
+      @sum += item.price_on_purchase * item.quantity
     end
   end
   
@@ -41,8 +41,8 @@ class OrdersController < ApplicationController
   def get_cart_and_sum
     @cart = CartItem.where(user_id: @user_id, order_id: nil)
     @sum = 0
-    @cart.each do |ci| 
-      @sum += ci.product.current_price * ci.quantity
+    @cart.each do |item| 
+      @sum += item.product.current_price_in_rubis * item.quantity
     end
   end
 end

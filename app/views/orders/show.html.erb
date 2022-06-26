@@ -12,14 +12,24 @@
     <% @cart.each do |item|%>
       <tr>
         <td class="text-start"> <%= link_to item.product.name, product_path(item.product.id) %></td>
-        <td class="text-center"> <strong> <%=item.quantity%>  </strong></td> 
-        <td class="text-center"> <strong> <%=number_to_currency(item.price_on_purchase, precision: 2)%> </strong></td>
-        <td class="text-center"> <strong> <%=number_to_currency(item.price_on_purchase * item.quantity, precision: 2)%> </strong></td>
+        <td class="text-center"> <strong> <%= item.quantity %>  </strong></td> 
+        <td class="text-center"> 
+          <%= image_tag 'rubi', height: '16' %>
+          <strong><%= number_with_delimiter(item.price_on_purchase).to_i %></strong>
+        </td>
+        <td class="text-center"> 
+          <%= image_tag 'rubi', height: '16' %>
+          <strong> <%= number_with_delimiter(item.price_on_purchase * item.quantity).to_i %></strong>
+        </td>
       </tr>
     <%end%>
     <tr>
-      <td colspan="3" class="text-center"> <strong>Valor Total:</strong></td>
-      <td class="text-center"> <strong><%=number_to_currency(@sum)%></strong></td>
+      <td colspan="4" class="text-center"> 
+        <strong>Valor Total:</strong>
+        &nbsp;
+        <%= image_tag 'rubi', height: '16' %>
+        <strong><%= number_with_delimiter(@sum).to_i %></strong> 
+      </td>
     </tr>
   </tbody>
 </table>

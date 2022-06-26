@@ -14,7 +14,10 @@
               <p class="card-text">Marca: <%= product.brand %></p>
               <p class="card-text"><%= product.description %></p>
               <p><%= product.product_category.nil? ? 'Sem categoria' : 'Categoria: ' + product.product_category.name %></p>
-              <p><%= number_to_currency(product.current_price, precision: 2) %></p>
+              <p>
+                <%= image_tag 'rubi', height: '16' %>
+                <%= number_with_delimiter(product.current_price_in_rubis) %> 
+              </p>
               <div class="text-center">
                 <%= link_to 'Ver produto', product, class: 'btn btn-outline-primary' %>
               </div>

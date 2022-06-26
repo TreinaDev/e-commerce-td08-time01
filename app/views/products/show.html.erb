@@ -34,7 +34,10 @@
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
     <dt>Preço:</dt>
-    <dd><%= number_to_currency(@product.current_price, precision: 2) %></dd>
+    <dd>
+      <%= image_tag 'rubi', height: '16' %>
+      <%= number_with_delimiter(@product.current_price_in_rubis) %> 
+    </dd>
   <dl>
 </article>
 
