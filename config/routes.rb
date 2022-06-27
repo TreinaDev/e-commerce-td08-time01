@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   
   resources :product_categories, only: [:index, :show, :new, :create, :edit, :update]
+  resources :promotions, only: [:index, :create]
 
   resources :users, shallow: true do
     resources :cart_items, only: [:index, :create, :destroy]
