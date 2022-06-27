@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users, shallow: true do
     resources :cart_items, only: [:index, :create, :destroy]
     resources :orders, only: [:index, :show, :new, :create]
+    get 'buy_rubis', to: 'buy_rubis#new'
+    post 'buy_rubis', to: 'buy_rubis#buy'
   end
 
   namespace :api do

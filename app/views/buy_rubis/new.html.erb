@@ -1,0 +1,10 @@
+<h1>Compra de Rubis</h1>
+
+<%= form_with url: user_buy_rubis_path(current_user.id) do |f| %>
+  <div id="buy-rubis">
+    <%= f.label :buy, 'Valor' %>
+    <%= f.number_field :buy %>
+
+    <%= f.submit 'Comprar'  %>
+  </div>
+<% end %>

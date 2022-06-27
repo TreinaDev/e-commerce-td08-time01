@@ -30,15 +30,19 @@ class Transaction < ApplicationService
     object
   end
 
-  def request
+  def build_payload
     type_of_user_tax_number = @user_tax_number.size == 11 ? 'cpf' : 'cnpj'
-    payload = { "#{type_of_user_tax_number}": @user_tax_number,
+    { "#{type_of_user_tax_number}": @user_tax_number,
                 "client_transaction": { "credit_value": @value,
                                         "type_transaction": @transaction_type }
-                }.as_json
-    @response = Faraday.post(API_ROOT.concat(API_ENDPOINT), payload)
+    }.as_json
+  end
+
+  def request
+    @response = Faraday.post(API_ROOT.concat(API_ENDPOINT), build_payload)
     if @response.status == 201 && @order_id.present?
       Order.find(@order_id).update!(transaction_code: JSON.parse(@response.body)[API_VARIABLE_HOLDING_TRANSACTION_CODE])
     end
+    @response
   end
 end
