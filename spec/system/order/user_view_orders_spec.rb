@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe "User enters orders page" do
   it "and views own orders" do
+    allow(Faraday).to receive(:post).and_return(double('faraday_response', status: 201, body: '{ "transaction_code": "nsurg745n" }'))
+    # above: mock for API call when creating an order
     user = create(:user)
     user_2 = create(:user, name: 'Maciel', email: 'maciel@meuemail.com')
     product_1 = create(:product, name: 'Caneca')

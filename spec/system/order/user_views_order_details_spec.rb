@@ -2,6 +2,9 @@ require 'rails_helper'
 
 describe 'User enters order detail page' do
   it "and sees prices as of on date of purchase" do
+    allow(Faraday).to receive(:post).and_return(double('faraday_response', status: 201, body: '{ "transaction_code": "nsurg745n" }'))
+    # above: mock for API call when creating an order
+    
     user = create(:user)
     Timecop.freeze(1.month.ago) do
       create(:exchange_rate, rate: 2)
@@ -24,7 +27,10 @@ describe 'User enters order detail page' do
   end
   
   it "and sees a message if the order was canceled due to insufficiente funds" do
-    user = create(:user)
+    allow(Faraday).to receive(:post).and_return(double('faraday_response', status: 201, body: '{ "transaction_code": "nsurg745n" }'))
+    # above: mock for API call when creating an order
+    
+   user = create(:user)
     product = create(:product)
     create(:cart_item, product: product, user: user)
     order = create(:order, user: user, status: 'canceled', error_type: 'insufficient_funds')
