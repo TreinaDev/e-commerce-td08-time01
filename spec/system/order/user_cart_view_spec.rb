@@ -18,10 +18,10 @@ describe 'User enters cart page' do
     click_on "Meu Carrinho"
     
     expect(page).to have_content "Produto Quantidade Preço Quantidade X Preço"
-    expect(page).to have_content "Caneca 3 24 72"
-    expect(page).to have_content "Garrafa 7 10 70"
-    expect(page).not_to have_content "Jarra 5 32 160"
-    expect(page).not_to have_content "Pote 7 6 42"
+    expect(page).to have_content "Caneca 3 6 18"
+    expect(page).to have_content "Garrafa 7 3 21"
+    expect(page).not_to have_content "Jarra 5 8 40"
+    expect(page).not_to have_content "Pote"
   end
 
   it 'and there are no cart items' do

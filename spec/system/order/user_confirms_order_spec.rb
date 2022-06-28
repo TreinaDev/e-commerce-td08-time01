@@ -24,7 +24,7 @@ describe "User confirms order from cart" do
     
     expect(page).to have_text "Meu Pedido"
     expect(page).to have_text "Produto Quantidade Preço Quantidade X Preço"
-    expect(page).to have_text "Caneca 3 30 90"
+    expect(page).to have_text "Caneca 3 8 24"
     expect(page).to have_text "Garrafa 7 #{price_2} #{subtotal_2}"
     expect(page).to have_text "Jarra 5 #{price_3} #{subtotal_3}"
     expect(page).to have_text "Valor Total:"
@@ -63,7 +63,7 @@ describe "User confirms order from cart" do
 
     expect(page).to have_content 'Pedido 123A-SD45'
     expect(page).to have_content "Produto Quantidade Preço Quantidade X Preço"
-    expect(page).to have_content "Caneca 3 30 90"
+    expect(page).to have_content "Caneca 3 8 24"
     expect(page).to have_content "Garrafa 7 #{price_2} #{subtotal_2}"
     expect(page).to have_content "Jarra 5 #{price_3} #{subtotal_3}"
     expect(page).not_to have_button "Retirar"
