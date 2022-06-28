@@ -11,7 +11,7 @@ describe 'User enters order detail page' do
       product = create(:product)
       create(:price, product: product, price_in_brl: "10", validity_start: Time.current)
       create(:cart_item, product: product, quantity: 3, user: user)
-      create(:order, user: user)
+      create(:order, user: user, code: 'WFKM-JYY7')
     end
     create(:price, product: Product.last, price_in_brl: "12", validity_start: Time.current)
     price_in_rubis_at_time_of_purchase = 10 / 2
