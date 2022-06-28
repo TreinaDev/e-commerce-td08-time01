@@ -19,7 +19,7 @@ describe "User confirms order from cart" do
 
     login_as(user, scope: :user)
     visit root_path
-    click_on "Meu Carrinho"
+    click_on class: 'bi bi-cart3'
     click_on "Finalizar Pedido"
     
     expect(page).to have_text "Meu Pedido"
@@ -56,7 +56,7 @@ describe "User confirms order from cart" do
 
     login_as(user, scope: :user)
     visit root_path
-    click_on "Meu Carrinho"
+    click_on class: 'bi bi-cart3'
     click_on "Finalizar Pedido"
     fill_in "Endereço de entrega", with: "Rua da entrega, 45"
     click_on "Confirmar"
@@ -81,7 +81,7 @@ describe "User confirms order from cart" do
 
     login_as(user, scope: :user)
     visit root_path
-    click_on "Meu Carrinho"
+    click_on class: 'bi bi-cart3'
     click_on "Finalizar Pedido"
     fill_in "Endereço de entrega", with: ""
     click_on "Confirmar"

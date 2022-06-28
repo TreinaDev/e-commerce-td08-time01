@@ -32,7 +32,6 @@
     <%end%>
 
     <% if admin_signed_in? %>
-
       <ul class="navbar-nav">
         <li class="nav-link">
           <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'text-light text-decoration-none nav-link active' %>
@@ -40,6 +39,14 @@
           
         <li class="nav-link">
           <span class="nav-link"><%= current_admin.name %></span>
+        </li>
+
+        <li class="nav-link">
+          <ul class="navbar-nav">
+            <li class="nav-link">
+              <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-light mini-button' %>
+            </li>
+          </ul>
         </li>
       </ul>
     <% end %>
@@ -60,10 +67,9 @@
                   <li><%= link_to 'Meus Pedidos', user_orders_path(current_user.id), class: 'dropdown-item' %></li>
                   <li><%= link_to 'Comprar Rubis', user_buy_rubis_path(current_user.id), class: 'dropdown-item' %></li>
                 </ul>
-              </li>
-          
+              </li>        
               <li class="nav-link">
-                <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-light mini-button' %>
+                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light mini-button' %>
               </li>
             </ul>
           </div>
