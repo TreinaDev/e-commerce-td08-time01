@@ -2,7 +2,7 @@ class Api::V1::PaymentsController < Api::V1::ApiController
   rescue_from ActiveRecord::ActiveRecordError, with: :status_500
 
   def results
-    order = Order.find_by(code: params[:transaction][:code])
+    order = Order.find_by(transaction_code: params[:transaction][:code])
     status = params[:transaction][:status]
     error_type = params[:transaction][:error_type]
     return render json: 'Transação desconhecida.', status: :not_found if order.nil?
