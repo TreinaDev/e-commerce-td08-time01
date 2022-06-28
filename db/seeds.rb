@@ -6,8 +6,8 @@
 puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
-admin = Admin.create(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
-user = User.create(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '95350391216')
+admin = Admin.create!(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
+user = User.create!(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '06001818398')
 
 puts '--------- cria taxa de câmbio ---------'
 
@@ -106,20 +106,20 @@ product5 = Product.create!(status: 'on_shelf',
 
 puts '----------- cria pedidos --------------'
 
-CartItem.create!(product: product1, quantity: 5, user: user )
-CartItem.create!(product: product2, quantity: 7, user: user )
+CartItem.create!(product: product1, quantity: 5, user: user)
+CartItem.create!(product: product2, quantity: 7, user: user)
 order1 = Order.new(address: 'Rua da entrega, 75', user: user)
 order1.skip_callback = true
 order1.save!
 
-CartItem.create!(product: product3, quantity: 1, user: user )
-CartItem.create!(product: product4, quantity: 3, user: user )
+CartItem.create!(product: product3, quantity: 1, user: user)
+CartItem.create!(product: product4, quantity: 3, user: user)
 order2 = Order.new(address: 'Rua da Paz, 42 - Belém, PA', user: user)
 order2.skip_callback = true
 order2.save!
 order2.approved!
 
-CartItem.create!(product: product5, quantity: 6, user: user )
+CartItem.create!(product: product5, quantity: 6, user: user)
 order3 = Order.new(address: 'Rua do Bailão de Domingo - Erechim, RS', user: user)
 order3.skip_callback = true
 order3.save!
