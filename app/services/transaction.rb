@@ -39,10 +39,11 @@ class Transaction < ApplicationService
   end
 
   def request
-    @response = Faraday.post(API_ROOT + API_ENDPOINT, payload)
+    @response = Faraday.post(API_ROOT + API_ENDPOINT, build_payload)
     if @response.status == 201 && @order_id.present?
       Order.find(@order_id).update!(transaction_code: JSON.parse(@response.body)[API_VARIABLE_HOLDING_TRANSACTION_CODE])
     end
+    p "Resposta do Pagamento: #{@response.body}"
     @response
   end
 end
