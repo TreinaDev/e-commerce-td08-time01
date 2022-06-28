@@ -11,7 +11,7 @@ describe 'User tries to buy rubis' do
     within('nav') do
       click_on('Comprar Rubis')
     end
-    fill_in 'Valor em Real', with: 500
+    fill_in 'Valor em Reais', with: 500
     within('#buy-rubis') do
       click_on 'Comprar'
     end
@@ -30,7 +30,7 @@ describe 'User tries to buy rubis' do
     within('nav') do
       click_on('Comprar Rubis')
     end
-    fill_in 'Valor em Real', with: 'quinhentos'
+    fill_in 'Valor em Reais', with: 'quinhentos'
     within('#buy-rubis') do
       click_on 'Comprar'
     end
@@ -50,7 +50,7 @@ describe 'User tries to buy rubis' do
     within('nav') do
       click_on('Comprar Rubis')
     end
-    fill_in 'Valor em Real', with: '500'
+    fill_in 'Valor em Reais', with: '500'
     within('#buy-rubis') do
       click_on 'Comprar'
     end

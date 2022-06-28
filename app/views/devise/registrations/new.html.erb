@@ -8,18 +8,18 @@
 
     <div class="field">
       <%= f.label :name, "Nome" %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "Nome", required: true %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "Nome", required: true, class: 'form-control'  %>
     </div>
 
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "E-mail" %>
+      <%= f.email_field :email, autocomplete: "E-mail", class: 'form-control'  %>
     </div>
     
     <% if request.path == new_user_registration_path or request.path == users_path %>
       <div class="field">
         <%= f.label :identify_number %><br />
-        <%= f.text_field :identify_number %>
+        <%= f.text_field :identify_number, class: 'form-control'  %>
       </div>
     <% end %>
 
@@ -28,15 +28,15 @@
       <% if @minimum_password_length %>
       <em>(no mínimo <%= @minimum_password_length %> caracteres)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "Nova senha" %>
+      <%= f.password_field :password, autocomplete: "Nova senha", class: 'form-control' %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation, "Confirmar senha" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'  %>
     </div>
 
-    <div class="actions">
+    <div class="actions little-buffer">
       <%= f.submit "Cadastrar-se", class: 'w-100 btn btn-lg btn-primary' %>
     </div>
   <% end %>
