@@ -6,12 +6,13 @@ describe 'PATCH api/v1/payment_results' do
     fake_response = double('faraday_response', status: 201, 
                                                 body: '{ "transaction_code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
-
+      
     user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, status: 'pending', user: user)
+    create(:order, status: 'pending', user: user) 
+    order = Order.last
 
-    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.code}",
+    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "canceled",
                                                               "error_type": "insufficient_funds" } }
     body = response.body
@@ -31,10 +32,10 @@ describe 'PATCH api/v1/payment_results' do
 
     user = create(:user)
     create(:cart_item, user: user)
-    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ASDF1234')
-    order = create(:order, user: user)
+    create(:order, user: user)
+    order = Order.last
 
-    patch '/api/v1/payment_results', params: { transaction: { "code": "4567-QWER",
+    patch '/api/v1/payment_results', params: { transaction: { "code": "asdgr654s",
                                                               "status": "approved",
                                                               "error_type": "" } }
     body = response.body
@@ -52,9 +53,10 @@ describe 'PATCH api/v1/payment_results' do
     
     user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, status: 'pending', user: user)
+    create(:order, status: 'pending', user: user)
+    order = Order.last
 
-    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.code}",
+    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "happy",
                                                               "error_type": "" } }
     body = response.body
@@ -73,9 +75,10 @@ describe 'PATCH api/v1/payment_results' do
     
     user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, user: user)
-    
-    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.code}",
+    create(:order, user: user)
+    order = Order.last
+
+    patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "canceled",
                                                               "error_type": "" } }
     body = response.body
@@ -86,14 +89,9 @@ describe 'PATCH api/v1/payment_results' do
   end
 
   it 'returns 500 if some error occurs inside the server' do
-    # below: mock for API call when creating an order
-    fake_response = double('faraday_response', status: 201, 
-                                                body: '{ "transaction_code": "nsurg745n" }')
-    allow(Faraday).to receive(:post).and_return(fake_response)
-    
     allow(Order).to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
 
-    patch '/api/v1/payment_results', params: { transaction: { "code": "4567-QWER",
+    patch '/api/v1/payment_results', params: { transaction: { "code": "nsurg745n",
                                                               "status": "completed",
                                                               "error_type": "" } }
     body = response.body
