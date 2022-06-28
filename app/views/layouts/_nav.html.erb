@@ -20,56 +20,56 @@
         <% end %>
     </div>
 
-    <ul class="navbar-nav">
-      <% unless user_signed_in? || admin_signed_in? %>
-        <li class="nav-item">
+    <% unless user_signed_in? || admin_signed_in? %>
+      <ul class="navbar-nav">
+        <li class="nav-link">
           <%= link_to 'Entrar', new_user_session_path, class: 'nav-link active'  %>
         </li>
-
-        <li class="nav-item">
+        <li class="nav-link">
           <%= link_to 'Registrar', new_user_registration_path, class: 'nav-link active'  %>
         </li>
-      <%end%>
+      </ul>
+    <%end%>
 
-      <% if user_signed_in? %>
+    <% if admin_signed_in? %>
+
+      <ul class="navbar-nav">
         <li class="nav-link">
-          <%= current_user.name %><br />
-          <span style="font-size: 0.75em">RB$ <%= @balance %></span>
+          <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'text-light text-decoration-none nav-link active' %>
+        </li>
+          
+        <li class="nav-link">
+          <span class="nav-link"><%= current_admin.name %></span>
+        </li>
+      </ul>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <ul class="navbar-nav">
+        <li class="nav-link">
+          <%= link_to '', user_cart_items_path(current_user.id), class: 'dropdown-item bi bi-cart3' %>
+        </li>
         <li>
-
-        <li class="nav-link">
-          <%= link_to 'Meu Carrinho', user_cart_items_path(current_user.id), class: 'text-light text-decoration-none' %>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= current_user.name %>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark bg-primary" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><%= link_to 'Meus Pedidos', user_orders_path(current_user.id), class: 'dropdown-item' %></li>
+                  <li><%= link_to 'Comprar Rubis', user_buy_rubis_path(current_user.id), class: 'dropdown-item' %></li>
+                </ul>
+              </li>
+          
+              <li class="nav-link">
+                <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-light mini-button' %>
+              </li>
+            </ul>
+          </div>
         </li>
-
-        <li class="nav-link">
-          <%= link_to 'Comprar Rubis', user_buy_rubis_path(current_user.id), class: 'text-light text-decoration-none' %>
-        </li>
-        
-        <li class="nav-link">
-          <%= link_to 'Meus Pedidos', user_orders_path(current_user.id), class: 'text-light text-decoration-none' %>
-        </li>
-
-        <li class="nav-link">
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-light mini-button' %>
-        </li>
-      <% end %>
-
-      <% if admin_signed_in? %>
-
-        <li class="nav-link">
-          <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'text-light text-decoration-none' %>
-        </li>
-        
-        <li class="nav-link">
-          <%= current_admin.name %>
-        </li>
-
-        <li class="nav-link">
-          <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'btn btn-light mini-button' %>
-        </li>
-      <% end %>
-
-    </ul>
+      </ul>
+    <% end %>
   </div>
 </nav>
 <br />
