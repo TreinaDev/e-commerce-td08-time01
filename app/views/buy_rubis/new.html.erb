@@ -2,8 +2,8 @@
 
 <%= form_with url: user_buy_rubis_path(current_user.id) do |f| %>
   <div id="buy-rubis">
-    <%= f.label :buy, 'Valor' %>
-    <%= f.number_field :buy %>
+    <%= f.label :value, 'Valor em Real' %>
+    <%= f.number_field :value %>
 
     <%= f.submit 'Comprar'  %>
   </div>
