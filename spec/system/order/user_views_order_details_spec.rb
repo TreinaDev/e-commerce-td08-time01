@@ -23,7 +23,7 @@ describe 'User enters order detail page' do
     click_on "Detalhes do Pedido"
 
     expect(page).to have_content "#{price_in_rubis_at_time_of_purchase} #{3 * price_in_rubis_at_time_of_purchase}"
-    expect(page).not_to have_content "#{price_in_rubis_now}"
+    expect(page).not_to have_content "#{price_in_rubis_now} #{3 * price_in_rubis_now}"
   end
   
   it "and sees a message if the order was canceled due to insufficiente funds" do
