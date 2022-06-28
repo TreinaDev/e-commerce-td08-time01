@@ -31,6 +31,10 @@ main {
   margin: 20px 0
 }
 
+.tiny-buffer {
+  padding: 10px 10px;
+}
+
 .standard-width {
   max-width: 900px;
 }
