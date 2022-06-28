@@ -9,7 +9,7 @@
 </ul>
 
 <div class="text center standard-width m-auto">
-  <%= simple_form_for @promotion do |promo| %>
+  <%= form_with @new_promotion do |promo| %>
     <%= promo.input :name %>
     <%= promo.input :start_date %>
     <%= promo.input :end_date %>
@@ -17,13 +17,15 @@
     <%= promo.input :maximum_discount %>
     <%= promo.input :absolute_discount_uses %>
     
-    <%= promo.input :product_category_id, :as => :hidden, :input_html => {value: @user_id} %>
+    <%= promo.input :product_category_id, collection: @categories, input_html: {multiple: true}%>
     <div class="text-center little-buffer">
-      <%= cat.button :submit, 'Confirmar', class: 'btn btn-warning' %>
+      <%= promo.button :submit, 'Confirmar', class: 'btn btn-warning' %>
     </div>
   <% end %>
 
+  f.input :days, collection: @your_collection, input_html: { multiple: true }
+
   <div class="text-center buffer">
-    <%= link_to 'Voltar', user_cart_items_path(@user_id), class: 'btn btn-outline-primary mini-button' %>
+    <%= link_to 'Voltar', '/algumlugar', class: 'btn btn-outline-primary mini-button' %>
   </div>
 </div>

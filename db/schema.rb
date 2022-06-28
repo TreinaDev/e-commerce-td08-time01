@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_214217) do
 
   create_table "prices", force: :cascade do |t|
     t.decimal "price_in_brl"
-    t.daqstart"
+    t.datetime "validity_start"
     t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

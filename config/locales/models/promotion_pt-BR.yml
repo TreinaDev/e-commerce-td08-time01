@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      promotion:
+        one: Promoção
+        other: Promoções
+    attributes:
+      promotion:
+        name: Nome
+        start_date: Data de início
+        end_date: Data de fim
+        discount_percent: Porcentagem de desconto
+        maximum_discount: Desconto máximo
+        code: Código
