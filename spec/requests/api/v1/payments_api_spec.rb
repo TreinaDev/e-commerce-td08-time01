@@ -3,12 +3,11 @@ require 'rails_helper'
 describe 'PATCH api/v1/payment_results' do 
   it 'when done correctly returns 200 with success message' do
     # below: mock for API call when creating an order
-    user = create(:user)
-
     fake_response = double('faraday_response', status: 201, 
                                                 body: '{ "transaction_code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
-
+      
+    user = create(:user)
     create(:cart_item, user: user)
     create(:order, status: 'pending', user: user) 
     order = Order.last
@@ -33,7 +32,6 @@ describe 'PATCH api/v1/payment_results' do
 
     user = create(:user)
     create(:cart_item, user: user)
-    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ASDF1234')
     create(:order, user: user)
     order = Order.last
 
