@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  attr_accessor :skip_callback
+
   belongs_to :user
   has_many :cart_items
   validates_presence_of :address
@@ -6,9 +8,9 @@ class Order < ApplicationRecord
 
   before_create :set_code
   after_create :process_cart
-  after_create :request_payment
+  after_create :request_payment, unless: :skip_callback
 
-  enum status: {pending: 0, approved: 5, canceled: 9}
+  enum status: { pending: 0, approved: 5, canceled: 9 }
   
   private
 
