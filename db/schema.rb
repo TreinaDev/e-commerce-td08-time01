@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_214217) do
     t.string "code"
     t.integer "status", default: 0
     t.string "error_type"
+    t.string "transaction_code"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
