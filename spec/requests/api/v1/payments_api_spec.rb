@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 describe 'PATCH api/v1/payment_results' do 
-  # Mocks não estão escrevendo atributo "transaction_code" do pedido
   it 'when done correctly returns 200 with success message' do
     # below: mock for API call when creating an order
+    user = create(:user)
+
     fake_response = double('faraday_response', status: 201, 
                                                 body: '{ "transaction_code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
 
-    user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, status: 'pending', user: user, transaction_code: "nsurg745n")
+    create(:order, status: 'pending', user: user) 
+    order = Order.last
 
     patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "canceled",
@@ -33,7 +34,8 @@ describe 'PATCH api/v1/payment_results' do
     user = create(:user)
     create(:cart_item, user: user)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ASDF1234')
-    order = create(:order, user: user)
+    create(:order, user: user)
+    order = Order.last
 
     patch '/api/v1/payment_results', params: { transaction: { "code": "asdgr654s",
                                                               "status": "approved",
@@ -53,7 +55,8 @@ describe 'PATCH api/v1/payment_results' do
     
     user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, status: 'pending', user: user, transaction_code: "nsurg745n")
+    create(:order, status: 'pending', user: user)
+    order = Order.last
 
     patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "happy",
@@ -74,7 +77,8 @@ describe 'PATCH api/v1/payment_results' do
     
     user = create(:user)
     create(:cart_item, user: user)
-    order = create(:order, user: user, transaction_code: "nsurg745n")
+    create(:order, user: user)
+    order = Order.last
 
     patch '/api/v1/payment_results', params: { transaction: { "code": "#{order.transaction_code}",
                                                               "status": "canceled",
