@@ -1,16 +1,18 @@
 require 'rails_helper'
 
-describe 'Admin register new price configuration' do
+describe 'Admin edits an existing price configuration' do
   it 'with succesful' do
     admin = create(:admin)
     product = create(:product)
-    old_price = Timecop.freeze(1.week.ago) { create(:price, product: product, price_in_brl: 10.00) }
+    price = Timecop.freeze(1.week.ago) { create(:price, product: product, price_in_brl: 10.00) }
 
     login_as(admin, scope: :admin)
     visit root_path
     click_on 'Gerenciar Preços & Produtos'
     click_on product.name
-    click_on 'Cadastrar nova configuração de preço'
+    within '#price-config' do
+      first(:link, 'Editar').click
+    end
     fill_in 'Preço em reais', with: 15.55
     select DateTime.current.day, from: 'price_validity_start_3i'
     select I18n.l(DateTime.current, format: "%B"), from: 'price_validity_start_2i'
@@ -20,8 +22,6 @@ describe 'Admin register new price configuration' do
     click_on 'Salvar'
 
     expect(page).to have_content('Cadastrar nova configuração de preço')
-    expect(page).to have_content('R$ 10,00')
-    expect(page).to have_content(I18n.l(old_price.validity_start))
     expect(page).to have_content('R$ 15,55')
     expect(page).to have_content(I18n.l(product.prices.last.validity_start))
   end
@@ -35,7 +35,9 @@ describe 'Admin register new price configuration' do
     visit root_path
     click_on 'Gerenciar Preços & Produtos'
     click_on product.name
-    click_on 'Cadastrar nova configuração de preço'
+    within '#price-config' do
+      first(:link, 'Editar').click
+    end
     fill_in 'Preço em reais', with: 15.55
     select DateTime.current.day, from: 'price_validity_start_3i'
     select I18n.l(DateTime.current, format: "%B"), from: 'price_validity_start_2i'
