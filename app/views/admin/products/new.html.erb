@@ -1,0 +1,12 @@
+<% if @product.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1 class="mt-4 page-title">Cadastrar produto</h1>
+
+<%= render 'form' %>

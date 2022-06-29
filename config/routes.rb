@@ -23,4 +23,8 @@ Rails.application.routes.draw do
       patch 'payment_results', to: 'payments#results'
     end
   end
+
+  namespace :admin do
+    resources :products, only: [:index, :new, :create, :edit, :update]
+  end
 end
