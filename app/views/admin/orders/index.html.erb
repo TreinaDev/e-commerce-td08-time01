@@ -1,0 +1,6 @@
+<% @orders.each do |order| %>
+  <%= order.code %> <br />
+  <%= number_with_delimiter(order.value) %><br />
+  <%= order.created_at.strftime('%d/%m/%Y ás %H:%M') %><br />
+  <%= order.status  %><br /><br />
+<% end %>
