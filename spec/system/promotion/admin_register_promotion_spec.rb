@@ -80,5 +80,28 @@ describe 'Admin access promotions page' do
       expect(page).to have_content('data de início não pode estar no passado') 
       expect(page).to have_content('quantidade de usos não pode estar em branco') 
     end
+
+    it 'unsuccessfully due to lack of categories' do
+      admin = create(:admin)
+      create(:product_category, name: "Eletrônicos")
+      create(:product_category, name: "Têxtil")
+      create(:product_category, name: "Comidas")
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCD1234')
+
+      login_as(admin, scope: :admin)
+      visit root_path
+      click_on 'Gerenciar Promoções'
+      fill_in 'Nome', with: 'Dia das mães'
+      fill_in "Data de início",	with: 2.days.from_now
+      fill_in "Data de fim",	with: 3.days.from_now
+      fill_in "Porcentagem de desconto",	with: "20"
+      fill_in "Valor máximo",	with: "70.00"
+      fill_in "Quantidade de usos",	with: '5000'
+      click_on 'Criar nova promoção.'
+
+      expect(current_path).to eq promotions_path
+      expect(page).to have_content('Promoção não pôde ser criada:') 
+      expect(page).to have_content('é necessário atribuição de categorias') 
+    end
   end
 end
