@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="catnav">
+<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <%= 'Sem categoria' if @product.product_category.nil? %>
     <% if !@product.product_category.nil? %>
@@ -62,11 +62,15 @@
   <h1 class="text-center">Configurações de Preço do Produto</h1>
   <br />
   <div class="text-center">
+    Preço Atual: <%= number_to_currency(@product.current_price_in_brl, precision: 2)  %>
+  </div>
+  <br />
+  <div class="text-center">
     <%= link_to 'Cadastrar nova configuração de preço', new_product_price_path(@product.id), class: 'btn btn-primary mini-button' %>
   </div>
   <br /><br />
   <div class="table-responsive">
-    <table class="table mx-auto w-auto text-center" style="max-width: 700px; min-width: 700px;">
+    <table class="table standard-width m-auto text-center">
       <thead>
         <tr>
           <th>Início do Preço</th>
@@ -75,12 +79,17 @@
         </tr>
       </thead>
       <tbody>
-      <% @product.prices.each do |price|  %>
+      <% @product.prices.order(:validity_start).reverse.each do |price|  %>
         <tr>
           <td><%= I18n.l(price.validity_start) %></td>
           <td><%= number_to_currency(price.price_in_brl, precision: 2) %></td>
           <td>
-            <%= link_to 'Editar', edit_product_price_path(@product, price), class: 'btn btn-outline-warning mini-button hbuffer' %>
+            <div class="btn-group">
+              <%= link_to 'Editar', edit_product_price_path(@product, price), class: 'btn btn-outline-warning mini-button hbuffer' %>
+            </div>
+            <div class="btn-group">
+              <%= button_to 'Remover', product_price_path(@product, price), method: :delete, class: 'btn btn-outline-danger mini-button hbuffer' %>
+            </div>
           </td>
         </tr>
       <% end %>

@@ -19,17 +19,25 @@ class PricesController < ApplicationController
   end
 
   def edit
+    @price = Price.find(params[:id])
     @product = Product.find(params[:product_id])
-    @price = Price.find([params[:id]])
   end
 
   def update
-    price_params 
+    price_params
+    @product = Product.find(params[:product_id])
 
-    return redirect_to product_categories_path, notice: "Configuração de Preço cadastrada com sucessp." if @price.update(price_params)
+    return redirect_to product_path(@product), notice: "Configuração de Preço cadastrada com sucessp." if @price.update(price_params)
    
     flash.now[:alert] = "Falha na atualização da Configuração de Preço." if !@price.update(price_params)
     render :edit
+  end
+
+  def destroy
+    @price = Price.find(params[:id])
+    @product = Product.find(params[:product_id])
+    @price.destroy
+    redirect_to product_path(@product), notice: 'Configuração de preço removida com sucesso.'
   end
 
   private

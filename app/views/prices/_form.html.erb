@@ -1,9 +1,9 @@
 <div class="text center standard-width m-auto">
-  <%= simple_form_for [@product, @price] do |cat| %>
-    <%= cat.input :price_in_brl %>
-    <%= cat.input :validity_start %>
+  <%= simple_form_for [@product, @price] do |price| %>
+    <%= price.input :price_in_brl %>
+    <%= price.input :validity_start %>
     <div class="text-center little-buffer">
-      <%= cat.button :submit, 'Salvar', class: 'btn btn-success' %>
+      <%= price.button :submit, 'Salvar', class: 'btn btn-success' %>
     </div>
   <% end %>
 
