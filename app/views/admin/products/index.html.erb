@@ -1,0 +1,26 @@
+<h1 class="text-center">Gerenciar Produtos</h1>
+<section class="container">
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col card-group little-buffer">
+        <article class="card" style="width: 18rem; max-width: 18rem;">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+
+          <div class="card-body">
+            <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
+            <p class="card-text"><strong>Marca:</strong> <%= product.brand %></p>
+            <p><strong><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></strong></p>
+            <p>
+              <%= image_tag 'rubi', height: '16' %>
+              <%= number_with_delimiter(product.current_price_in_rubis) %> 
+            </p>
+            <p><strong>Status:</strong> <%= product.status %></p>
+            <div class="text-center">
+              <%= link_to 'Editar produto', product, class: 'btn btn-outline-warning' %>
+            </div>
+          </div>
+        </article>
+      </div>
+    <% end %>
+  </div>
+</section>

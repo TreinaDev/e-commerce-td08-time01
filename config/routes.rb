@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :products, only: [:show] do
+    resources :prices, only: [:new, :create, :edit, :update, :destroy]
     get 'by_category', on: :collection
     post 'update_status', on: :member
     get 'search', on: :collection
@@ -16,6 +17,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :create]
     get 'buy_rubis', to: 'buy_rubis#new'
     post 'buy_rubis', to: 'buy_rubis#buy'
+  end
+
+  namespace :admin do
+    resources :products, only: [:index]
   end
 
   namespace :api do
