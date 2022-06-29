@@ -26,8 +26,9 @@ class PricesController < ApplicationController
   def update
     price_params
     @product = Product.find(params[:product_id])
+    @price = Price.find(params[:id])
 
-    return redirect_to product_path(@product), notice: "Configuração de Preço cadastrada com sucessp." if @price.update(price_params)
+    return redirect_to product_path(@product), notice: "Configuração de Preço atualizada com sucesso." if @price.update(price_params)
    
     flash.now[:alert] = "Falha na atualização da Configuração de Preço." if !@price.update(price_params)
     render :edit

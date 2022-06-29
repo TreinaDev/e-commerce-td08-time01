@@ -23,7 +23,4 @@ describe 'Admin sees product in admin view' do
     expect(page).to have_content('R$ 20,00')
     expect(page).to have_content(I18n.l(price3.validity_start))
   end
-
-  it '' do
-  end
 end

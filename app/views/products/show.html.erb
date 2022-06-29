@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="catnav">
   <ol class="breadcrumb">
     <%= 'Sem categoria' if @product.product_category.nil? %>
     <% if !@product.product_category.nil? %>
@@ -59,7 +59,7 @@
 <br />
 <br />
 
-  <h1 class="text-center">Configurações de Preço do Produto</h1>
+  <h3 class="text-center">Configurações de Preço do Produto</h3>
   <br />
   <div class="text-center">
     Preço Atual: <%= number_to_currency(@product.current_price_in_brl, precision: 2)  %>
