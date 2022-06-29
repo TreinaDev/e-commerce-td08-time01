@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     post 'buy_rubis', to: 'buy_rubis#buy'
   end
 
+  namespace :admin do
+    resources :products, only: [:index, :show]
+  end
+
   namespace :api do
     namespace :v1 do
       patch 'payment_results', to: 'payments#results'
