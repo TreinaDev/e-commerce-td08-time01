@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Admin edits an existing price configuration' do
-  it 'with succesful' do
+  it 'successfully' do
     admin = create(:admin)
     product = create(:product)
     price = Timecop.freeze(1.week.ago) { create(:price, product: product, price_in_brl: 10.00) }
@@ -26,7 +26,7 @@ describe 'Admin edits an existing price configuration' do
     expect(page).to have_content(I18n.l(product.prices.last.validity_start))
   end
 
-  it 'and fail beacause the price is empty' do
+  it 'and fails because the price is empty' do
     admin = create(:admin)
     product = create(:product)
     old_price = Timecop.freeze(1.week.ago) { create(:price, product: product, price_in_brl: 10.00) }
