@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <% @promotions.each do |prom|%>
+  <% @all_promotions.each do |prom|%>
 
     <li class="list-group-item">
       <%= prom.name%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
@@ -9,7 +9,7 @@
 </ul>
 
 <div>
-  <%= form_for @new_promotion do |promo| %>
+  <%= form_for @promotion do |promo| %>
     <%= promo.label :name %>
     <%= promo.text_field :name %>
     <%= promo.label :start_date %>
