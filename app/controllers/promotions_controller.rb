@@ -14,9 +14,9 @@ class PromotionsController < ApplicationController
 
     promotion = Promotion.new(parameters)
     
-    if promotion.save && categories_list.any?
-      PromotionCategoryCreator.call(promotion, categories_list)
-      redirect_to promotion_path(1), notice: 'Promoção criada com sucesso.'
+    if PromotionsManager::CategoriesListValidator.call(categories_list) && promotion.save  
+      PromotionsManager::PromotionCategoryCreator.call(promotion, categories_list)
+      redirect_to promotion_path(promotion.id), notice: 'Promoção criada com sucesso.'
     else
     #   eenlk
     end

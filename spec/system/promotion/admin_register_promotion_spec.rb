@@ -37,7 +37,7 @@ describe 'Admin access promotions page' do
     click_on 'Criar nova promoção.'
 
     expect(page).to have_content('Promoção criada com sucesso.') 
-    expect(page).to have_content('Dia das mães') 
+    expect(page).to have_content('Dia das mães')
     expect(page).to have_content("Data de início:\n#{I18n.localize(1.day.from_now)}") 
     expect(page).to have_content("Data de fim:\n#{I18n.localize(3.day.from_now)}") 
     expect(page).to have_content("ABCD1234")
@@ -46,6 +46,9 @@ describe 'Admin access promotions page' do
     expect(page).to have_content("70,0")
     expect(page).to have_content("Quantidade de usos:\n5000")
     expect(page).to have_content("Categorias atreladas:")
-    expect(page).to have_content("Eletrônicos\nTêxtil")
+    within 'ul#categories' do 
+      expect(page).to have_content("Eletrônicos\nTêxtil")
+      expect(page).not_to have_content("Comidas")
+    end
   end
 end
