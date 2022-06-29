@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
       expect(response).to eq 1000
     end
 
-    it 'should return 0 if status is differente from 200' do
+    it 'should return 0 if status is different from 200' do
       fake_response = double('faraday_instance', status: 500, body: '{}')
       user = create(:user, identify_number: '28124808074')
 
