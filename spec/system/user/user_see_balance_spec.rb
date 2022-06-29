@@ -14,7 +14,7 @@ describe 'user sign in' do
     visit root_path
 
     within('nav') do
-      expect(page).to have_content 'RB$ 1000'
+      expect(page).to have_content 'RB$ 1.000'
     end
   end
 end
