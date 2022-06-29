@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :users, shallow: true do
     resources :cart_items, only: [:index, :create, :destroy]
-    resources :orders, only: [:index, :show, :new, :create]
+    resources :orders, only: [:index, :show, :new, :create] do
+      patch 'coupon', on: :collection
+    end
   end
 
   namespace :api do

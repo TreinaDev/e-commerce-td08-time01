@@ -2,7 +2,7 @@
   <% @all_promotions.each do |prom|%>
 
     <li class="list-group-item">
-      <%= prom.name%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
+      <%= link_to prom.name, promotion_path(prom.id)%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
     </li>
 
   <% end %>

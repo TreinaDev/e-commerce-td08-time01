@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :get_user, only: [:index, :new, :create]
+  before_action :get_user, only: [:index, :new, :create, :user_id]
   before_action :get_cart_and_sum, only: [:new, :create]
   before_action :authenticate_user!
 
@@ -30,6 +30,12 @@ class OrdersController < ApplicationController
       flash[:alert] = "Falha ao efetuar o pedido"
       render 'new'
     end
+  end
+
+  def coupon
+    @cupom = params[:code]
+    msg_erro = PromotionsManager::Aapeienvon.call(@cupm, @user)
+    redirect_to Something_path, alett:
   end
 
   private
