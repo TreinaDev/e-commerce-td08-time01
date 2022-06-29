@@ -43,7 +43,6 @@ class Transaction < ApplicationService
     if @response.status == 201 && @order_id.present?
       Order.find(@order_id).update!(transaction_code: JSON.parse(@response.body)[API_VARIABLE_HOLDING_TRANSACTION_CODE])
     end
-    p "Resposta do Pagamento: #{@response.body}"
     @response
   end
 end
