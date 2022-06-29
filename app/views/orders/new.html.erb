@@ -22,7 +22,7 @@
           <%= image_tag 'rubi', height: '16' %>
           <strong><%= number_with_delimiter(item.product.current_price_in_rubis * item.quantity) %></strong>
         </td>
-        <td><%= button_to 'Retirar', cart_item_path(item.id), class: 'btn btn-outline-warning mini-button', method: :delete %> </td>
+        <td><%= button_to 'Retirar', cart_item_path(item.id), class: 'btn btn-outline-danger mini-button', method: :delete %> </td>
       </tr>
     <%end%>
     <tr>
@@ -41,7 +41,7 @@
     <%= cat.input :address %>
     <%= cat.input :user_id, :as => :hidden, :input_html => {value: @user_id} %>
     <div class="text-center little-buffer">
-      <%= cat.button :submit, 'Confirmar', class: 'btn btn-warning' %>
+      <%= cat.button :submit, 'Confirmar', class: 'btn btn-outline-warning' %>
     </div>
   <% end %>
 

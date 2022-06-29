@@ -153,7 +153,7 @@ RSpec.describe Product, type: :model do
       create(:exchange_rate, rate: 2, registered_at_source_for: 1.day.ago)
       product = create(:product).set_brl_price(10)
 
-      expect(product.current_price_in_rubis).to eq 20
+      expect(product.current_price_in_rubis).to eq 5
     end
 
     it 'should return an Integer rounded to the direction that makes the product more expensive' do
@@ -163,13 +163,13 @@ RSpec.describe Product, type: :model do
       price_in_rubis = product.current_price_in_rubis
 
       expect(price_in_rubis.class).to be Integer
-      expect(price_in_rubis).to eq 26
+      expect(price_in_rubis).to eq 4
       expect(price_in_rubis * ExchangeRate.current).to be >= product.current_price_in_brl
 
       # reasoning: 
-      # price in Rubi = 9 * 2.8 = 25.2
-      # if price in Rubi = 25, this is equivalent to 25 / 2.8 = 8.93 BRL
-      # if price in Rubi = 26, this is equivalent to 26 / 2.8 = 9.29 BRL -> more expensive -> should round price up
+      # price in Rubi = 9 / 2.8 = 3.214
+      # if price in Rubi = 3, this is equivalent to 3 * 2.8 = 8.4 BRL
+      # if price in Rubi = 4, this is equivalent to 4 * 2.8 = 11.2 BRL -> more expensive -> should round price up
     end
   end
 end

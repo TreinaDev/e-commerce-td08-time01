@@ -27,7 +27,7 @@ describe 'Unlogged user visits home page' do
     expect(page).to have_text 'Caneca Mon Amour'
     expect(page).to have_text 'TOC & Ex-TOC'
     expect(page).to have_text 'Caneca em cerâmica com desenho de uma flecha do cupido'
-    expect(page).to have_content '24'
+    expect(page).to have_content '6'
     expect(page).to have_text 'Garrafa Star Wars'
     expect(page).to have_text 'Zona Criativa'
     expect(page).to have_text 'Garrafa térmica inox com temática do filme Star Wars'
