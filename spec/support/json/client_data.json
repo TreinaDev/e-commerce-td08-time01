@@ -1,0 +1,17 @@
+{
+	"client_info": {
+		"name": "Luiz Santos",
+		"balance": 1000,
+		"bonus": [],
+		"transactions": [
+			{
+				"credit_value": "10000.0",
+				"type_transaction": "buy_rubys",
+				"transaction_date": "27/06/2022 ás 15:57",
+				"status": "pending",
+				"approval_date": null,
+				"code": "AWA6-64MZ"
+			}
+    ]
+  }
+}
