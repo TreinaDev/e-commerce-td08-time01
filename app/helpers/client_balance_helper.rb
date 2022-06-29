@@ -6,7 +6,7 @@ module ClientBalanceHelper
     
       JSON.parse(result.body)["client_info"]["balance"] if result.status == 200
     rescue
-      0.0
+      0
     end
   end
 end
