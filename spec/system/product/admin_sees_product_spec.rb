@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin sees the product' do
-  it 'in a admin view' do
+describe 'Admin sees the product in admin view' do
+  it 'with successfull' do
     admin = create(:admin)
     product = create(:product)
 
@@ -13,6 +13,5 @@ describe 'Admin sees the product' do
     expect(page).to have_content('Gerenciar Produtos')
     expect(page).to have_content(product.name)
     expect(page).to have_content(product.brand)
-
   end
 end

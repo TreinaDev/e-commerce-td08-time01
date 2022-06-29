@@ -8,12 +8,16 @@
 
           <div class="card-body">
             <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
-            <p class="card-text">Marca: <%= product.brand %></p>
-            <p><%= product.product_category.nil? ? 'Sem categoria' : 'Categoria: ' + product.product_category.name %></p>
+            <p class="card-text"><strong>Marca:</strong> <%= product.brand %></p>
+            <p><strong><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></strong></p>
             <p>
               <%= image_tag 'rubi', height: '16' %>
               <%= number_with_delimiter(product.current_price_in_rubis) %> 
             </p>
+            <p><strong>Status:</strong> <%= product.status %></p>
+            <div class="text-center">
+              <%= link_to 'Editar produto', product, class: 'btn btn-outline-warning' %>
+            </div>
           </div>
         </article>
       </div>

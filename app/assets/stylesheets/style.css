@@ -35,6 +35,11 @@ main {
   padding: 10px 10px;
 }
 
+.hbuffer {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .standard-width {
   max-width: 900px;
 }
