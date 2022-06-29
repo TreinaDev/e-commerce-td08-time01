@@ -31,17 +31,21 @@ describe 'Admin access promotions page' do
     fill_in "Porcentagem de desconto",	with: "20"
     fill_in "Valor máximo",	with: "70.00"
     fill_in "Quantidade de usos",	with: "5000"
-    select "Eletrônicos",	from: "Categorias"
-    select "Têxtil",	from: "Categorias" 
+    select = page.find('select#new_promotion')
+    select.select "Eletrônicos"
+    select.select "Têxtil"
+    click_on 'Criar nova promoção.'
 
+    expect(page).to have_content('Promoção criada com sucesso.') 
     expect(page).to have_content('Dia das mães') 
-    expect(page).to have_content("Data de início: #{I18n.localize(1.day.from_now)}") 
-    expect(page).to have_content("Data de início: #{I18n.localize(3.day.from_now)}") 
-    expect(page).to have_content("Código de cupom: ABCD1234")
-    expect(page).to have_content("Porcentagem de desconto: 20%")
-    expect(page).to have_content("Valor máximo: RB$ 70,00")
-    expect(page).to have_content("Quantidade de usos: 5000")
+    expect(page).to have_content("Data de início:\n#{I18n.localize(1.day.from_now)}") 
+    expect(page).to have_content("Data de fim:\n#{I18n.localize(3.day.from_now)}") 
+    expect(page).to have_content("ABCD1234")
+    expect(page).to have_content("Porcentagem de desconto:\n20%")
+    expect(page).to have_content("Valor máximo:")
+    expect(page).to have_content("70,0")
+    expect(page).to have_content("Quantidade de usos:\n5000")
     expect(page).to have_content("Categorias atreladas:")
-    expect(page).to have_content("Eletrônicos\n Têxtil")
+    expect(page).to have_content("Eletrônicos\nTêxtil")
   end
 end

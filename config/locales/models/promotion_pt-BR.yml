@@ -10,5 +10,6 @@ pt-BR:
         start_date: Data de início
         end_date: Data de fim
         discount_percent: Porcentagem de desconto
-        maximum_discount: Desconto máximo
+        maximum_discount: Valor máximo
+        absolute_discount_uses: Quantidade de usos
         code: Código
