@@ -4,8 +4,8 @@ RSpec.describe Price, type: :model do
   it { should belong_to :product }
 
   context '#valid?' do
-    it { should validate_presence_of :price_in_brl}
-    it { should validate_presence_of :validity_start}
+    it { should validate_presence_of :price_in_brl }
+    it { should validate_presence_of :validity_start }
     it { should validate_numericality_of(:price_in_brl).is_greater_than(0) }
 
     context 'is expected to validate that :validity_start'  do

@@ -1,4 +1,3 @@
-
 <nav aria-label="breadcrumb" class="catnav">
   <ol class="breadcrumb">
     <%= 'Sem categoria' if @product.product_category.nil? %>
@@ -12,13 +11,14 @@
 </nav>
 
 <article>
-  <h3><%= @product.name %></h3>
+  <h3 class="text-center"><%= @product.name %></h3>
+  <br />
 
   <% if admin_signed_in? %>
-    <div id='status_buttons' class='d-flex'>
-      <%= (button_to 'Suspender produto', update_status_product_path, params: { status: 'off_shelf'}, class: 'btn btn-outline-primary mini-button') unless @product.off_shelf? %>
-      <%= (button_to 'Tornar produto um rascunho', update_status_product_path, params: { status: 'draft'}, class: 'btn btn-outline-primary mini-button') unless @product.draft? %>
-      <%= (button_to 'Colocar produto à venda', update_status_product_path, params: { status: 'on_shelf'}, class: 'btn btn-outline-primary mini-button') unless @product.on_shelf? %>
+    <div id='status_buttons' class='d-flex justify-content-center'>
+      <div style="margin-left: 10px; margin-right: 10px;"> <%= (button_to 'Suspender produto', update_status_product_path, params: { status: 'off_shelf'}, class: 'btn btn-outline-warning') unless @product.off_shelf? %></div>
+      <div style="margin-left: 10px; margin-right: 10px;"><%= (button_to 'Tornar produto um rascunho', update_status_product_path, params: { status: 'draft'}, class: 'btn btn-outline-secondary') unless @product.draft? %></div>
+      <div style="margin-left: 10px; margin-right: 10px;"><%= (button_to 'Colocar produto à venda', update_status_product_path, params: { status: 'on_shelf'}, class: 'btn btn-outline-success') unless @product.on_shelf? %></div>
     </div>
   <% end %>
 
@@ -51,5 +51,50 @@
   <%end%>
 </div>
 <div class="text-center buffer">
-  <%= link_to 'Voltar', root_path, class: 'btn btn-outline-primary mini-button' %>
+  <%= link_to 'Voltar', admin_signed_in? ? admin_products_path : root_path, class: 'btn btn-outline-primary mini-button' %>
 </div>
+
+<% if admin_signed_in? %>
+<hr />
+<br />
+<br />
+
+  <h3 class="text-center">Configurações de Preço do Produto</h3>
+  <br />
+  <div class="text-center">
+    Preço Atual: <%= number_to_currency(@product.current_price_in_brl, precision: 2)  %>
+  </div>
+  <br />
+  <div class="text-center">
+    <%= link_to 'Cadastrar nova configuração de preço', new_product_price_path(@product.id), class: 'btn btn-primary mini-button' %>
+  </div>
+  <br /><br />
+  <div class="table-responsive">
+    <table class="table standard-width m-auto text-center" id="price-config">
+      <thead>
+        <tr>
+          <th>Início do Preço</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @product.prices.order(:validity_start).reverse.each do |price|  %>
+        <tr>
+          <td><%= I18n.l(price.validity_start) %></td>
+          <td><%= number_to_currency(price.price_in_brl, precision: 2) %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to 'Editar', edit_product_price_path(@product, price), class: 'btn btn-outline-warning mini-button hbuffer' %>
+            </div>
+            <div class="btn-group">
+              <%= button_to 'Remover', product_price_path(@product, price), method: :delete, class: 'btn btn-outline-danger mini-button hbuffer' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
