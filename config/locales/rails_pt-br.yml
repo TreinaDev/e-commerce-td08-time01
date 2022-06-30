@@ -222,6 +222,7 @@ pt-BR:
       default: "%a, %d/%m/%Y, %H:%M" # => sex, 27/05/2022, 13:57
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
+      verbose: "%A, %d/%m/%Y às %H:%M:%S" # => sext-feira, 27/05/2022 às 13:57:32
       very_long: "%a, %d de %B de %Y, %H:%M:%S %z"
     pm: ''
       
