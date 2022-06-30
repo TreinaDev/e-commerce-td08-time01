@@ -21,7 +21,7 @@ describe 'Admin tries to update exchange rate' do
 
   it 'and is succesful' do
     create(:exchange_rate, rate: 4.52)
-    fake_response = double('faraday_response', status: 200, body: '{
+    fake_response = double('faraday_response', status: 201, body: '{
         "brl_coin": 2.5,
         "register_date": "2022-06-21"}' )
     allow(Faraday).to receive(:get).and_return(fake_response)

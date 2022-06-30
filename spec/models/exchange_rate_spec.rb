@@ -10,7 +10,7 @@ RSpec.describe ExchangeRate, type: :model do
   describe '.get' do
     it 'should retrieve the day rate from the Payments API' do
       create(:exchange_rate, rate: 9.99)
-      fake_response = double('faraday_response', status: 200, body: '{
+      fake_response = double('faraday_response', status: 201, body: '{
           "brl_coin": 2.0,
           "register_date": "2022-06-21"}' )
       allow(Faraday).to receive(:get).and_return(fake_response)
@@ -29,6 +29,16 @@ RSpec.describe ExchangeRate, type: :model do
       allow(Faraday).to receive(:get).and_return(fake_response)
 
       expect { ExchangeRate.get }.not_to change { ExchangeRate.count }
+    end
+
+    it 'should return false if the rate could not be retrieved' do
+      create(:exchange_rate, rate: 9.99)
+      fake_response = double('faraday_response', status: 404, body: '' )
+      allow(Faraday).to receive(:get).and_return(fake_response)
+
+      returned_value = ExchangeRate.get
+
+      expect(returned_value).to be false
     end
   end
 
