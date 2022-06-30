@@ -18,19 +18,23 @@ class Product < ApplicationRecord
   end
 
   def current_price_in_rubis
-    return nil if self.current_price_in_brl.nil?
-    (self.current_price_in_brl / ExchangeRate.current).ceil
+    begin
+      (self.current_price_in_brl / ExchangeRate.current).ceil
+    rescue NoMethodError
+      nil
+    end
   end
 
   def current_price_in_brl
-    return nil if self.prices.empty?
-    return nil if self.prices.where('validity_start <= ?', DateTime.current).empty?
-    
-    self.prices
-        .where('validity_start <= ?', DateTime.current)
-        .order(validity_start: :asc)
-        .last
-        .price_in_brl
+   begin
+      self.prices
+          .where('validity_start <= ?', DateTime.current)
+          .order(validity_start: :asc)
+          .last
+          .price_in_brl
+    rescue NoMethodError
+      nil
+    end
   end
 end
 
