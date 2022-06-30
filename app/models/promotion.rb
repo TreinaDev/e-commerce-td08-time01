@@ -11,7 +11,7 @@ class Promotion < ApplicationRecord
   private
 
   def set_code
-    self.code = SecureRandom.alphanumeric(8)
+    self.code = SecureRandom.alphanumeric(8).upcase
   end
 
   def start_date_must_not_be_in_the_past
