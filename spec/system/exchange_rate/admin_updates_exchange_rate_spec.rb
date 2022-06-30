@@ -18,4 +18,28 @@ describe 'Admin tries to update exchange rate' do
     expect(page).to have_text 'Última atualização'
     expect(page).to have_button 'Atualizar taxa de câmbio'
   end
+
+  it 'and is succesful' do
+    create(:exchange_rate, rate: 4.52)
+    fake_response = double('faraday_response', status: 200, body: '{
+        "brl_coin": 2.5,
+        "register_date": "2022-06-21"}' )
+    allow(Faraday).to receive(:get).and_return(fake_response)
+    admin = create(:admin)
+
+    login_as(admin, scope: :admin)
+    visit admin_exchange_rates_path
+    click_on 'Atualizar taxa de câmbio'
+
+    expect(ExchangeRate.current).to eq 2.50
+    expect(page).to have_text '1 rubi = 2,50 reais'
+    expect(page).to have_text '1 real = 0,4000 rubis'
+  end
+
+  it 'but access is denied because they are not logged in' do
+    visit admin_exchange_rates_path
+
+    expect(current_path).not_to eq admin_exchange_rates_path
+    expect(current_path).to eq new_admin_session_path
+  end
 end

@@ -19,7 +19,7 @@ class ExchangeRate < ApplicationRecord
   def self.get
     response = Faraday.get("#{API_ROOT}/api/v1/exchange_rates/search/",
                            { "register_date": "#{I18n.l Date.current, format: :api_query}" })
-    ExchangeRate.update!(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
-                         registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
+    ExchangeRate.update(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
+                        registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
   end
 end

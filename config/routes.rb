@@ -21,7 +21,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :products, only: [:index]
-    resources :exchange_rates, only: [:index]
+    resources :exchange_rates, only: [:index] 
+    post 'collect_rate', to: 'exchange_rates#collect_rate'
   end
 
   namespace :api do
