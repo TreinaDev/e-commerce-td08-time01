@@ -14,14 +14,12 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @cart = @order.cart_items
-    @sum = 0
-    @cart.each do |item| 
-      @sum += item.price_on_purchase * item.quantity
-    end
+    @sum = @order.price_on_purchase
+    @promotion = Promotion.find_by(id: @order.promotion_id)
   end
   
   def create
-    @order_params = params.require(:order).permit(:address, :user_id)
+    @order_params = params.require(:order).permit(:address, :user_id, :promotion_id, :price_on_purchase)
     @order = Order.new(@order_params)
     if @order.save
       flash[:notice] = "Pedido efetuado com sucesso"
@@ -35,7 +33,7 @@ class OrdersController < ApplicationController
   def coupon
     @order = Order.new
     coupon = params[:code]
-    @promotion = nil
+    @promotion_id = nil
     msg = PromotionsManager::ApplyCouponInCartItem.call(coupon, @user_id)
     
     if msg.is_a?(String)
@@ -43,9 +41,8 @@ class OrdersController < ApplicationController
     else
       flash[:notice] = "Cupom adicionado com sucesso"
       @sum = msg
-      @promotion = Promotion.find_by(code: coupon)
+      @promotion_id = Promotion.find_by(code: coupon).id
     end
-    # debugger
     render 'new'
   end
 

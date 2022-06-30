@@ -23,7 +23,7 @@ describe "User applies coupon to product" do
     expect(page).to have_content("Valor Total:   180,0")
   end
 
-  xit 'successfully and finishes the purchase' do
+  it 'successfully and finishes the purchase' do
     user = create(:user)
     category = create(:product_category, name: 'Eletrônicos')
     create(:exchange_rate, rate: 2)
@@ -44,6 +44,7 @@ describe "User applies coupon to product" do
     click_on "Finalizar"
     fill_in "Cupom de desconto",	with: "ASDF1234" 
     click_on "Adicionar"
+    fill_in "Endereço de entrega", with: "Rua da entrega, 45"
     click_on "Confirmar"
 
     expect(page).to have_content("Valor Total:   180")

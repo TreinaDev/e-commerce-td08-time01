@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_30_014849) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_30_032008) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_30_014849) do
     t.string "error_type"
     t.string "transaction_code"
     t.integer "promotion_id"
+    t.integer "price_on_purchase"
     t.index ["promotion_id"], name: "index_orders_on_promotion_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

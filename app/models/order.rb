@@ -3,7 +3,7 @@ class Order < ApplicationRecord
 
   belongs_to :user
   has_many :cart_items
-  validates_presence_of :address
+  validates_presence_of :address, :price_on_purchase
   validate :must_have_cart, on: :create
 
   before_create :set_code
@@ -32,7 +32,7 @@ class Order < ApplicationRecord
   def request_payment
     Transaction.request(user_tax_number: self.user.identify_number,
                         order_id: self.id,
-                        value: self.cart_items.pluck(:price_on_purchase).sum,
+                        value: self.price_on_purchase,
                         transaction_type: 'transaction_order')
   end
 end

@@ -5,6 +5,7 @@ RSpec.describe Order, type: :model do
     it {should belong_to(:user)}
     it {should have_many(:cart_items)}
     it {should validate_presence_of(:address)}
+    it {should validate_presence_of(:price_on_purchase)}
 
     context 'when cart' do
       it "doesn't exist gives false" do
