@@ -71,7 +71,7 @@
               <li class="nav-item dropdown d-flex flex-column ms-2" style="line-height: 90%; text-align: right; margin: 0px 10px;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span><%= current_user.name %></span><br/>
-                  <span style="font-size: 0.75em">RB$ 1000</span>
+                  <span style="font-size: 0.75em">RB$ <%= number_with_precision(current_user.get_balance, precision: 0) %></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark bg-primary" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li><%= link_to 'Meus Pedidos', user_orders_path(current_user.id), class: 'dropdown-item tiny-buffer' %></li>
