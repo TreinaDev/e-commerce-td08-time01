@@ -68,7 +68,6 @@ describe 'Admin tries to update exchange rate' do
     expect(page).to have_text '1 real = 0,2212 rubis'
   end
 
-
   it 'but access is denied because they are not logged in' do
     visit admin_exchange_rates_path
 
