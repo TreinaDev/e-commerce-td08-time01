@@ -26,13 +26,11 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     product_category_select
-    # @prices = @product.prices.all
     @product.prices.build
   end
 
   def update
     if @product.update(product_params)
-      # debugger
       redirect_to admin_products_path, notice:'Produto atualizado com sucesso!'
     else
       product_category_select
