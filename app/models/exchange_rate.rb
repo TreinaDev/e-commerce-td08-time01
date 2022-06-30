@@ -2,6 +2,7 @@ class NoExchangeRateError < StandardError; end
 
 class ExchangeRate < ApplicationRecord
   API_ROOT = 'http://localhost:4000'
+  API_ENDPOINT = '/api/v1/exchange_rates/search/'
   API_VARIABLE_HOLDING_EXCHANGE_RATE = "brl_coin"
   API_VARIABLE_HOLDING_DATE = "register_date"
 
@@ -17,7 +18,7 @@ class ExchangeRate < ApplicationRecord
   end
 
   def self.get
-    response = Faraday.get("#{API_ROOT}/api/v1/exchange_rates/search/",
+    response = Faraday.get(API_ROOT + API_ENDPOINT,
                            { "register_date": "#{I18n.l Date.current, format: :api_query}" })
     if response.status == 200
       ExchangeRate.update(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
