@@ -1,5 +1,6 @@
 class PromotionsController < ApplicationController
   before_action :index_variables, except: [:show]
+  before_action :authenticate_admin!
 
   def index
     @promotion = Promotion.new
