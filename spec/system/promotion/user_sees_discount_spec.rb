@@ -5,9 +5,9 @@ describe "User applies coupon to product" do
     user = create(:user)
     category = create(:product_category, name: 'Eletrônicos')
     create(:exchange_rate, rate: 2)
-    product = create(:product, name: 'Notebook', product_category: category).set_brl_price(50.0) 
+    product = create(:product, name: 'Notebook', product_category: category).set_brl_price(25.0) 
     product_2 = create(:product, name: 'Caneca').set_brl_price(50.0)
-    create(:cart_item, product: product, user: user)
+    create(:cart_item, product: product, user: user, quantity: 2)
     create(:cart_item, product: product_2, user: user)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ASDF1234')
     promotion = create(:promotion, discount_percent: 20)
@@ -20,7 +20,8 @@ describe "User applies coupon to product" do
     fill_in "Cupom de desconto",	with: "ASDF1234" 
     click_on "Adicionar"
 
-    expect(page).to have_content("Valor Total:   180,0")
+    expect(page).to have_content("Valor Total:   180")
+    expect(page).to have_content("Você economizou:   20")
   end
 
   it 'successfully and finishes the purchase' do
@@ -49,5 +50,6 @@ describe "User applies coupon to product" do
 
     expect(page).to have_content("Valor Total:   180")
     expect(page).to have_content("Cupom:\nDia das mães")
+    expect(page).to have_content("Você economizou:   20")
   end
 end
