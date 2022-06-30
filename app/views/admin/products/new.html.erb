@@ -47,6 +47,20 @@
           <%= f.collection_select :product_category_id, @product_categories_for_select, :id, :name, { }, {:class =>"form-select"}%>
         </div>
       </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <div class="custom-file">
+            <%= f.label :picture, class: "custom-file-label" %></p>
+            <%= f.file_field :picture, class:"form-control-file", placeholder:"Selecione a imagem." %>
+          </div>
+        </div>
+        <div class="col">
+          <div class="custom-file">
+            <%= f.label :file, class: "custom-file-label" %></p>
+            <%= f.file_field :file, class:"form-control-file", placeholder:"Selecione o arquivo." %>
+          </div>
+        </div>
+      </div>
 
       <br/>
 

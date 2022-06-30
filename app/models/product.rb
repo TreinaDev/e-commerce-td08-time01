@@ -9,6 +9,9 @@ class Product < ApplicationRecord
   has_many :prices, dependent: :destroy
   accepts_nested_attributes_for :prices, allow_destroy: true
 
+  has_one_attached :picture
+  has_one_attached :file
+
   enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
 
   def set_brl_price(price_in_brl, validity_start = 1.second.ago)
