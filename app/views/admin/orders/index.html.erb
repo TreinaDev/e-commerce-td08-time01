@@ -1,6 +1,38 @@
-<% @orders.each do |order| %>
+<h3 class="text-center"></h3>Pedidos</h3>
+
+<strong><%= 'Não há pedidos pendentes' if @orders.pending.empty? %></strong>
+
+Soma dos pedidos pendentes:  <%= @pending_orders_sum_rb %> | <%= number_to_currency(@pending_orders_sum_rs) %><br />
+
+<% @orders.pending.each do |order| %>
   <%= order.code %> <br />
-  <%= number_with_delimiter(order.value) %><br />
-  <%= order.created_at.strftime('%d/%m/%Y ás %H:%M') %><br />
+  <%= number_with_delimiter(order.price_on_purchase) %><br />
+  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
   <%= order.status  %><br /><br />
+  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
 <% end %>
+
+<hr />
+<strong><%= 'Não há pedidos aprovados' if @orders.approved.empty? %></strong>
+
+Soma dos pedidos aprovados:  <%= @approved_orders_sum_rb %> | <%= number_to_currency(@aproved_orders_sum_rs) %><br />
+<% @orders.approved.each do |order| %>
+  <%= order.code %> <br />
+  <%= number_with_delimiter(order.price_on_purchase) %><br />
+  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
+  <%= order.status  %><br /><br />
+  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
+<% end %>
+
+<hr />
+<strong><%= 'Não há pedidos cancelados' if @orders.canceled.empty? %></strong>
+
+Soma dos pedidos cancelados:  <%= @canceled_orders_sum_rb %> | <%= number_to_currency(@canceled_orders_sum_rs) %><br />
+<% @orders.canceled.each do |order| %>
+  <%= order.code %> <br />
+  <%= number_with_delimiter(order.price_on_purchase) %><br />
+  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
+  <%= order.status  %><br /><br />
+  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
+<% end %>
+
