@@ -41,6 +41,7 @@
                     Gerenciar Loja
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <%= link_to 'Gerenciar Promoções', promotions_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Gerenciar Preços & Produtos', admin_products_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Taxa de Câmbio', admin_exchange_rates_path, class: 'dropdown-item tiny-buffer' %>
@@ -51,6 +52,7 @@
             <span class="nav-link"><%= current_admin.name %></span>
           </li>
         </li>
+        
         <li class="nav-link">
           <ul class="navbar-nav">
             <li class="nav-link">

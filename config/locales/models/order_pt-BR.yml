@@ -7,6 +7,8 @@ pt-BR:
     attributes:
       order:
         address: Endereço de entrega
+        price_on_purchase: Valor total
+        promotion_id: Cupom
         statuses:
           pending: Pendente
           approved: Aprovado
