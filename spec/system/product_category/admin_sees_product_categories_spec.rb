@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Admin visits the index page of ProductCategory' do
-  it 'succesfully' do
+  it 'successfully' do
     admin = Admin.create!(email: 'alguem@mercadores.com.br', password: '123456', name: 'Alguém')
     eletronicos = ProductCategory.create!(name: 'Eletrônicos' )
     moveis = ProductCategory.create!(name: 'Móveis' )

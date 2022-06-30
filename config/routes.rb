@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   end
   
   resources :product_categories, only: [:index, :show, :new, :create, :edit, :update]
+  resources :promotions, only: [:index, :show, :create]
 
   resources :users, shallow: true do
     resources :cart_items, only: [:index, :create, :destroy]
-    resources :orders, only: [:index, :show, :new, :create]
+    resources :orders, only: [:index, :show, :new, :create] do
+      patch 'coupon', on: :collection
+    end
     get 'buy_rubis', to: 'buy_rubis#new'
     post 'buy_rubis', to: 'buy_rubis#buy'
   end
