@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :get_user, only: [:index, :new, :create, :user_id]
-  before_action :get_cart_and_sum, only: [:new, :create]
+  before_action :get_user, only: [:index, :new, :create, :coupon]
+  before_action :get_cart_and_sum, only: [:new, :create, :coupon]
   before_action :authenticate_user!
 
   def index
@@ -33,9 +33,20 @@ class OrdersController < ApplicationController
   end
 
   def coupon
-    @cupom = params[:code]
-    msg_erro = PromotionsManager::Aapeienvon.call(@cupm, @user)
-    redirect_to Something_path, alett:
+    @order = Order.new
+    coupon = params[:code]
+    @promotion = nil
+    msg = PromotionsManager::ApplyCouponInCartItem.call(coupon, @user_id)
+    
+    if msg.is_a?(String)
+      flash[:alert] = msg
+    else
+      flash[:notice] = "Cupom adicionado com sucesso"
+      @sum = msg
+      @promotion = Promotion.find_by(code: coupon)
+    end
+    # debugger
+    render 'new'
   end
 
   private

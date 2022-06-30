@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Admin access promotions page' do
   it 'and sees promotions history' do
     admin = create(:admin)
-    promotion = create(:promotion)
+    promotion = create(:promotion, start_date: 1.day.from_now, end_date: 3.days.from_now)
 
     login_as(admin, scope: :admin)
     visit root_path

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_27_214217) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_30_014849) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_214217) do
     t.integer "status", default: 0
     t.string "error_type"
     t.string "transaction_code"
+    t.integer "promotion_id"
+    t.index ["promotion_id"], name: "index_orders_on_promotion_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -123,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_214217) do
   add_foreign_key "cart_items", "orders"
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "users"
+  add_foreign_key "orders", "promotions"
   add_foreign_key "orders", "users"
   add_foreign_key "prices", "products"
   add_foreign_key "products", "product_categories"
