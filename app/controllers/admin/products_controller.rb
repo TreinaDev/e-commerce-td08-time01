@@ -9,6 +9,7 @@ class Admin::ProductsController < ApplicationController
   def new
     product_category_select
     @product = Product.new
+    @product.prices.build
   end
 
   def create
@@ -25,12 +26,16 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     product_category_select
+    # @prices = @product.prices.all
+    @product.prices.build
   end
 
   def update
     if @product.update(product_params)
+      # debugger
       redirect_to admin_products_path, notice:'Produto atualizado com sucesso!'
     else
+      product_category_select
       flash.now[:alert] = 'O produto não foi alterado.'
       render :edit
     end
@@ -47,6 +52,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :brand, :description, :sku, :status, :product_category_id)
+    params.require(:product).permit(
+      :name, :brand, :description, :sku, :status, :product_category_id,
+      prices_attributes:[:price_in_brl, :validity_start, :product_id, :_destroy, :id]
+    )
   end
 end

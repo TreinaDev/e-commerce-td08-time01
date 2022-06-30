@@ -15,7 +15,7 @@
             <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
           </svg>
           <div class="card-body">
-            <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
+            <h5 class="card-title text-center"><%= product.name %></h5>
             <p class="card-text"><strong>Marca:</strong> <%= product.brand %></p>
             <p><strong><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></strong></p>
             <p>
