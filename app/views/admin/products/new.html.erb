@@ -1,0 +1,76 @@
+<% if @product.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1 class="mt-4 page-title">Cadastrar produto</h1>
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table me-1"></i>Formulário
+	</div>
+	<div class="card-body">
+    <%= form_with(model: [:admin, @product]) do |f| %>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :name, class:"form-label" %>
+          <%= f.text_field :name, class:"form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :brand, class:"form-label" %>
+          <%= f.text_field :brand, class:"form-control" %>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :description, class:"form-label" %>
+          <%= f.text_area :description, class:"form-control" %>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :sku, class:"form-label" %>
+          <%= f.text_field :sku, class:"form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :status, class: "form-label" %>
+          <%= f.select(:status, options_for_product_status(@product.status), {:selected => "à venda"}, {:class =>"form-select", include_blank: false})%>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :product_category_id, class: "form-label" %>
+          <%= f.collection_select :product_category_id, @product_categories_for_select, :id, :name, { }, {:class =>"form-select"}%>
+        </div>
+      </div>
+
+      <br/>
+
+      <h3 class="mt-4 page-title">Configurações de Preço do Produto</h3>
+      <%= f.fields_for :prices do |p| %>
+        <div class="mb-3 row">
+          <div class="col">
+            <%= p.label :price_in_brl, class: "form-label" %>
+            <%= p.number_field :price_in_brl, class:"form-control" %>
+          </div>
+          <div class="col">
+            <%= p.label :validity_start, class: "form-label" %>
+            <%= p.date_field :validity_start, class: "form-control" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group button-form-group">
+        <%= f.submit 'Cadastrar', disable_with: 'cadastrando...', class:"btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-group button-form-group">
+  <%= link_to 'Voltar', admin_products_path, class:"btn btn-secondary" %>
+</div>

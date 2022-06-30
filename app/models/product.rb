@@ -6,7 +6,8 @@ class Product < ApplicationRecord
 
   belongs_to :product_category, optional: true
 
-  has_many :prices
+  has_many :prices, dependent: :destroy
+  accepts_nested_attributes_for :prices, allow_destroy: true
 
   enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
 
@@ -33,4 +34,3 @@ class Product < ApplicationRecord
         .price_in_brl
   end
 end
-
