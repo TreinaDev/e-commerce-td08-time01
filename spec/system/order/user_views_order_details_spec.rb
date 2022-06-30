@@ -30,7 +30,7 @@ describe 'User enters order detail page' do
     allow(Faraday).to receive(:post).and_return(double('faraday_response', status: 201, body: '{ "transaction_code": "nsurg745n" }'))
     # above: mock for API call when creating an order
     
-   user = create(:user)
+    user = create(:user)
     product = create(:product)
     create(:cart_item, product: product, user: user)
     order = create(:order, user: user, status: 'canceled', error_type: 'insufficient_funds')

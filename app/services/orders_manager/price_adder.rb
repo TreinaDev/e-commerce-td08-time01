@@ -42,10 +42,10 @@ class OrdersManager::PriceAdder < ApplicationService
   end
 
   def cart_item_discount_value(cart_item, promotion)
-    discount_value = (cart_item.product.current_price_in_rubis * promotion.discount_percent / 100.0).to_i
-
-    if discount_value > promotion.maximum_discount
-      limited_discount_value = cart_item.product.current_price_in_rubis - promotion.maximum_discount
+    discount_value = (cart_item.product.current_price_in_rubis * promotion.discount_percent / 100.0).round
+    
+    if discount_value > promotion.maximum_discount.to_i
+      limited_discount_value = cart_item.product.current_price_in_rubis - promotion.maximum_discount.to_i
     else
       limited_discount_value = cart_item.product.current_price_in_rubis - discount_value
     end

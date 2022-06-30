@@ -61,7 +61,6 @@
     <%= odr.input :address %>
     <%= odr.input :user_id, :as => :hidden, :input_html => {value: @user_id} %>
     <%= odr.input :promotion_id, :as => :hidden, :input_html => {value: @promotion_id} %>
-    <%= odr.input :price_on_purchase, :as => :hidden, :input_html => {value: @sum} %>
     <div class="text-center little-buffer">
       <%= odr.button :submit, 'Confirmar', class: 'btn btn-warning' %>
     </div>

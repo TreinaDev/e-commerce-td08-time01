@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   end
   
   def create
-    @order_params = params.require(:order).permit(:address, :user_id, :promotion_id, :price_on_purchase)
+    @order_params = params.require(:order).permit(:address, :user_id, :promotion_id)
     @order = Order.new(@order_params)
     if @order.save
       flash[:notice] = "Pedido efetuado com sucesso"
@@ -33,16 +33,16 @@ class OrdersController < ApplicationController
 
   def coupon
     @order = Order.new
-    coupon = params[:code]
-    error_msg_or_promo = PromotionsManager::PromotionFinder.call(coupon)
+    promotion = Promotion.find_by(code: params[:code])
+    error_msg = PromotionsManager::PromotionValidator.call(promotion)
     
-    if error_msg_or_promo.is_a?(String)
-      flash[:alert] = error_msg_or_promo
+    unless error_msg.nil?
+      flash[:alert] = error_msg
     else
       flash[:notice] = "Cupom adicionado com sucesso"
-      @sum = OrdersManager::PriceAdder.call(@cart, error_msg_or_promo)
+      @sum = OrdersManager::PriceAdder.call(@cart, promotion)
       @discount = OrdersManager::PriceAdder.call(@cart) - @sum
-      @promotion_id = error_msg_or_promo.id
+      @promotion_id = promotion.id
     end
     render 'new'
   end
