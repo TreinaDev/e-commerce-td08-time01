@@ -4,7 +4,7 @@ describe "User applies coupon to product" do
   it 'successfully' do
     user = create(:user)
     category = create(:product_category, name: 'Eletrônicos')
-    create(:exchange_rate, rate: 2)
+    create(:exchange_rate, rate: 0.5)
     product = create(:product, name: 'Notebook', product_category: category).set_brl_price(25.0) 
     product_2 = create(:product, name: 'Caneca').set_brl_price(50.0)
     create(:cart_item, product: product, user: user, quantity: 2)
@@ -15,7 +15,7 @@ describe "User applies coupon to product" do
     
     login_as(user, scope: :user)
     visit root_path
-    click_on "Meu Carrinho"
+    click_on class: 'bi bi-cart3'
     click_on "Finalizar"
     fill_in "Cupom de desconto",	with: "ASDF1234" 
     click_on "Adicionar"
@@ -27,7 +27,7 @@ describe "User applies coupon to product" do
   it 'successfully and finishes the purchase' do
     user = create(:user)
     category = create(:product_category, name: 'Eletrônicos')
-    create(:exchange_rate, rate: 2)
+    create(:exchange_rate, rate: 0.5)
     product = create(:product, name: 'Notebook', product_category: category).set_brl_price(50.0) 
     product_2 = create(:product, name: 'Caneca').set_brl_price(50.0)
     create(:cart_item, product: product, user: user)
@@ -41,7 +41,7 @@ describe "User applies coupon to product" do
     
     login_as(user, scope: :user)
     visit root_path
-    click_on "Meu Carrinho"
+    click_on class: 'bi bi-cart3'
     click_on "Finalizar"
     fill_in "Cupom de desconto",	with: "ASDF1234" 
     click_on "Adicionar"

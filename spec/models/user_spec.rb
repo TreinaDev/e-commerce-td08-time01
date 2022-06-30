@@ -65,4 +65,32 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#get_balance' do
+    it 'should return the client balance' do
+      json_data = File.read(Rails.root.join('spec/support/json/client_data.json'))
+      fake_response = double('faraday_instance', status: 200, body: json_data)
+      user = create(:user, identify_number: '28124808074')
+
+      payload = { "registration_number": "#{ user.identify_number }" }.as_json
+
+      allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/clients_info', payload).and_return(fake_response)
+
+      response = user.get_balance
+
+      expect(response).to eq 1000
+    end
+
+    it 'should return 0 if status is different from 200' do
+      fake_response = double('faraday_instance', status: 500, body: '{}')
+      user = create(:user, identify_number: '28124808074')
+
+      payload = { "registration_number": "#{ user.identify_number }" }.as_json
+
+      allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/clients_info', payload).and_return(fake_response)
+
+      response = user.get_balance
+
+      expect(response).to eq 0
+    end
+  end
 end

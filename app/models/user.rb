@@ -38,6 +38,19 @@ class User < ApplicationRecord
     rescue
     end
   end
+
+  def get_balance
+    begin
+      payload = { "registration_number": "#{ identify_number }" }.as_json
+      result = Faraday.get('http://localhost:4000/api/v1/clients_info', payload)
+    
+      return JSON.parse(result.body)["client_info"]["balance"] if result.status == 200
+
+      0
+    rescue
+      0
+    end
+  end
  
   private
 

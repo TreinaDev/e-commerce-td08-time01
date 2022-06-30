@@ -2,27 +2,34 @@
 
 :warning:  projeto em desenvolvimento  
   
-Mercadores é uma loja virtual que permite a compra de produtos mediante pagamento com Rubis, um sistema de pontos.  
-
+Mercadores é uma loja virtual que permite a compra de produtos mediante pagamento com Rubis, um sistema de pontos.   
+  
 ## Domínio
 
-Um **produto** (`Product`) é o que se vende. Ele pode ter status *em rascunho* (`draft`), *à venda* (`on_shelf`) ou *suspenso* (`off_shelf`). Apenas produtos à venda aparecem para os usuários finais.  
+Esta aplicação prevê 3 tipos de usuários: **administradores** (`Admin`), que são empregados do e-commerce gerenciando a oferta de produtos, seus preços e também os pedidos; **consumidores** (`User`), os clientes da plataforma quando estão logados; e **visitantes**, qualquer usuário não logado.  
   
-Desses produtos que aparecem, um usuário pode colocá-los num carrinho e gerar um **pedido** (`Order`), que é posteriormente processado pelo [serviço de pagamentos](https://github.com/TreinaDev/pagamentos-td08-time01).  
+Um **produto** (`Product`) é o que se vende. Ele pode ter status *em rascunho* (`draft`), *à venda* (`on_shelf`) ou *suspenso* (`off_shelf`). Apenas produtos à venda aparecem para os consumidores e visitantes.  
   
-Os **preços** (`Price`) de um produto podem ser atualizados automaticamente de acordo com uma data previamente indicada por algum admin do sistema.  
+A plataforma, internamente, registra os **preços** (`Price`) em Real, mas eles sempre são exibidos aos clientes em Rubi. A conversão é efetuada através de uma **taxa de conversão** (`ExchangeRate`) fornecida pelo [Serviço de Pagamentos](https://github.com/TreinaDev/pagamentos-td08-time01).  
+  
+Todos os preços tem uma data de início de validade, o que permite sua alteração automática de acordo com uma data previamente indicada por algum admin do sistema.  
   
 Os produtos são organizados em **categorias** (`ProductCategory`), que tem uma organização do tipo árvore.  
   
-Esta aplicação prevê 3 tipos de usuários: **administradores** (`Admin`), que são empregados do e-commerce gerenciando a oferta de produtos, seus preços e também os pedidos; **consumidores** (`User`), os clientes da plataforma quando estão logados; e **visitantes**, qualquer usuário não logado.  
+Do lado dos usuários finais, consumidores logados conseguem comprar Rubis - isto é, pagar reais e obter uma quantidade de moeda virtual - que podem então serem usados para pagar pelos produtos à venda na plataforma.  
+  
+Para comprar produtos, os consumidores logados devem colocá-los num carrinho. Ao finalizar o processo, um **pedido** (`Order`) é gerado, sempre com status pendente, até que o Serviço de Pagamentos processe a transação. Caso a transação seja processada com sucesso, o pedido é separado para envio. Caso contrário, ele é cancelado.  
 
 ## Versão do Ruby
+
 ![This app requires Ruby 3.1.0 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.0&color=B61D1D&style=for-the-badge&logo=ruby)  
   
 ## Dependências de sistema
+
  - sqlite3  
 
 ## Configuração
+
 Clonar repositório  
 `$ git clone git@github.com:TreinaDev/e-commerce-td08-time01.git`  
   
@@ -63,7 +70,7 @@ Este app foi desenvolvido como um projeto em equipe para a 2ª parte do bootcamp
 Esta é a equipe 1, composta por 9 pessoas divididas na frente de **e-commerce** (este repositório) e **[pagamentos](https://github.com/TreinaDev/pagamentos-td08-time01)**. Durante 4 semanas, nos encontramos para pair programming todos os dias, simulando a rotina real de uma empresa:  
 - *plannings* todas as segundas-feiras
 - *dailies* todos os dias no início da jornada
-- apresentação de evolução do projeto todas as sexta-feiras
+- demonstração de telas e funcionalidades todas as sexta-feiras
 - tarefas organizadas em *stories* num *board* de projeto
 - desenvolvimento em *branches*, passando por *pull requests* e *code review*
 

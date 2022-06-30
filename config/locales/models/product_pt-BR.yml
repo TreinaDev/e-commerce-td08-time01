@@ -10,8 +10,9 @@ pt-BR:
         brand: Marca
         description: Descrição
         sku: SKU
-        status:
+        status: 'Status'
+        product_category_id: Categoria do produto
+        statuses:
           draft: em rascunho
           off_shelf: suspenso
           on_shelf: à venda
-

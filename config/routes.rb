@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :products, only: [:show] do
+    resources :prices, only: [:new, :create, :edit, :update, :destroy]
     get 'by_category', on: :collection
     post 'update_status', on: :member
     get 'search', on: :collection
@@ -17,11 +18,19 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :create] do
       patch 'coupon', on: :collection
     end
+    get 'buy_rubis', to: 'buy_rubis#new'
+    post 'buy_rubis', to: 'buy_rubis#buy'
   end
 
   namespace :api do
     namespace :v1 do
       patch 'payment_results', to: 'payments#results'
+    end
+  end
+
+  namespace :admin do
+    resources :products, only: [:index, :new, :create, :edit, :update] do
+      resources :prices, only: [:new, :create, :edit, :update, :destroy]
     end
   end
 end

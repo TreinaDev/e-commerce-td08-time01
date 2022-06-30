@@ -1,0 +1,13 @@
+<h1 class="text-center">Compra de Rubis</h1>
+<br />
+<div class="d-flex justify-content-center text-center">
+<%= form_with url: user_buy_rubis_path(current_user.id), class: 'row g-3' do |f| %>
+  <div>
+    <%= f.label :value, 'Valor em Reais (R$)' %>
+    <%= f.number_field :value, class: 'form-control' %>
+  </div>
+  <div id="buy-rubis">
+    <%= f.submit 'Comprar', class: 'btn btn-outline-success'  %>
+  </div>
+</div>
+<% end %>

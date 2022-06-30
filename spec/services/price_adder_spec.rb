@@ -6,7 +6,7 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
       context 'and there is no promotion,' do
         it 'should give current price sum' do
           user = create(:user)
-          create(:exchange_rate, rate: 2)
+          create(:exchange_rate, rate: 0.5)
           product_1 = create(:product, name: 'Caneca', status: 'on_shelf').set_brl_price(12)
           product_2 = create(:product, name: 'Garrafa', status: 'on_shelf').set_brl_price(5)
           product_3 = create(:product, name: 'Jarra', status: 'on_shelf').set_brl_price(16)
@@ -24,7 +24,7 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
       context 'and there is a promotion,' do
         it 'should give discounted current price sum' do
           user = create(:user)
-          create(:exchange_rate, rate: 2)
+          create(:exchange_rate, rate: 0.5)
           category = create(:product_category, name: 'Utensílios')
           promotion = create(:promotion, name: 'Dia das mães', discount_percent: 20, maximum_discount: 100)
           create(:promotion_category, promotion: promotion, product_category: category) 
@@ -36,9 +36,9 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
           create(:cart_item, product: product_3, quantity: 5, user: user)
           cart = CartItem.where(order_id: nil)
 
-          # 12 × 2 × 0,8 = 19,2 >> 19 × 3 = 57
-          # 5 × 2 × 0,8 = 8 >> 8 x 7 = 56
-          # 16 × 2 × 5 = 160
+          # 12 / 0,5 × 0,8 = 19,2 >> 19 × 3 = 57
+          # 5 / 0,5 × 0,8 = 8 >> 8 x 7 = 56
+          # 16 / 0,5 × 5 = 160
           # 160 + 57 + 56 = 273
 
           sum = OrdersManager::PriceAdder.call(cart, promotion)
@@ -48,7 +48,7 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
 
         it 'should give discounted current price sum with limit' do
           user = create(:user)
-          create(:exchange_rate, rate: 2)
+          create(:exchange_rate, rate: 0.5)
           category = create(:product_category, name: 'Utensílios')
           promotion = create(:promotion, name: 'Dia das mães', discount_percent: 20, maximum_discount: 5)
           create(:promotion_category, promotion: promotion, product_category: category) 
@@ -60,9 +60,9 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
           create(:cart_item, product: product_3, quantity: 5, user: user)
           cart = CartItem.where(order_id: nil)
 
-          # 25 × 2 × 0,2 = 10 >> 10 > maximum_discount >> discounted_value = 45 >> 45 x 3 = 135
-          # 5 × 2 × 0,8 = 8 >> 8 x 7 = 56
-          # 16 × 2 × 5 = 160
+          # 25 / 0,5 × 0,2 = 10 >> 10 > maximum_discount >> discounted_value = 45 >> 45 x 3 = 135
+          # 5 / 0,5 × 0,8 = 8 >> 8 x 7 = 56
+          # 16 / 0,5 × 5 = 160
           # 160 + 135 + 56 = 351
 
           sum = OrdersManager::PriceAdder.call(cart, promotion)
@@ -76,7 +76,7 @@ RSpec.describe OrdersManager::PriceAdder, type: :model do
       it 'should give price on purchase sum' do
         Timecop.freeze(1.week.ago) do
           user = create(:user)
-          create(:exchange_rate, rate: 2)
+          create(:exchange_rate, rate: 0.5)
           @product_1 = create(:product, name: 'Caneca', status: 'on_shelf')
           @product_2 = create(:product, name: 'Garrafa', status: 'on_shelf')
           @product_3 = create(:product, name: 'Jarra', status: 'on_shelf')

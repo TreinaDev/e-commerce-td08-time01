@@ -31,6 +31,62 @@ main {
   margin: 20px 0
 }
 
+.tiny-buffer {
+  padding: 10px 10px;
+}
+
+.hbuffer {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .standard-width {
   max-width: 900px;
+}
+
+body {
+  font-family: 'Anek Latin', sans-serif;
+  font-size: 1.05em
+}
+
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+
+label {
+  font-weight: 500;
+}
+
+@media (min-width: 34em) {
+  .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media (min-width: 48em) {
+  .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+  }
+}
+
+@media (min-width: 62em) {
+  .card-columns {
+      -webkit-column-count: 4;
+      -moz-column-count: 4;
+      column-count: 4;
+  }
+}
+
+@media (min-width: 75em) {
+  .card-columns {
+      -webkit-column-count: 5;
+      -moz-column-count: 5;
+      column-count: 5;
+  }
 }
