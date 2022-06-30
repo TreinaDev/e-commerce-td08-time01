@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :get_user, only: [:index, :new, :create, :coupon]
-  before_action :get_cart_and_sum, only: [:new, :show, :create, :coupon]
+  before_action :get_cart_and_sum, only: [:new, :create, :coupon]
   before_action :authenticate_user!
 
   def index
@@ -14,12 +14,8 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @cart = @order.cart_items
-    @sum = 0
-    @cart.each do |item| 
-      @sum += item.product.current_price_in_rubis * item.quantity
-    end
     @price_on_purchase = @order.price_on_purchase
-    @discount = @sum - @price_on_purchase
+    @discount = OrdersManager::PriceAdder.call(@cart) - @price_on_purchase
     @promotion = Promotion.find_by(id: @order.promotion_id)
   end
   
@@ -38,15 +34,15 @@ class OrdersController < ApplicationController
   def coupon
     @order = Order.new
     coupon = params[:code]
-    msg = PromotionsManager::ApplyCouponInCartItem.call(coupon, @user_id)
+    error_msg_or_promo = PromotionsManager::PromotionFinder.call(coupon)
     
-    if msg.is_a?(String)
-      flash[:alert] = msg
+    if error_msg_or_promo.is_a?(String)
+      flash[:alert] = error_msg_or_promo
     else
       flash[:notice] = "Cupom adicionado com sucesso"
-      @discount = @sum - msg
-      @sum = msg
-      @promotion_id = Promotion.find_by(code: coupon).id
+      @sum = OrdersManager::PriceAdder.call(@cart, error_msg_or_promo)
+      @discount = OrdersManager::PriceAdder.call(@cart) - @sum
+      @promotion_id = error_msg_or_promo.id
     end
     render 'new'
   end
@@ -60,9 +56,6 @@ class OrdersController < ApplicationController
   def get_cart_and_sum
     @promotion_id = nil
     @cart = CartItem.where(user_id: @user_id, order_id: nil)
-    @sum = 0
-    @cart.each do |item| 
-      @sum += item.product.current_price_in_rubis * item.quantity
-    end
+    @sum = OrdersManager::PriceAdder.call(@cart)
   end
 end
