@@ -6,11 +6,10 @@ class ProductsController < ApplicationController
   end
 
   def search
-    redirect_to root_path if params['query'] == nil
     if params['query'].present?
       @products = Search.new(params[:query]).inside_products
       @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
-      @message_if_empty = "Nenhum resultado encontrado para: #{params[:query]}"
+      @message_if_empty = "Nenhum resultado encontrado para: #{ params[:query] }"
       render 'home/index'
     else
       @products = ProductCategory.find_by(name: params['name']).products.sort_by(&:name)
