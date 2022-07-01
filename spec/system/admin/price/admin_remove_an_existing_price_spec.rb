@@ -6,7 +6,7 @@ describe 'Admin remove an existing price configuration' do
     login_as(admin, scope: :admin)
     create(:exchange_rate)
     product_category = ProductCategory.create!(name: 'Tecnologia')
-    product = Product.create!(name: 'Produto teste', brand: 'Marca teste', description: 'Description do produto teste', sku: 'QQ1234567', status: :on_shelf, product_category_id: product_category.id)
+    product = Product.create!(name: 'Produto teste', brand: 'Marca teste', description: 'Description do produto teste', sku: 'QQ1234567', status: :on_shelf, product_category_id: product_category.id, width: (1..5).to_a.sample.to_i, weight: (1..5).to_a.sample.to_i, depth: (1..5).to_a.sample.to_i, height: (1..5).to_a.sample.to_i, is_fragile: ['unchecked', 'checked'].sample)
     price1 = Timecop.freeze(1.week.ago) { create(:price, product: product, price_in_brl: 10.00) }
     price2 = Timecop.freeze(3.days.ago) { create(:price, product: product, price_in_brl: 15.00) }
     price3 = Timecop.freeze(1.day.ago) { create(:price, product: product, price_in_brl: 20.00) }

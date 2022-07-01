@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   describe '#valid?' do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:weight) }
+    it { should validate_presence_of(:height) }
+    it { should validate_presence_of(:depth) }
+    it { should validate_presence_of(:width) }
+    it { should validate_presence_of(:is_fragile) }
     it { should validate_uniqueness_of(:sku) }
     it { should allow_value('7U030P3JD').for(:sku) }
     it { should_not allow_value('/_-.?').for(:sku).with_message('deve ter apenas letras e números') }
@@ -128,7 +133,12 @@ RSpec.describe Product, type: :model do
       product = Product.create!(name: 'Garrafa Star Wars',
                                 sku: 'JG6857JF8',
                                 brand: 'Zona Criativa',
-                                description: 'Garrafa térmica inox com temática do filme Star Wars')
+                                description: 'Garrafa térmica inox com temática do filme Star Wars',
+                                weight: 0.2,
+                                width: 2,
+                                height: 2,
+                                depth: 7,
+                                is_fragile: 'checked')
 
       expect(product.prices).to be_empty
       expect(product.current_price_in_brl).to be nil
@@ -139,7 +149,12 @@ RSpec.describe Product, type: :model do
       product = Product.create!(name: 'Garrafa Star Wars',
                                 sku: 'JG6857JF8',
                                 brand: 'Zona Criativa',
-                                description: 'Garrafa térmica inox com temática do filme Star Wars')
+                                description: 'Garrafa térmica inox com temática do filme Star Wars',
+                                weight: 0.2,
+                                width: 2,
+                                height: 2,
+                                depth: 7,
+                                is_fragile: 'checked')
 
       price = create(:price, price_in_brl: 22.22, validity_start: 2.months.from_now, product: product)
 

@@ -78,12 +78,17 @@ names_and_descriptions = [
 brands = ['Pensaminarium', 'Vesúvia', 'TOC & ex-TOC']
 
 names_and_descriptions.each do | info |
-  Product.create(status: 'on_shelf',
+  Product.create!(status: 'on_shelf',
                 product_category: info[0],
                 name: info[1], 
                 description: info[2], 
                 brand: brands[rand(brands.size)],
                 sku: ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**7).to_i.to_s,
+                width: (1..5).to_a.sample.to_i,
+                weight: (1..5).to_a.sample.to_i,
+                depth: (1..5).to_a.sample.to_i,
+                height: (1..5).to_a.sample.to_i,
+                is_fragile: ['unchecked', 'checked'].sample
   ).set_brl_price(14 * (1 + rand(100)/100.0).truncate(2))
 end
 
@@ -91,26 +96,56 @@ puts '----- cria mais produtos e preços -----'
 
 product1 = Product.create!(status: 'on_shelf',
   name: 'Caneca Mon Amour', brand: 'TOC & Ex-TOC', sku: 'TOC1234',
-  description: 'Caneca em cerâmica com desenho de uma flecha do cupido', product_category: canecas).set_brl_price(10)
+  description: 'Caneca em cerâmica com desenho de uma flecha do cupido', product_category: canecas,
+  width: (1..5).to_a.sample.to_i,
+  weight: (1..5).to_a.sample.to_i,
+  depth: (1..5).to_a.sample.to_i,
+  height: (1..5).to_a.sample.to_i,
+  is_fragile: ['unchecked', 'checked'].sample
+  ).set_brl_price(10)
   
 product2 = Product.create!(status: 'on_shelf',
   name: 'Garrafa Star Wars', brand: 'Zona Criativa', sku: 'ZON0001',
-  description: 'Garrafa térmica inox, star wars', product_category: garrafas_termicas)
+  description: 'Garrafa térmica inox, star wars', product_category: garrafas_termicas,
+  width: (1..5).to_a.sample.to_i,
+  weight: (1..5).to_a.sample.to_i,
+  depth: (1..5).to_a.sample.to_i,
+  height: (1..5).to_a.sample.to_i,
+  is_fragile: ['unchecked', 'checked'].sample
+  )
 Price.create!(product: product2, price_in_brl: 25.99, validity_start: Time.current)
 Price.create!(product: product2, price_in_brl: 19.99, validity_start: 2.weeks.from_now)
 Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.from_now)
 
 product3 = Product.create!(status: 'off_shelf',
   name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
-  description: 'Camisa de algodão com estampa de céu e nuvens.', product_category: camisas_basicas).set_brl_price(20)
+  description: 'Camisa de algodão com estampa de céu e nuvens.', product_category: camisas_basicas,
+  width: (1..5).to_a.sample.to_i,
+  weight: (1..5).to_a.sample.to_i,
+  depth: (1..5).to_a.sample.to_i,
+  height: (1..5).to_a.sample.to_i,
+  is_fragile: ['unchecked', 'checked'].sample
+  ).set_brl_price(20)
 
 product4 = Product.create!(status: 'draft',
   name: 'Camisa Green Forest', sku: 'VES4321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.', product_category: camisas_basicas).set_brl_price(90)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa de floresta.', product_category: camisas_basicas,
+  width: (1..5).to_a.sample.to_i,
+  weight: (1..5).to_a.sample.to_i,
+  depth: (1..5).to_a.sample.to_i,
+  height: (1..5).to_a.sample.to_i,
+  is_fragile: ['unchecked', 'checked'].sample
+  ).set_brl_price(90)
 
 product5 = Product.create!(status: 'on_shelf',
   name: 'Camisa Large Sea', sku: 'VES2321',
-  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas).set_brl_price(89)
+  brand: 'Vestil',description: 'Camisa de algodão com estampa do mar com ondas.', product_category: camisas_basicas,
+  width: (1..5).to_a.sample.to_i,
+  weight: (1..5).to_a.sample.to_i,
+  depth: (1..5).to_a.sample.to_i,
+  height: (1..5).to_a.sample.to_i,
+  is_fragile: ['unchecked', 'checked'].sample
+  ).set_brl_price(89)
 
 puts '----------- cria pedidos --------------'
 

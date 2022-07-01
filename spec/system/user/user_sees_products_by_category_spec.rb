@@ -6,9 +6,11 @@ describe 'user filter the search of product by category' do
     category_tv = ProductCategory.create!(name: 'TVs')
     category_smartphone = ProductCategory.create!(name: 'Smartphones')
     Product.create!(name: 'Smart TV 43', brand: 'Samsung', description: 'TV LED ultrafina',
-                    sku: 'SAMLED1234', product_category_id: category_tv.id, status: 'on_shelf')
+                    sku: 'SAMLED1234', product_category_id: category_tv.id, status: 'on_shelf',
+                    width: 2, weight: 2, depth: 2, height: 2, is_fragile: 'checked')
     Product.create!(name: 'Iphone 13', brand: 'Apple', description: 'Preto com 256 GB',
-                    sku: 'APPIPO1234', product_category_id: category_smartphone.id, status: 'on_shelf')
+                    sku: 'APPIPO1234', product_category_id: category_smartphone.id, status: 'on_shelf',
+                    width: 2, weight: 2, depth: 2, height: 2, is_fragile: 'checked')
     user = create(:user)
 
     login_as(user, scope: user)
@@ -24,7 +26,8 @@ describe 'user filter the search of product by category' do
     ExchangeRate.create!(rate: 2, registered_at_source_for: 2)
     category_tv = ProductCategory.create!(name: 'TVs')
     Product.create!(name: 'Smart TV 43', brand: 'Samsung', description: 'TV LED ultrafina',
-                    sku: 'SAMLED1234', product_category_id: category_tv.id, status: 'draft')
+                    sku: 'SAMLED1234', product_category_id: category_tv.id, status: 'draft',
+                    width: 2, weight: 2, depth: 2, height: 2, is_fragile: 'checked')
     user = create(:user)
 
     login_as(user, scope: user)
