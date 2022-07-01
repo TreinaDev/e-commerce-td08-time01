@@ -2,7 +2,9 @@ puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
 admin = Admin.create!(email: 'manoel@mercadores.com.br', password: '123456', name: 'Manoel da Silva')
-user = User.create!(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '06001818398')
+user1 = User.create!(email: 'joaquim@meuemail.com.br', password: '123456', name: 'Joaquim Santos', identify_number: '06001818398')
+user2 = User.create!(email: 'livia@meuemail.com.br', password: '123456', name: 'Lívia Guevara', identify_number: '53126169406')
+user3 = User.create!(email: 'josi@meuemail.com.br', password: '123456', name: 'Josi da Cruz', identify_number: '27681458824')
 
 puts '--------- cria taxa de câmbio ---------'
 
@@ -17,16 +19,6 @@ eletronicos = ProductCategory.create(name: "Eletrônicos")
     notebooks = ProductCategory.create(name: "Notebooks", parent: informatica)
       ultrafinos = ProductCategory.create(name: "Notebooks", parent: notebooks)
         macbook = ProductCategory.create(name: "Notebooks", parent: macbook)
-
-eletrodomesticos = ProductCategory.create(name: "Eletrodomésticos")
-  lavar_e_secar = ProductCategory.create(name: "Lavar e Secar", parent: eletrodomesticos)
-  geladeiras = ProductCategory.create(name: "Geladeiras", parent: eletrodomesticos)
-  fogao = ProductCategory.create(name: "Fogão", parent: eletrodomesticos)
-  ar_e_ventilacao = ProductCategory.create(name: "Ar e Ventilação", parent: eletrodomesticos)
-
-moveis = ProductCategory.create(name: "Móveis")
-  mesa_escritorio = ProductCategory.create(name: "Mesa de Escritório", parent: moveis)
-  guarda_roupa = ProductCategory.create(name: "Guarda-roupa", parent: moveis)
 
 utilidades_domesticas = ProductCategory.create(name: "Utilidades Domésticas")
   cafe_e_cha = ProductCategory.create(name: "Café e Chá", parent: utilidades_domesticas)
@@ -54,7 +46,6 @@ end
 puts "---- cria um monte de cacarecos  ------"
 
 names_and_descriptions = [
-  # ['', ''], 
   [canecas, 'Caneca Sabre de Luz', 'Caneca em cerâmica com desenho de sabre de luz que se acende quando a caneca está quente.'],
   [cafe_e_cha, 'Xícara Levitadora', 'Par de duas xícaras em vidro transparente com parede dupla. Parece que seu café está flutuando!'],
   [cafe_e_cha, 'Conjunto Tóquio', 'Conjunto para chá em estilo japonês, feito inteiramente em ecoplástico e composto de 4 xícaras pequenas sem alça.'],
@@ -75,21 +66,19 @@ names_and_descriptions = [
   [garrafas_termicas, 'Caneca Térmica Hot Forever', 'Linda caneca térmica em aço inox, para compor um belo ambiente de trabalho na sua mesa de home office e ser ostentada furtivamente durante suas vídeo-conferências'], 
 ]
 
-brands = ['Pensaminarium', 'Vesúvia', 'TOC & ex-TOC']
-
 names_and_descriptions.each do | info |
   Product.create!(status: 'on_shelf',
-                product_category: info[0],
-                name: info[1], 
-                description: info[2], 
-                brand: brands[rand(brands.size)],
-                sku: ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**7).to_i.to_s,
-                width: (1..5).to_a.sample.to_i,
-                weight: (1..5).to_a.sample.to_i,
-                depth: (1..5).to_a.sample.to_i,
-                height: (1..5).to_a.sample.to_i,
-                is_fragile: ['unchecked', 'checked'].sample
-  ).set_brl_price(14 * (1 + rand(100)/100.0).truncate(2))
+                  product_category: info[0],
+                  name: info[1], 
+                  description: info[2], 
+                  brand: ['Pensaminarium', 'Vesúvia', 'TOC & ex-TOC'].sample,
+                  sku: ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**7).to_i.to_s,
+                  width: (1..5).to_a.sample.to_i,
+                  weight: (1..5).to_a.sample.to_i,
+                  depth: (1..5).to_a.sample.to_i,
+                  height: (1..5).to_a.sample.to_i,
+                  is_fragile: ['unchecked', 'checked'].sample
+                 ).set_brl_price(14 * (1 + rand(100)/100.0).truncate(2))
 end
 
 puts '----- cria mais produtos e preços -----'
@@ -113,9 +102,9 @@ product2 = Product.create!(status: 'on_shelf',
   height: (1..5).to_a.sample.to_i,
   is_fragile: ['unchecked', 'checked'].sample
   )
-Price.create!(product: product2, price_in_brl: 25.99, validity_start: Time.current)
-Price.create!(product: product2, price_in_brl: 19.99, validity_start: 2.weeks.from_now)
-Price.create!(product: product2, price_in_brl: 27.99, validity_start: 3.weeks.from_now)
+Price.create!(product: product2, price_in_brl: 25, validity_start: Time.current)
+Price.create!(product: product2, price_in_brl: 20, validity_start: 2.weeks.from_now)
+Price.create!(product: product2, price_in_brl: 28, validity_start: 3.weeks.from_now)
 
 product3 = Product.create!(status: 'off_shelf',
   name: 'Camisa Blue Sky', sku: 'VES1234', brand: 'Vestil',
@@ -147,32 +136,65 @@ product5 = Product.create!(status: 'on_shelf',
   is_fragile: ['unchecked', 'checked'].sample
   ).set_brl_price(89)
 
+  product6 = Product.create!(status: 'on_shelf',
+    name: 'MacBook Air 11"', sku: 'APL39857',
+    brand: 'Apple',description: 'Computador portátil com design moderno e espessura diminuta, mas com tão pouca memória que te obriga a carregar sempre um HD externo junto.', 
+    product_category: macbook,
+    weight: 1.9,
+    width: 25,
+    depth: 33,
+    height: 10,
+    is_fragile: 'checked',
+  ).set_brl_price(7.500)
+
 puts '----------- cria pedidos --------------'
 
-CartItem.create!(product: product1, quantity: 5, user: user)
-CartItem.create!(product: product2, quantity: 7, user: user)
+CartItem.create!(product: product1, quantity: 5, user: user1)
+CartItem.create!(product: product2, quantity: 7, user: user1)
 cart = CartItem.where(order_id: nil)
-order1 = Order.new(address: 'Rua da entrega, 75', user: user, promotion_id: @promotion_2.id,
+order1 = Order.new(address: 'Rua da entrega, 75', user: user1, promotion_id: @promotion_2.id,
                    price_on_purchase: OrdersManager::PriceAdder.call(cart, @promotion_2))
 order1.skip_callback = true
 order1.save!
 
-CartItem.create!(product: product3, quantity: 1, user: user)
-CartItem.create!(product: product4, quantity: 3, user: user)
+CartItem.create!(product: product3, quantity: 1, user: user1)
+CartItem.create!(product: product4, quantity: 3, user: user1)
 cart = CartItem.where(order_id: nil)
-order2 = Order.new(address: 'Rua da Paz, 42 - Belém, PA', user: user,
+order2 = Order.new(address: 'Rua da Paz, 42 - Belém, PA', user: user1,
                    price_on_purchase: OrdersManager::PriceAdder.call(cart))
 order2.skip_callback = true
 order2.save!
 order2.approved!
 
-CartItem.create!(product: product5, quantity: 6, user: user)
+CartItem.create!(product: product5, quantity: 6, user: user1)
 cart = CartItem.where(order_id: nil)
-order3 = Order.new(address: 'Rua do Bailão de Domingo - Erechim, RS', user: user,
+order3 = Order.new(address: 'Rua do Bailão de Domingo - Erechim, RS', user: user1,
                    price_on_purchase: OrdersManager::PriceAdder.call(cart))
 order3.skip_callback = true
 order3.save!
 order3.update!(status: 'canceled', error_type: 'insufficient_funds')
+
+puts '------- cria vários pedidos -----------'
+
+10.times do
+  user = [user1, user2, user3].to_a.sample
+  (1..7).to_a.sample.to_i.times do
+    CartItem.create!(
+      product_id: (1..Product.all.size).to_a.sample, 
+      quantity: (1..5).to_a.sample, 
+      user: user)
+  end
+  cart = CartItem.where(order_id: nil)
+  order = Order.new(address: 'Rua da Felicidade, Chuí - RS', 
+                    user: user,
+                    price_on_purchase: OrdersManager::PriceAdder.call(cart))
+  order.skip_callback = true
+  order.status = ['pending', 'approved', 'canceled'].sample
+  order.save!
+  order.error_type = ['insufficient_funds', 'fraud_warning'].sample if order.canceled?
+  order.save!
+end
+
 
 puts "\nSumário"
 puts "Foram criadas #{ExchangeRate.all.size} taxas de câmbio"
