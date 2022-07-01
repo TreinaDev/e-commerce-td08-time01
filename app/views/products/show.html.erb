@@ -15,12 +15,25 @@
   <br />
 
   <dl>
+    <% if @product.file.present? %>
+      <p><%= image_tag(@product.picture) %></p>
+    <% end %>
     <dt>SKU:</dt>
     <dd><%= @product.sku %></dd>
     <dt>Marca:</dt>
     <dd><%= link_to @product.brand, search_products_path(query: @product.brand) %></dd>
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
+    <% if @product.is_fragile == 'checked' %>
+      <dt>Frágil: </dt>
+      <dd>Produto frágil</dd>
+    <% end %>
+    <dt>Manual: </dt>
+    <% if @product.file.present? %>
+      <dd><%= link_to @product.file.filename, url_for(@product.file) %></dd>
+    <% else %>
+      <dd><i>Não há manual cadastrado para este produto.</i></dd>
+    <% end %>
     <dt>Preço:</dt>
     <dd>
       <%= image_tag 'rubi', height: '16' %>

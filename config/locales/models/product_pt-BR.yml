@@ -16,3 +16,10 @@ pt-BR:
           draft: em rascunho
           off_shelf: suspenso
           on_shelf: à venda
+        picture: Imagem
+        file: Manual
+        width: Largura
+        weight: Peso
+        depth: Profundidade
+        height: Altura
+        is_fragile: Frágil

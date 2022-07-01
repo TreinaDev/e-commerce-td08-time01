@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates_presence_of :name
+  validates_presence_of :name, :width, :weight, :depth, :height, :is_fragile
   validates_presence_of :brand, :description, :sku, if: Proc.new { |p| p.on_shelf? }
   validates_uniqueness_of :sku, allow_blank: true
   validates_format_of :sku, with: /\A[A-Z0-9]+\z/, message: 'deve ter apenas letras e números', if: Proc.new { |p| p.sku.present? }
@@ -9,6 +9,10 @@ class Product < ApplicationRecord
   has_many :prices, dependent: :destroy
   accepts_nested_attributes_for :prices, allow_destroy: true
 
+  has_one_attached :picture
+  has_one_attached :file
+
+  enum is_fragile: { unchecked: 0, checked: 1 }
   enum status: { off_shelf: 0, draft: 5, on_shelf: 9 }
 
   def set_brl_price(price_in_brl, validity_start = 1.second.ago)

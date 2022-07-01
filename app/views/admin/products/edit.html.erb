@@ -40,6 +40,10 @@
           <%= f.label :status, class: "form-label" %>
           <%= f.select(:status, options_for_product_status(@product.status), {:selected => "à venda"}, {:class =>"form-select", include_blank: false})%>
         </div>
+        <div class="col">
+          <%= f.label :is_fragile, class:"form-check-label" %> </p>
+          <%= f.check_box :is_fragile, {class:"form-check-input"}, "checked", "unchecked" %>
+        </div>
       </div>
       <div class="mb-3 row">
         <div class="col">
@@ -47,6 +51,45 @@
           <%= f.collection_select :product_category_id, @product_categories_for_select, :id, :name, { }, {:class =>"form-select"}%>
         </div>
       </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :picture, class: "form-label" %></p>
+          <%= f.file_field :picture, class:"form-control-file", placeholder:"Selecione a imagem." %>
+          <% if @product.file.present? %>
+            <p><%= image_tag(@product.picture, size:'30') %></p>
+          <% else %>
+            <p style="color: red; font-size: 13px;"><i>Não há imagem cadastrada para este produto.</i></p>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= f.label :file, class: "form-label" %></p>
+          <%= f.file_field :file, class:"form-control-file", placeholder:"Selecione o arquivo." %>
+          <% if @product.file.present? %>
+            <p><%= link_to @product.file.filename, url_for(@product.file) %></p>
+          <% else %>
+            <p style="color: red; font-size: 13px;"><i>Não há manual cadastrado para este produto.</i></p>
+          <% end %>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= f.label :weight, class:"form-label" %>
+          <%= f.number_field :weight, class:"form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :width, class:"form-label" %>
+          <%= f.number_field :width, class:"form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :height, class:"form-label" %>
+          <%= f.number_field :height, class:"form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label :depth, class:"form-label" %>
+          <%= f.number_field :depth, class:"form-control" %>
+        </div>
+      </div>
+      
       <br/>
       <div class="form-group button-form-group">
         <%= f.submit 'Atualizar produto', disable_with: 'editando...', class:"btn btn-primary" %>
