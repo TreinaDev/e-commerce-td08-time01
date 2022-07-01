@@ -60,5 +60,23 @@ label {
 }
 
 .mini-height { line-height: 0.50em }
-
 .max-with-select-navbar { max-width: 180px}
+
+.product-brand {
+  font-size: 0.85em;
+  line-height: 0.5em;
+}
+
+.product-price {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.product-category {
+  font-size: 0.85em;
+  margin-bottom: 5px;
+}
+
+.product-description {
+  font-size: 0.90em;
+}
