@@ -4,10 +4,15 @@ describe 'Unlogged user tries to see details of a Product' do
   it 'and is successful' do
     create(:exchange_rate, rate: 2)
     product = create(:product, name: 'Caneca Mon Amour', 
-                               status: 'on_shelf',
-                               brand: 'TOC & Ex-TOC',
-                               description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
-                               sku: 'TOCCAN1234',
+                      status: 'on_shelf',
+                      brand: 'TOC & Ex-TOC',
+                      description: 'Caneca em cerâmica com desenho de uma flecha do cupido',
+                      sku: 'TOCCAN1234',
+                      width: (1..5).to_a.sample.to_i,
+                      weight: (1..5).to_a.sample.to_i,
+                      depth: (1..5).to_a.sample.to_i,
+                      height: (1..5).to_a.sample.to_i,
+                      is_fragile: ['unchecked', 'checked'].sample
                     ).set_brl_price(15)
 
     visit root_path
@@ -60,7 +65,12 @@ describe 'Unlogged user tries to see details of a Product' do
                               description: 'Description do produto teste',
                               sku: 'QQ1234567',
                               status: :on_shelf,
-                              product_category_id: product_category.id
+                              product_category_id: product_category.id,
+                              width: (1..5).to_a.sample.to_i,
+                              weight: (1..5).to_a.sample.to_i,
+                              depth: (1..5).to_a.sample.to_i,
+                              height: (1..5).to_a.sample.to_i,
+                              is_fragile: ['unchecked', 'checked'].sample
                             )
       product.picture.attach(
         io: File.open('spec/support/attach_file/pagamento.png'),

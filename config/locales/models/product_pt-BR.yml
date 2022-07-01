@@ -18,3 +18,8 @@ pt-BR:
           on_shelf: à venda
         picture: Imagem
         file: Manual
+        width: Largura
+        weight: Peso
+        depth: Profundidade
+        height: Altura
+        is_fragile: Frágil

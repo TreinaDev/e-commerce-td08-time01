@@ -24,6 +24,10 @@
     <dd><%= @product.brand %></dd>
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
+    <% if @product.is_fragile == 'checked' %>
+      <dt>Frágil: </dt>
+      <dd>Produto frágil</dd>
+    <% end %>
     <dt>Manual: </dt>
     <% if @product.file.present? %>
       <dd><%= link_to @product.file.filename, url_for(@product.file) %></dd>

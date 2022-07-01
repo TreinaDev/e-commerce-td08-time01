@@ -15,6 +15,11 @@ describe 'admin register a product' do
     fill_in "SKU", with: "UU1234567"
     select 'à venda', from: 'Status'
     select 'Tecnologia', from: 'Categoria do produto'
+    fill_in 'Altura', with: 10
+    fill_in 'Largura', with: 3
+    fill_in 'Profundidade', with: 19
+    fill_in 'Peso', with: 0.2
+    page.check('Frágil')
     fill_in "Preço em reais", with: 10
     fill_in "Início da validade", with: DateTime.tomorrow
     attach_file('Imagem', File.join(Rails.root, 'spec/support/attach_file/pagamento.png'))
@@ -43,6 +48,11 @@ describe 'admin register a product' do
     fill_in "SKU",	with: ''
     select 'à venda', from: 'Status'
     select 'Tecnologia', from: 'Categoria do produto'
+    fill_in 'Altura', with: 10
+    fill_in 'Largura', with: 3
+    fill_in 'Profundidade', with: 19
+    fill_in 'Peso', with: 0.2
+    page.check('Frágil')
     fill_in "Preço em reais",	with: ''
     fill_in "Início da validade",	with: ''
     click_on 'Cadastrar'
