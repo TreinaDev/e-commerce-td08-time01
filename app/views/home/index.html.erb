@@ -11,15 +11,15 @@
 
             <div class="card-body">
               <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
-              <p class="card-text">Marca: <%= link_to product.brand, search_products_path(query: product.brand)  %></p>
-              <p class="card-text"><%= product.description %></p>
               <p>
                 <% if product.product_category.nil? %>
                   Sem categoria
                 <% else %>
                   Categoria: <%= link_to product.product_category.name, by_category_products_path(product.product_category.id) %>
                 <% end %>
+                <br>Marca: <%= link_to product.brand, search_products_path(query: product.brand) %>
               </p>
+              <p class="card-text"><%= product.description %></p>
               <p>
                 <%= image_tag 'rubi', height: '16' %>
                 <%= number_with_delimiter(product.current_price_in_rubis) %> 
