@@ -1,8 +1,3 @@
-# Examples:
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-
 puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')

@@ -5,7 +5,7 @@ class Transaction < ApplicationService
   API_ROOT = 'http://localhost:4000'
   API_ENDPOINT = '/api/v1/client_transactions'
   API_TRANSACTION_TYPES = ["buy_rubys", "transaction_order", "cashback"]
-  API_VARIABLE_HOLDING_TRANSACTION_CODE = 'transaction_code'
+  API_VARIABLE_HOLDING_TRANSACTION_CODE = 'code'
 
   attr_reader :response
 
