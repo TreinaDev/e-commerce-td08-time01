@@ -43,13 +43,13 @@
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
               <div class="fw-bold">Endereço de entrega:</div>
-              <%=@order.address%>
+              <%= @order.address %>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
               <div class="fw-bold">Solicitante:</div>
-              <%=@order.user.name%>
+              <%= @order.user.name %>
             </div>
           </li>
         </ul>
@@ -69,7 +69,7 @@
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
               <div class="fw-bold"><%=Order.human_attribute_name(:status)%>:</div>
-              <%=Order.human_enum_name(:status, @order.status)%>
+              <%= Order.human_enum_name(:status, @order.status) %>
               <%= "- saldo insuficiente para quitar pedido." if @order.error_type == 'insufficient_funds' %>
             </div>
           </li>
@@ -77,8 +77,8 @@
           <% unless @promotion.nil? %>
             <li class="list-group-item d-flex justify-content-between align-items-start">
               <div class="ms-2 me-auto">
-                <div class="fw-bold"><%=Order.human_attribute_name(:promotion_id)%>:</div>
-                <%= @promotion.name%>
+                <div class="fw-bold"><%= Order.human_attribute_name(:promotion_id) %>:</div>
+                <%= @promotion.name %>
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -88,9 +88,7 @@
               <strong><%= number_with_delimiter(@discount).to_i %></strong> 
             </li>
           <% end %>
-
         </ul>
-      
       </div>
     </div>
   </div>

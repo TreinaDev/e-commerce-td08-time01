@@ -1,33 +1,71 @@
-<ul class="list-group">
-  <% @all_promotions.each do |prom|%>
+<h1 class="text-center">Promoções</h1>
 
-    <li class="list-group-item">
-      <%= link_to prom.name, promotion_path(prom.id)%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
-    </li>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th>Nome da Promoção</th>
+      <th>Cupom</th>
+      <th>Data incial</th>
+      <th>Data final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_promotions.each do |promo|%>
+      <tr>
+        <td><%= link_to promo.name, promotion_path(promo.id)%></td>
+        <td><%= promo.code %></td>
+        <td><%= l promo.start_date %></td>
+        <td><%= l promo.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <% end %>
-</ul>
+<h2 class="text-center top-buffer">Cadastrar Promoção</h2>
 
-<div>
-  <%= form_for @promotion do |promo| %>
-    <%= promo.label :name %>
-    <%= promo.text_field :name %>
-    <%= promo.label :start_date %>
-    <%= promo.datetime_local_field :start_date %>
-    <%= promo.label :end_date %>
-    <%= promo.datetime_local_field :end_date %>
-    <%= promo.label :discount_percent %>
-    <%= promo.number_field :discount_percent %>
-    <%= promo.label :maximum_discount %>
-    <%= promo.number_field :maximum_discount %>
-    <%= promo.label :absolute_discount_uses %>
-    <%= promo.number_field :absolute_discount_uses %>
-
-    <%= promo.label :product_category_ids, 'Categorias'%>
-    <%= promo.select :product_category_ids, @categories.collect { |cat| [cat.name, cat.id] }, {}, multiple: true, id: 'new_promotion' %>
-
-    <div>
-      <%= promo.submit 'Criar nova promoção.' %>
-    </div>
-  <% end %>
+<div class="card mb4">
+  <div class="card-header">Nova Promoção</div>
+  <div class="card-body">
+    <%= form_for @promotion do |promo| %>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= promo.label :name, class: 'form-label' %>
+          <%= promo.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= promo.label :start_date, class: 'form-label' %>
+          <%= promo.datetime_local_field :start_date, class: 'form-control' %>
+        </div>
+        <div class="col">
+          <%= promo.label :end_date, class: 'form-label' %>
+          <%= promo.datetime_local_field :end_date, class: 'form-control' %>
+        </div>
+        <div class="col">
+          <%= promo.label :discount_percent, class: 'form-label' %>
+          <%= promo.number_field :discount_percent, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <%= promo.label :maximum_discount, class: 'form-label' %>
+          <%= promo.number_field :maximum_discount, class: 'form-control' %>
+        </div>
+        <div class="col">
+          <%= promo.label :absolute_discount_uses, class: 'form-label' %>
+          <%= promo.number_field :absolute_discount_uses, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb3-row">
+        <div class="col">
+          <%= promo.label :product_category_ids, 'Categorias', class: 'form-label'%>
+          <%= promo.select :product_category_ids, @categories.collect { |cat| [cat.show_with_ancestors, cat.id] }, {}, multiple: true, id: 'new_promotion', class: 'form-control full-select' %>
+        </div>
+      </div>
+      <div class="text-center buffer ">
+        <%= promo.submit 'Criar nova promoção', class: 'btn btn-outline-primary' %>
+      </div>
+    <% end %> 
+  </div>
 </div>

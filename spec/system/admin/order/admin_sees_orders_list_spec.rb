@@ -15,7 +15,7 @@ describe 'Admin sees pending orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
     
     expect(page).to have_content 'Pedidos'
@@ -40,7 +40,7 @@ describe 'Admin sees pending orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'
@@ -63,7 +63,7 @@ describe 'Admin sees pending orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'
@@ -90,7 +90,7 @@ describe 'Admin sees approved orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'
@@ -117,7 +117,7 @@ describe 'Admin sees approved orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'
@@ -143,7 +143,7 @@ describe 'Admin sees canceled orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'
@@ -170,7 +170,7 @@ describe 'Admin sees canceled orders' do
     login_as(admin, scope: :admin)
     visit root_path
     within('nav') do
-      click_on 'Gerenciar Pedidos'
+      click_on 'Acompanhar Pedidos'
     end
 
     expect(page).to have_content 'Pedidos'

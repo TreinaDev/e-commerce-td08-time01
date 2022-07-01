@@ -9,14 +9,14 @@
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:start_date)%>:</div>
-              <%=l @promotion.start_date%>
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:start_date) %>:</div>
+              <%= l @promotion.start_date %>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:end_date)%>:</div>
-              <%=l @promotion.end_date%>
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:end_date) %>:</div>
+              <%= l @promotion.end_date %>
             </div>
           </li>
         </ul>
@@ -29,27 +29,27 @@
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:discount_percent)%>:</div>
-              <%=@promotion.discount_percent%>%
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:discount_percent) %>:</div>
+              <%= @promotion.discount_percent %>%
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:maximum_discount)%>:</div>
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:maximum_discount) %>:</div>
               <%= image_tag 'rubi', height: '16' %>
-              <%=number_with_delimiter(@promotion.maximum_discount)%>
+              <%= number_with_precision(@promotion.maximum_discount, precision: 0) %>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:absolute_discount_uses)%>:</div>
-              <%=@promotion.absolute_discount_uses%>
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:absolute_discount_uses) %>:</div>
+              <%= @promotion.absolute_discount_uses %>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold"><%=Promotion.human_attribute_name(:code)%>:</div>
-              <%=@promotion.code%>
+              <div class="fw-bold"><%= Promotion.human_attribute_name(:code) %>:</div>
+              <%= @promotion.code %>
             </div>
           </li>
         </ul>
@@ -61,14 +61,14 @@
       <div class="p-3 border bg-light">
 
         <div class="ms-2 me-auto">
-          <div class="fw-bold">Categorias atreladas:<div>
+          <div class="fw-bold">Categorias contempladas:<div>
         </div>
 
         <ul class="list-group" id="categories">
           <% @categories.each do |cat|%>
             <li class="list-group-item d-flex justify-content-between align-items-start">
               <div class="ms-2 me-auto">
-                <%=cat.name%>
+                <%= cat.name %>
               </div>
             </li>
           <% end %>
@@ -78,8 +78,7 @@
     </div>
 
   </div>
-
-  <div class="text-center buffer">
-    <%= link_to 'Voltar', :back, class: 'btn btn-outline-primary mini-button' %>
-  </div>
+</div>
+<div class="text-center buffer">
+  <%= link_to 'Voltar', :back, class: 'btn btn-outline-primary mini-button' %>
 </div>

@@ -1,0 +1,57 @@
+<h2 class="text-center">Gerenciamento da Loja</h2>
+<section class="container" style="margin-top: 75px;">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card text-bg-light">
+      <div class="card-body">
+        <h4 class="card-title text-center">Atualizar Taxa de Câmbio</h4>
+        <div class="text-center">
+          <%= link_to '', admin_exchange_rates_path, class: 'bi bi-cash-coin', style: 'color: black; font-size: 5em;' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Acompanhar Pedidos</h5>
+        <div class="text-center">
+          <%= link_to '', admin_orders_path, class: 'bi bi-cart-fill', style: 'color: black; font-size: 5em;' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Gerenciar Promoções</h5>
+        <div class="text-center">
+          <%= link_to '', promotions_path, class: 'bi bi-ticket-perforated-fill', style: 'color: black; font-size: 5em;' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Gerenciar Preços & Produtos</h5>
+        <div class="text-center">
+          <%= link_to '', admin_products_path, class: 'bi bi-boxes', style: 'color: black; font-size: 5em;' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Gerenciar Categorias</h5>
+        
+        <div class="text-center">
+          <%= link_to '', admin_products_path, class: 'bi bi-list-nested', style: 'color: black; font-size: 5em;' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</section>

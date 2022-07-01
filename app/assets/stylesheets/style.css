@@ -40,6 +40,10 @@ main {
   margin-right: 10px;
 }
 
+.top-buffer {
+  margin-top: 60px;
+}
+
 .standard-width {
   max-width: 900px;
 }
@@ -60,3 +64,54 @@ label {
 }
 
 .mini-height { line-height: 0.50em }
+
+.max-with-select-navbar { max-width: 180px}
+
+.product-brand {
+  font-size: 0.85em;
+  line-height: 0.5em;
+}
+
+.product-price {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.product-category {
+  font-size: 0.85em;
+  margin-bottom: 5px;
+}
+
+.product-description {
+  font-size: 0.90em;
+}
+
+.admin-nav-position {
+  line-height: 0.75em;
+  margin-top: 14px;
+  text-align: right;
+}
+
+.user-nav-position {
+  line-height: 90%;
+  text-align: right;
+  margin: 0px 10px;
+}
+
+.text-white {
+  color: white !important
+}
+
+a.text-white {
+  color: white !important
+}
+
+.bi {
+  fill: #fff;
+  color: #fff;
+}
+
+.full-select {
+  height: 300px;
+}
+

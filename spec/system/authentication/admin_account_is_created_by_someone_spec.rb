@@ -10,7 +10,7 @@ describe 'Someone tries to create an admin account' do
     fill_in 'Confirmar senha', with: '123456'
     click_on 'Cadastrar'
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(admin_index_path)
     expect(page).to have_content('Manoel da Silva')
     expect(Admin.count).to be 1
   end
