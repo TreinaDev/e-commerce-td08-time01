@@ -6,7 +6,7 @@ class ExchangeRate < ApplicationRecord
   API_VARIABLE_HOLDING_EXCHANGE_RATE = "brl_coin"
   API_VARIABLE_HOLDING_DATE = "register_date"
 
-  validates :rate, presence: true, numericality: true
+  validates :rate, numericality: true, presence: true
   validates :registered_at_source_for, presence: true
 
   def self.current
@@ -18,13 +18,13 @@ class ExchangeRate < ApplicationRecord
   end
 
   def self.get
-    response = Faraday.get(API_ROOT + API_ENDPOINT,
-                           { "register_date": "#{I18n.l Date.current, format: :api_query}" })
-    if response.status == 200
-      ExchangeRate.update(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
-                          registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
-    else
-      false
-    end
+    payload = { "register_date": "#{I18n.l Date.current, format: :api_query}" }
+    begin
+      response = Faraday.get(API_ROOT + API_ENDPOINT, payload)
+    rescue Faraday::ConnectionFailed; end
+    
+    return false unless response.try(:status) == 200
+    ExchangeRate.update(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
+                        registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
   end
 end
