@@ -26,4 +26,10 @@ describe 'I18n translations should be available for model' do
     expect(ProductCategory.human_attribute_name('parent')).to eq 'Categoria Pai'
     expect(ProductCategory.human_attribute_name('parent_id')).to eq 'Categoria Pai'
   end
+
+  it 'Order' do
+    expect(Order.human_enum_name(:status, 'pending')).to eq 'Pendente'
+    expect(Order.human_enum_name(:status, 'approved')).to eq 'Aprovado'
+    expect(Order.human_enum_name(:status, 'canceled')).to eq 'Cancelado'
+  end
 end

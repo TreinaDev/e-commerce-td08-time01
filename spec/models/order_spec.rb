@@ -40,4 +40,26 @@ RSpec.describe Order, type: :model do
       expect(Order.last.transaction_code).to eq 'nsurg745n'
     end
   end
+
+  describe '.value' do
+    it 'should return sum of cart without promotion' do
+      fake_response = double('faraday_response', status: 201, 
+                                                 body: '{ "code": "nsurg745n" }')
+      allow(Faraday).to receive(:post).and_return(fake_response)
+      user = create(:user)
+      category = create(:product_category, name: 'Eletrônicos')
+      create(:exchange_rate, rate: 0.5)
+      product = create(:product, name: 'Notebook', product_category: category).set_brl_price(25.0) 
+      product_2 = create(:product, name: 'Caneca').set_brl_price(50.0)
+      create(:cart_item, product: product, user: user, quantity: 2)
+      create(:cart_item, product: product_2, user: user)
+      promotion = create(:promotion, discount_percent: 20)
+      promotion_category = create(:promotion_category, product_category: category, promotion: promotion)
+      order = create(:order, promotion_id: promotion.id, user: user)
+
+      value = order.value
+
+      expect(value).to be > order.price_on_purchase
+    end
+  end
 end
