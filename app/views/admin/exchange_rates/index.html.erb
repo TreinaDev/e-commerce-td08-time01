@@ -1,0 +1,18 @@
+<h1>Taxa de Câmbio</h1>
+
+<dl>
+  <dt>Valor atual</dt>
+  <dd>
+    <%= "1 rubi = #{number_with_precision(@current_rate.rate, precision: 2)} reais" %>
+    <br>
+    <%= "1 real  = #{number_with_precision(1 / @current_rate.rate, precision: 4)} rubis" %>
+  </dd>
+
+  <dt>Data de referência (indicada pelo time de Pagamentos)</dt>
+  <dd><%= l @current_rate.registered_at_source_for %></dd>
+
+  <dt>Última atualização</dt>
+  <dd><%= l @current_rate.updated_at, format: :verbose %></dd>
+</dl>
+
+<%= button_to 'Atualizar taxa de câmbio', admin_collect_rate_path, class: 'btn btn-outline-primary' %>

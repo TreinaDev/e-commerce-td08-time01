@@ -12,6 +12,10 @@ class Order < ApplicationRecord
 
   enum status: { pending: 0, approved: 5, canceled: 9 }
   
+  def value
+    self.cart_items.reduce(0) {|sum, cart| sum += cart.price_on_purchase * cart.quantity }
+  end
+
   private
 
   def set_code

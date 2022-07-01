@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     post 'buy_rubis', to: 'buy_rubis#buy'
   end
 
+  namespace :admin do
+    resources :products, only: [:index]
+    resources :exchange_rates, only: [:index] 
+    post 'collect_rate', to: 'exchange_rates#collect_rate'
+  end
+
   namespace :api do
     namespace :v1 do
       patch 'payment_results', to: 'payments#results'
@@ -29,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :orders, only: [:index, :show]
     resources :products, only: [:index, :new, :create, :edit, :update] do
       resources :prices, only: [:new, :create, :edit, :update, :destroy]
     end

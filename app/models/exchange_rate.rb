@@ -2,6 +2,7 @@ class NoExchangeRateError < StandardError; end
 
 class ExchangeRate < ApplicationRecord
   API_ROOT = 'http://localhost:4000'
+  API_ENDPOINT = '/api/v1/exchange_rates/search/'
   API_VARIABLE_HOLDING_EXCHANGE_RATE = "brl_coin"
   API_VARIABLE_HOLDING_DATE = "register_date"
 
@@ -9,18 +10,21 @@ class ExchangeRate < ApplicationRecord
   validates :registered_at_source_for, presence: true
 
   def self.current
-    raise NoExchangeRateError, 'Não há nenhum taxa de câmbio disponível' unless ExchangeRate.where('registered_at_source_for <= ?', DateTime.current).present?
-    
-    ExchangeRate.where('registered_at_source_for <= ?', DateTime.current)
-                .order(registered_at_source_for: :asc)
-                .last
-                .rate
+    begin
+      ExchangeRate.take.rate
+    rescue NoMethodError
+      raise NoExchangeRateError, 'Não há nenhuma taxa de câmbio disponível'
+    end
   end
 
   def self.get
-    response = Faraday.get("#{API_ROOT}/api/v1/exchange_rates/search/",
+    response = Faraday.get(API_ROOT + API_ENDPOINT,
                            { "register_date": "#{I18n.l Date.current, format: :api_query}" })
-    ExchangeRate.create!(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
-                         registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
+    if response.status == 200
+      ExchangeRate.update(rate: JSON.parse(response.body)[API_VARIABLE_HOLDING_EXCHANGE_RATE],
+                          registered_at_source_for: JSON.parse(response.body)[API_VARIABLE_HOLDING_DATE])
+    else
+      false
+    end
   end
 end
