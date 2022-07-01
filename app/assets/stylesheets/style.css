@@ -60,3 +60,5 @@ label {
 }
 
 .mini-height { line-height: 0.50em }
+
+.max-with-select-navbar { max-width: 180px}
