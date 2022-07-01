@@ -102,6 +102,10 @@ label {
   color: white !important
 }
 
+a.text-white {
+  color: white !important
+}
+
 .bi {
   fill: #fff;
   color: #fff;
