@@ -1,38 +1,85 @@
-<h3 class="text-center"></h3>Pedidos</h3>
+<h1 class="text-center">Pedidos</h1>
 
-<strong><%= 'Não há pedidos pendentes' if @orders.pending.empty? %></strong>
+<div style="margin-top: 75px;">
+  <h3 class="mini-height">Pedidos Pendentes</h3>
+  <strong><%= 'Não há pedidos pendentes' if @orders.pending.empty? %></strong> 
+  <strong>Valor total dos pedidos pendentes:</strong>
+  <strong><%= image_tag 'rubi', height: '16' %> <%= @pending_orders_sum_rb %> │ <%= number_to_currency(@pending_orders_sum_rs) %></strong>
+</div>
 
-Soma dos pedidos pendentes:  <%= @pending_orders_sum_rb %> | <%= number_to_currency(@pending_orders_sum_rs) %><br />
+<table class="table table-bordered text-center">
+  <thead>
+    <th>Código</th>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Status</th>
+    <th>Detalhes</th>
+  </thead>
+  <tbody>
+    <% @orders.pending.each do |order| %>
+      <tr>
+        <td><%= order.code %></td>
+        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
+        <td><%= order.status  %></td>
+        <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<% @orders.pending.each do |order| %>
-  <%= order.code %> <br />
-  <%= number_with_delimiter(order.price_on_purchase) %><br />
-  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
-  <%= order.status  %><br /><br />
-  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
-<% end %>
+<div style="margin-top: 75px;">
+  <h3 class="mini-height">Pedidos Aprovados</h3>
+  <strong>Valor total dos pedidos aprovados:</strong>
+  <strong><%= 'Não há pedidos aprovados' if @orders.approved.empty? %></strong>
+  <strong><%= image_tag 'rubi', height: '16' %> <%= @approved_orders_sum_rb %> │ <%= number_to_currency(@approved_orders_sum_rs) %></strong>
+</div>
 
-<hr />
-<strong><%= 'Não há pedidos aprovados' if @orders.approved.empty? %></strong>
+<table class="table table-bordered text-center">
+  <thead>
+    <th>Código</th>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Status</th>
+    <th>Detalhes</th>
+  </thead>
+  <tbody>
+    <% @orders.approved.each do |order| %>
+      <tr>
+        <td><%= order.code %></td>
+        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
+        <td><%= order.status  %></td>
+        <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-Soma dos pedidos aprovados:  <%= @approved_orders_sum_rb %> | <%= number_to_currency(@aproved_orders_sum_rs) %><br />
-<% @orders.approved.each do |order| %>
-  <%= order.code %> <br />
-  <%= number_with_delimiter(order.price_on_purchase) %><br />
-  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
-  <%= order.status  %><br /><br />
-  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
-<% end %>
+<div style="margin-top: 75px;">
+  <h3 class="mini-height">Pedidos Cancelados</h3>
+  <strong>Valor total dos pedidos cancelados:</strong>
+  <strong><%= 'Não há pedidos cancelados' if @orders.canceled.empty? %></strong>
+  <strong><%= image_tag 'rubi', height: '16' %> <%= @canceled_orders_sum_rb %> │ <%= number_to_currency(@canceled_orders_sum_rs) %></strong>
+</div>
 
-<hr />
-<strong><%= 'Não há pedidos cancelados' if @orders.canceled.empty? %></strong>
-
-Soma dos pedidos cancelados:  <%= @canceled_orders_sum_rb %> | <%= number_to_currency(@canceled_orders_sum_rs) %><br />
-<% @orders.canceled.each do |order| %>
-  <%= order.code %> <br />
-  <%= number_with_delimiter(order.price_on_purchase) %><br />
-  <%= order.created_at.strftime('%d/%m/%Y às %H:%M') %><br />
-  <%= order.status  %><br /><br />
-  <%= link_to 'Detalhes do Pedido', admin_order_path(order)  %>
-<% end %>
-
+<table class="table table-bordered text-center">
+  <thead>
+    <th>Código</th>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Status</th>
+    <th>Detalhes</th>
+  </thead>
+  <tbody>
+    <% @orders.canceled.each do |order| %>
+      <tr>
+        <td><%= order.code %></td>
+        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
+        <td><%= order.status  %></td>
+        <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
