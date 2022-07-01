@@ -15,7 +15,7 @@
         <td class="text-center"> <strong> <%= item.quantity %>  </strong></td> 
         <td class="text-center"> 
           <%= image_tag 'rubi', height: '16' %>
-          <strong><%= number_with_delimiter(item.price_on_purchase).to_i %></strong>
+          <strong><%= number_with_precision(item.price_on_purchase, precision: 0) %></strong>
         </td>
         <td class="text-center"> 
           <%= image_tag 'rubi', height: '16' %>
@@ -85,7 +85,7 @@
               <strong>Você economizou:</strong>
               &nbsp;
               <%= image_tag 'rubi', height: '16' %>
-              <strong><%= number_with_delimiter(@discount).to_i %></strong> 
+              <strong><%= number_with_precision(@discount, precision: 0) %></strong> 
             </li>
           <% end %>
 
