@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-describe 'admin register a product' do
+describe 'Admin register a product' do
   it 'with success' do
+    create(:exchange_rate)
     admin = create(:admin)
     login_as(admin, scope: :admin)
     ProductCategory.create!(name: 'Tecnologia')
