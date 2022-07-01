@@ -40,6 +40,12 @@ RSpec.describe ExchangeRate, type: :model do
 
       expect(returned_value).to be false
     end
+
+    it 'should not raise an error if the other server is down' do
+      create(:exchange_rate, rate: 9.99)
+      
+      expect{ ExchangeRate.get }.not_to raise_error
+    end
   end
 
   describe '.current' do
