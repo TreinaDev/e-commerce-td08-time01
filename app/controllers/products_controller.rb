@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def search
+    return redirect_to root_path if params['query'] == ''
     if params['query'].present?
       @products = Search.new(params[:query]).inside_products
       @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
