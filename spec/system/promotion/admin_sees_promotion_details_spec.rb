@@ -26,7 +26,7 @@ describe "Admin sees promotion details" do
     expect(page).to have_content("ABCD1234")
     expect(page).to have_content("Porcentagem de desconto:\n20%")
     expect(page).to have_content("Valor máximo:")
-    expect(page).to have_content("70,0")
+    expect(page).to have_content("70")
     expect(page).to have_content("Quantidade de usos:\n5000")
     expect(page).to have_content("Categorias contempladas:")
     within 'ul#categories' do 

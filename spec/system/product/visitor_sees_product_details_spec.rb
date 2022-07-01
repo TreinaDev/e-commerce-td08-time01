@@ -56,7 +56,6 @@ describe 'Unlogged user tries to see details of a Product' do
 
     it 'product has an image and guide' do
       admin = create(:admin)
-      login_as(admin, scope: :admin)
       create(:exchange_rate)
       product_category = ProductCategory.create!(name: 'Tecnologia')
       product = Product.create!(

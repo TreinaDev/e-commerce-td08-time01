@@ -35,7 +35,8 @@ describe 'Admin access promotions page' do
       select = page.find('select#new_promotion')
       select.select "Eletrônicos"
       select.select "Têxtil"
-      click_on 'Criar nova promoção.'
+  
+      click_on 'Criar nova promoção'
 
       expect(page).to have_content('Promoção criada com sucesso.') 
       expect(page).to have_content('Dia das mães')
@@ -72,7 +73,7 @@ describe 'Admin access promotions page' do
       select = page.find('select#new_promotion')
       select.select "Eletrônicos"
       select.select "Têxtil"
-      click_on 'Criar nova promoção.'
+      click_on 'Criar nova promoção'
 
       expect(current_path).to eq promotions_path
       expect(page).to have_content('Promoção não pôde ser criada:') 
@@ -97,7 +98,7 @@ describe 'Admin access promotions page' do
       fill_in "Porcentagem de desconto",	with: "20"
       fill_in "Valor máximo",	with: "70.00"
       fill_in "Quantidade de usos",	with: '5000'
-      click_on 'Criar nova promoção.'
+      click_on 'Criar nova promoção'
 
       expect(current_path).to eq promotions_path
       expect(page).to have_content('Promoção não pôde ser criada:') 
