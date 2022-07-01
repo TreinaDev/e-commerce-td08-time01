@@ -7,9 +7,6 @@
       <% @products.each do |product| %>
         <div class="col card-group little-buffer">
           <article class="card" style="width: 18rem; max-width: 18rem;">
-<<<<<<< HEAD
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-=======
             <% if product.picture.present? %>
               <%= image_tag(product.picture, width:"100%", height:"180", class:'custom-file-input') %>
             <% else %>
@@ -20,7 +17,6 @@
               </svg>
             <% end %>
 
->>>>>>> main
             <div class="card-body">
               <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
               <h6 class="product-brand text-center"><%= link_to product.brand, search_products_path(query: product.brand) %></h6>
