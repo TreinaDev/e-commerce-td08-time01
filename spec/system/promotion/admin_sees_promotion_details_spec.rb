@@ -28,7 +28,7 @@ describe "Admin sees promotion details" do
     expect(page).to have_content("Valor máximo:")
     expect(page).to have_content("70,0")
     expect(page).to have_content("Quantidade de usos:\n5000")
-    expect(page).to have_content("Categorias atreladas:")
+    expect(page).to have_content("Categorias contempladas:")
     within 'ul#categories' do 
       expect(page).to have_content("Eletrônicos")
       expect(page).to have_content("Vestuário")

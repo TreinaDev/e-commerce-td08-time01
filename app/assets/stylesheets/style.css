@@ -106,3 +106,8 @@ label {
   fill: #fff;
   color: #fff;
 }
+
+.full-select {
+  height: 300px;
+}
+
