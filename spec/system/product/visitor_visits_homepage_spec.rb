@@ -46,15 +46,15 @@ end
 feature 'Link to brand on product card' do
   it 'leads to a page showing all products from that brand' do
     create(:exchange_rate, rate: 2)
-    create(:product, name: 'Sabre Jedi', brand: 'Otaku Dreams', status: 'on_shelf')
-    create(:product, name: 'Katana do Kill Bill', brand: 'Otaku Dreams', status: 'on_shelf')
     create(:product, name: 'Glamdring', brand: 'Round Windows', status: 'on_shelf')
+    create(:product, name: 'Katana do Kill Bill', brand: 'Otaku Dreams', status: 'on_shelf')
+    create(:product, name: 'Sabre Jedi', brand: 'Round Windows', status: 'on_shelf')
 
     visit root_path
-    first('.card').click_link 'Otaku Dreams'
+    first('.card').click_link 'Round Windows'
 
+    expect(page).to have_text 'Glamdring'
     expect(page).to have_text 'Sabre Jedi'
-    expect(page).to have_text 'Katana do Kill Bill'
-    expect(page).not_to have_text 'Glamdring'
+    expect(page).not_to have_text 'Katana do Kill Bill'
   end
 end
