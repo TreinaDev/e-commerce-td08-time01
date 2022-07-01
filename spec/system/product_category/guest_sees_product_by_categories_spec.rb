@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Guest user visit a product category' do
+describe 'Guest user visits a product category' do
   it 'and sees products within this category' do
     category1 = create(:product_category, name: 'Cozinha')
     product1 = create(:product, name: 'Conjunto Pratos de Porcelana', product_category: category1, status: :on_shelf)
@@ -59,6 +59,22 @@ describe 'Guest user visit a product category' do
 
     expect(page).to have_content('Não existem produtos cadastrados na categoria Cozinha')
   end
+end
 
+feature 'Link to category on product card' do
+  it 'leads to a page showing all products on that category' do
+    create(:exchange_rate, rate: 2)
+    category = create(:product_category, name: 'Espadas famosas')
+    another_category = create(:product_category, name: 'Espadas do Gandalf')
+    create(:product, name: 'Sabre Jedi', status: 'on_shelf', product_category: category)
+    create(:product, name: 'Katana do Kill Bill', status: 'on_shelf', product_category: category)
+    create(:product, name: 'Glamdring', status: 'draft', product_category: another_category)
 
+    visit root_path
+    first('.card').click_link 'Espadas famosas'
+
+    expect(page).to have_text 'Sabre Jedi'
+    expect(page).to have_text 'Katana do Kill Bill'
+    expect(page).not_to have_text 'Glamdring'
+  end
 end
