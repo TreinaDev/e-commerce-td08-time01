@@ -31,20 +31,21 @@
           <div class="collapse navbar-collapse align-bottom" id="navbarNavDarkDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="margin-top: 8px;">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Gerenciar Loja
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary" aria-labelledby="navbarDarkDropdownMenuLink">
                     <%= link_to 'Taxa de Câmbio', admin_exchange_rates_path, class: 'dropdown-item tiny-buffer' %>
-                    <%= link_to 'Gerenciar Pedidos', admin_orders_path, class: 'dropdown-item tiny-buffer' %>
+                    <%= link_to 'Acompanhar Pedidos', admin_orders_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Gerenciar Promoções', promotions_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Gerenciar Preços & Produtos', admin_products_path, class: 'dropdown-item tiny-buffer' %>
                     <%= link_to 'Gerenciar Categorias', product_categories_path, class: 'dropdown-item tiny-buffer' %>
                   </ul>
                 </li> 
             
-          <li class="nav-link">
-            <span class="nav-link"><%= current_admin.name %></span>
+          <li class="nav-link admin-nav-position text-white">
+            <span><%= current_admin.name %></span><br/>
+            <span style="font-size: 0.75em;">admin</span>
           </li>
         </li>
         
@@ -66,8 +67,8 @@
         <li>
           <div class="collapse navbar-collapse align-bottom" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item dropdown d-flex flex-column ms-2" style="line-height: 90%; text-align: right; margin: 0px 10px;">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown d-flex flex-column ms-2 user-nav-position">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span><%= current_user.name %></span><br/>
                   <span style="font-size: 0.75em">RB$ <%= number_with_precision(current_user.get_balance, precision: 0) %></span>
                 </a>
