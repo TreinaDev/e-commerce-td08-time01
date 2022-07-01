@@ -1,4 +1,4 @@
-<h3 class='text-center'>Pedido <%=@order.code%></h3>
+<h3 class='text-center'>Pedido: <%=@order.code%></h3>
 <table class="table text-center align-middle m-auto" style="max-width: 900px">
   <thead>
     <tr>
@@ -82,7 +82,7 @@
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-start">
-              <strong>Você economizou:</strong>
+              <strong>Desconto aplicado:</strong>
               &nbsp;
               <%= image_tag 'rubi', height: '16' %>
               <strong><%= number_with_delimiter(@discount).to_i %></strong> 
