@@ -19,11 +19,11 @@
                 <% end %>
                 <br>Marca: <%= link_to product.brand, search_products_path(query: product.brand) %>
               </p>
-              <p class="card-text"><%= product.description %></p>
               <p>
                 <%= image_tag 'rubi', height: '16' %>
                 <%= number_with_delimiter(product.current_price_in_rubis) %> 
               </p>
+              <p class="card-text"><%= product.description %></p>
               <div class="text-center">
                 <% user_id = user_signed_in? ? current_user.id : user_id = 0 %>  
                 <%= form_with url: user_cart_items_path(user_id) do |f| %>
