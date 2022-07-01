@@ -10,7 +10,8 @@
 <table class="table table-bordered text-center">
   <thead>
     <th>Código</th>
-    <th>Valor</th>
+    <th>Valor em Rubis</th>
+    <th>Valor em Reais</th>
     <th>Data</th>
     <th>Status</th>
     <th>Detalhes</th>
@@ -19,7 +20,8 @@
     <% @orders.pending.each do |order| %>
       <tr>
         <td><%= order.code %></td>
-        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %><%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= order.status  %></td>
         <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
@@ -38,7 +40,8 @@
 <table class="table table-bordered text-center">
   <thead>
     <th>Código</th>
-    <th>Valor</th>
+    <th>Valor em Rubis</th>
+    <th>Valor em Reais</th>
     <th>Data</th>
     <th>Status</th>
     <th>Detalhes</th>
@@ -47,7 +50,8 @@
     <% @orders.approved.each do |order| %>
       <tr>
         <td><%= order.code %></td>
-        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= order.status  %></td>
         <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
@@ -66,7 +70,8 @@
 <table class="table table-bordered text-center">
   <thead>
     <th>Código</th>
-    <th>Valor</th>
+    <th>Valor em Rubis</th>
+    <th>Valor em Reais</th>
     <th>Data</th>
     <th>Status</th>
     <th>Detalhes</th>
@@ -75,7 +80,8 @@
     <% @orders.canceled.each do |order| %>
       <tr>
         <td><%= order.code %></td>
-        <td> <%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= order.status  %></td>
         <td><%= link_to 'Detalhes do Pedido', admin_order_path(order)  %></td>
