@@ -4,7 +4,7 @@ describe 'PATCH api/v1/payment_results' do
   it 'when done correctly returns 200 with success message' do
     # below: mock for API call when creating an order
     fake_response = double('faraday_response', status: 201, 
-                                                body: '{ "transaction_code": "nsurg745n" }')
+                                                body: '{ "code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
       
     user = create(:user)
@@ -48,7 +48,7 @@ describe 'PATCH api/v1/payment_results' do
   it 'returns 422 when the payload status is invalid' do
     # below: mock for API call when creating an order
     fake_response = double('faraday_response', status: 201, 
-                                                body: '{ "transaction_code": "nsurg745n" }')
+                                                body: '{ "code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
     
     user = create(:user)
@@ -70,7 +70,7 @@ describe 'PATCH api/v1/payment_results' do
   it 'returns 422 if a canceled transaction has nothing inside error_type' do
     # below: mock for API call when creating an order
     fake_response = double('faraday_response', status: 201, 
-                                                body: '{ "transaction_code": "nsurg745n" }')
+                                                body: '{ "code": "nsurg745n" }')
     allow(Faraday).to receive(:post).and_return(fake_response)
     
     user = create(:user)

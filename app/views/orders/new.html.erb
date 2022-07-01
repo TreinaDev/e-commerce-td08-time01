@@ -30,18 +30,39 @@
         <strong>Valor Total:</strong>
         &nbsp;
         <%= image_tag 'rubi', height: '16' %>
-        <strong><%= number_with_delimiter(@sum).to_i %></strong> 
+        <strong><%= number_with_precision(@sum, precision: 0) %></strong> 
       </td>
     </tr>
+    <% unless @promotion_id.nil? %>
+      <tr>
+        <td colspan="4" class="text-center"> 
+          <strong>Você economizou:</strong>
+          &nbsp;
+          <%= image_tag 'rubi', height: '16' %>
+          <strong><%= number_with_delimiter(@discount).to_i %></strong> 
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
+<div>
+  <%= form_with url: coupon_user_orders_path(current_user.id), method: :patch do |promo| %>
+    <%= promo.label :code, 'Cupom de desconto' %>
+    <%= promo.text_field :code %>
+    <div>
+      <%= promo.submit 'Adicionar' %>
+    </div>
+  <% end %>
+</div>
+
 <div class="text center standard-width m-auto">
-  <%= simple_form_for @order, url: user_orders_path(@user_id) do |cat| %>
-    <%= cat.input :address %>
-    <%= cat.input :user_id, :as => :hidden, :input_html => {value: @user_id} %>
+  <%= simple_form_for @order, url: user_orders_path(@user_id) do |odr| %>
+    <%= odr.input :address %>
+    <%= odr.input :user_id, :as => :hidden, :input_html => {value: @user_id} %>
+    <%= odr.input :promotion_id, :as => :hidden, :input_html => {value: @promotion_id} %>
     <div class="text-center little-buffer">
-      <%= cat.button :submit, 'Confirmar', class: 'btn btn-outline-warning' %>
+      <%= odr.button :submit, 'Confirmar', class: 'btn btn-outline-warning' %>
     </div>
   <% end %>
 

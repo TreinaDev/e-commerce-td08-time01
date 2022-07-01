@@ -1,8 +1,3 @@
-# Examples:
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-
 puts "\n----- cria cadastros de usuários ------"
 
 Admin.create(email: 'claudia@mercadores.com.br', password: '123456', name: 'Claudia Ferreira')
@@ -42,6 +37,19 @@ utilidades_domesticas = ProductCategory.create(name: "Utilidades Domésticas")
 vestuario = ProductCategory.create(name: "Vestuário")
   camisas = ProductCategory.create(name: "Camisas", parent: vestuario)
     camisas_basicas = ProductCategory.create(name: "Camisas Básicas", parent: camisas)
+
+puts '-- cria promoções para categorias -----'
+
+promotion_1 = Promotion.create(name: 'Dia das mães', start_date: 1.second.ago, end_date: 1.week.from_now,
+                               discount_percent: 20, maximum_discount: 40.0, absolute_discount_uses: 400)
+PromotionCategory.create(promotion: promotion_1, product_category: smartphones)
+PromotionCategory.create(promotion: promotion_1, product_category: notebooks)
+
+Timecop.freeze(1.week.ago) do
+  @promotion_2 = Promotion.create(name: 'Tiradentes', start_date: 3.days.from_now, end_date: 2.weeks.from_now,
+                                discount_percent: 20, maximum_discount: 40.0, absolute_discount_uses: 400)
+  PromotionCategory.create(promotion: @promotion_2, product_category: garrafas_termicas)
+end
 
 puts "---- cria um monte de cacarecos  ------"
 
@@ -143,19 +151,25 @@ puts '----------- cria pedidos --------------'
 
 CartItem.create!(product: product1, quantity: 5, user: user)
 CartItem.create!(product: product2, quantity: 7, user: user)
-order1 = Order.new(address: 'Rua da entrega, 75', user: user)
+cart = CartItem.where(order_id: nil)
+order1 = Order.new(address: 'Rua da entrega, 75', user: user, promotion_id: @promotion_2.id,
+                   price_on_purchase: OrdersManager::PriceAdder.call(cart, @promotion_2))
 order1.skip_callback = true
 order1.save!
 
 CartItem.create!(product: product3, quantity: 1, user: user)
 CartItem.create!(product: product4, quantity: 3, user: user)
-order2 = Order.new(address: 'Rua da Paz, 42 - Belém, PA', user: user)
+cart = CartItem.where(order_id: nil)
+order2 = Order.new(address: 'Rua da Paz, 42 - Belém, PA', user: user,
+                   price_on_purchase: OrdersManager::PriceAdder.call(cart))
 order2.skip_callback = true
 order2.save!
 order2.approved!
 
 CartItem.create!(product: product5, quantity: 6, user: user)
-order3 = Order.new(address: 'Rua do Bailão de Domingo - Erechim, RS', user: user)
+cart = CartItem.where(order_id: nil)
+order3 = Order.new(address: 'Rua do Bailão de Domingo - Erechim, RS', user: user,
+                   price_on_purchase: OrdersManager::PriceAdder.call(cart))
 order3.skip_callback = true
 order3.save!
 order3.update!(status: 'canceled', error_type: 'insufficient_funds')

@@ -1,0 +1,33 @@
+<ul class="list-group">
+  <% @all_promotions.each do |prom|%>
+
+    <li class="list-group-item">
+      <%= link_to prom.name, promotion_path(prom.id)%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
+    </li>
+
+  <% end %>
+</ul>
+
+<div>
+  <%= form_for @promotion do |promo| %>
+    <%= promo.label :name %>
+    <%= promo.text_field :name %>
+    <%= promo.label :start_date %>
+    <%= promo.datetime_local_field :start_date %>
+    <%= promo.label :end_date %>
+    <%= promo.datetime_local_field :end_date %>
+    <%= promo.label :discount_percent %>
+    <%= promo.number_field :discount_percent %>
+    <%= promo.label :maximum_discount %>
+    <%= promo.number_field :maximum_discount %>
+    <%= promo.label :absolute_discount_uses %>
+    <%= promo.number_field :absolute_discount_uses %>
+
+    <%= promo.label :product_category_ids, 'Categorias'%>
+    <%= promo.select :product_category_ids, @categories.collect { |cat| [cat.name, cat.id] }, {}, multiple: true, id: 'new_promotion' %>
+
+    <div>
+      <%= promo.submit 'Criar nova promoção.' %>
+    </div>
+  <% end %>
+</div>

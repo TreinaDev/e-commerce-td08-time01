@@ -7,15 +7,24 @@ class CartItemsController < ApplicationController
   end
 
   def create 
+    origin_page = params[:origin_page]
     product_id = params[:product_id]
-    quantity = params[:quantity]
-
+    quantity = params[:quantity].to_i
+    
     return redirect_to new_user_session_path, notice: 'Bem vindo! Por favor registre-se ou entre em sua conta para continuar.' if user_signed_in? == false
     return redirect_to product_path(product_id), notice: 'Só é possível a compra de um ou mais produtos.' if quantity.to_i < 1
     
-    cart_item = CartItem.create!(product_id: product_id, user_id: @user_id, quantity: quantity)
+    similar_product_already_in_cart = CartItem.where(product_id: product_id, user_id: current_user.id, order_id: nil)
+    
+    if similar_product_already_in_cart.empty?
+      CartItem.create!(product_id: product_id, user_id: @user_id, quantity: quantity)
+    else
+      cart_item = similar_product_already_in_cart.take
+      cart_item.quantity += quantity
+      cart_item.save!
+    end
 
-    redirect_to product_path(product_id), notice: 'Produto adicionado com sucesso.'
+    redirect_to origin_page, notice: 'Produto adicionado com sucesso.'
   end
 
   def destroy
