@@ -57,7 +57,7 @@ describe 'Guest user visit a product category' do
 
     visit by_category_products_path(category)
 
-    expect(page).to have_content('Não existem produtos cadastrados nesta categoria')
+    expect(page).to have_content('Não existem produtos cadastrados na categoria Cozinha')
   end
 
 

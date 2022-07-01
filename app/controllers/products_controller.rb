@@ -21,11 +21,13 @@ class ProductsController < ApplicationController
   
   def by_category
     @product_category = ProductCategory.find(params[:format])
-    @products_by_category = []
+    @products = []
     @product_category.subtree.each do |subcat|
       subcat.products.each do |product|
-        @products_by_category << product
+        @products << product
       end
+    @message_if_empty = "Não existem produtos cadastrados na categoria #{@product_category.name}"
     end
+    render 'home/index'
   end
 end
