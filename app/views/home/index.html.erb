@@ -18,8 +18,7 @@
                   Categoria: <%= link_to product.product_category.name, by_category_products_path(product.product_category.id) %>
                 <% end %>
                 <br>Marca: <%= link_to product.brand, search_products_path(query: product.brand) %>
-              </p>
-              <p>
+                <br>Preço: 
                 <%= image_tag 'rubi', height: '16' %>
                 <%= number_with_delimiter(product.current_price_in_rubis) %> 
               </p>
