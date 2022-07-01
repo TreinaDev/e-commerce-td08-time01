@@ -6,7 +6,7 @@ describe 'Unlogged user visits home page' do
     
     visit root_path
 
-    expect(page).to have_content 'Mercadores'
+    expect(page).to have_content 'Seu site de compra e venda com Rubis'
   end
 
   it 'and sees only active products' do
