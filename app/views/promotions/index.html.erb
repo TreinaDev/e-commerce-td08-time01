@@ -1,12 +1,27 @@
-<ul class="list-group">
-  <% @all_promotions.each do |prom|%>
+<h1 class="text-center">Promoções</h1>
 
-    <li class="list-group-item">
-      <%= link_to prom.name, promotion_path(prom.id)%> | <%= l prom.start_date %> | <%= l prom.end_date %> | <%=prom.code %>
-    </li>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th>Nome da Promoção</th>
+      <th>Cupom</th>
+      <th>Data incial</th>
+      <th>Data final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_promotions.each do |promo|%>
+      <tr>
+        <td><%= link_to promo.name, promotion_path(promo.id)%></td>
+        <td><%= promo.code %></td>
+        <td><%= l promo.start_date %></td>
+        <td><%= l promo.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <% end %>
-</ul>
+<h2 class="text-center top-buffer">Cadastrar Promoção</h2>
 
 <div>
   <%= form_for @promotion do |promo| %>

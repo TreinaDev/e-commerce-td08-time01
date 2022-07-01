@@ -40,6 +40,10 @@ main {
   margin-right: 10px;
 }
 
+.top-buffer {
+  margin-top: 60px;
+}
+
 .standard-width {
   max-width: 900px;
 }
@@ -98,6 +102,7 @@ label {
   color: white !important
 }
 
-.bi-cart3 {
+.bi {
+  fill: #fff;
   color: #fff;
 }
