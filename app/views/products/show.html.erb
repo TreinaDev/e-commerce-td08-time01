@@ -18,7 +18,7 @@
     <dt>SKU:</dt>
     <dd><%= @product.sku %></dd>
     <dt>Marca:</dt>
-    <dd><%= @product.brand %></dd>
+    <dd><%= link_to @product.brand, search_products_path(query: @product.brand) %></dd>
     <dt>Descrição: </dt>
     <dd><%= @product.description %></dd>
     <dt>Preço:</dt>
@@ -35,6 +35,7 @@
     <%= f.label :quantity, 'Quantidade'%>
     <%= f.number_field :quantity, min: 1, value: 1%>
     <%= f.hidden_field :product_id, value: @product.id%>
+    <%= f.hidden_field :origin_page, value: request.path %>
     <%= f.submit 'Adicionar ao carrinho'%>
   <%end%>
 </div>

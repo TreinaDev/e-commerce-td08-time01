@@ -11,15 +11,26 @@
 
             <div class="card-body">
               <h5 class="card-title text-center"><%= link_to product.name, product %></h5>
-              <p class="card-text">Marca: <%= product.brand %></p>
-              <p class="card-text"><%= product.description %></p>
-              <p><%= product.product_category.nil? ? 'Sem categoria' : 'Categoria: ' + product.product_category.name %></p>
               <p>
+                <% if product.product_category.nil? %>
+                  Sem categoria
+                <% else %>
+                  Categoria: <%= link_to product.product_category.name, by_category_products_path(product.product_category.id) %>
+                <% end %>
+                <br>Marca: <%= link_to product.brand, search_products_path(query: product.brand) %>
+                <br>Preço: 
                 <%= image_tag 'rubi', height: '16' %>
                 <%= number_with_delimiter(product.current_price_in_rubis) %> 
               </p>
+              <p class="card-text"><%= product.description %></p>
               <div class="text-center">
-                <%= link_to 'Ver produto', product, class: 'btn btn-outline-primary' %>
+                <% user_id = user_signed_in? ? current_user.id : user_id = 0 %>  
+                <%= form_with url: user_cart_items_path(user_id) do |f| %>
+                  <%= f.hidden_field :quantity, value: 1 %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.hidden_field :origin_page, value: request.fullpath %>
+                  <%= f.submit 'Colocar no carrinho', id: "put_on_cart_#{product.id}", class: 'btn btn-outline-primary' %>
+                <% end %>
               </div>
             </div>
           </article>

@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
       @message_if_empty = "Nenhum resultado encontrado para: #{params[:query]}"
       render 'home/index'
     else
-      @products = ProductCategory.find_by(name: params['name']).products
+      @products = ProductCategory.find_by(name: params['name']).products.sort_by(&:name)
       @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
       @message_if_empty = "Nenhum resultado encontrado para: #{params['name']}"
       render 'home/index'
@@ -21,11 +21,13 @@ class ProductsController < ApplicationController
   
   def by_category
     @product_category = ProductCategory.find(params[:format])
-    @products_by_category = []
+    @products = []
     @product_category.subtree.each do |subcat|
       subcat.products.each do |product|
-        @products_by_category << product
+        @products << product
       end
+    @message_if_empty = "Não existem produtos cadastrados na categoria #{@product_category.name}"
     end
+    render 'home/index'
   end
 end
