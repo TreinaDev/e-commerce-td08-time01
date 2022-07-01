@@ -22,7 +22,7 @@
               <h6 class="product-brand text-center"><%= link_to product.brand, search_products_path(query: product.brand) %></h6>
               <p class="product-price text-center"> 
                 <%= image_tag 'rubi', height: '16' %>
-                <%= number_with_delimiter(product.current_price_in_rubis) %> 
+                <%= number_with_precision(product.current_price_in_rubis, precision: 0) %> 
               </p>
               <p class="product-category">
                 <% if product.product_category.nil? %>

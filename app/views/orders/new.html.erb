@@ -16,11 +16,11 @@
         <td class="text-center"> <strong> <%=item.quantity%>  </strong></td> 
         <td class="text-center"> 
           <%= image_tag 'rubi', height: '16' %>
-          <strong><%= number_with_delimiter(item.product.current_price_in_rubis) %></strong>
+          <strong><%= number_with_precision(item.product.current_price_in_rubis, precision: 0) %></strong>
         </td>
         <td class="text-center"> 
           <%= image_tag 'rubi', height: '16' %>
-          <strong><%= number_with_delimiter(item.product.current_price_in_rubis * item.quantity) %></strong>
+          <strong><%= number_with_precision(item.product.current_price_in_rubis * item.quantity, precision: 0) %></strong>
         </td>
         <td><%= button_to 'Retirar', cart_item_path(item.id), class: 'btn btn-outline-danger mini-button', method: :delete %> </td>
       </tr>
@@ -39,7 +39,7 @@
           <strong>Você economizou:</strong>
           &nbsp;
           <%= image_tag 'rubi', height: '16' %>
-          <strong><%= number_with_delimiter(@discount).to_i %></strong> 
+          <strong><%= number_with_precision(@discount, precision: 0) %></strong> 
         </td>
       </tr>
     <% end %>

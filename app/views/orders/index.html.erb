@@ -8,46 +8,27 @@
   
 <% else %>
 
-<div class="d-flex p-2">
-
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-blue" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-blue text-decoration-none">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Filtrar</span>
-    </a>
-    <hr>
-    <%= simple_form_for :search, url: user_orders_path(@orders.last.user), method: "GET", html: { class: 'mb-3' } do |f| %>
-      <%= f.input :order_search, label: "Procurar Pedido", required: false %>
-      <%= f.input :status, as: :check_boxes, collection: [["0", "Pendente"], ["5", "Aprovado"], ["9", "Cancelado"]], label_method: :second, value_method: :first, required: false, legend_tag: false %>
-      <%= f.submit "Search", class: "btn btn-primary" %>
-    <% end %>
-  
+<div class="row">
+<% @orders.each do |order| %>
+  <div class="col-sm-4 little-buffer">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Pedido <%= order.code %> - <%= Order.human_enum_name(:status, order.status)%></h5>
+        <p class="card-text">
+          <ul class="list-group">
+            <% order.cart_items.each do |item|%>
+              <li class="list-group-item">
+                <%= item.product.name %>
+              </li>
+            <% end %>
+          </ul>
+        </p>
+        <div class="text-center">
+          <%= link_to "Detalhes do Pedido", order_path(order.id), class: 'btn btn-outline-warning mini-button little-buffer' %>
+        </div>
+      </div>
+    </div>
   </div>
-
-    <ol class="list-group list-group-numbered">
-      <% @orders.each do |o|%>
-
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">
-              Pedido <%=o.code%> - <%= Order.human_enum_name(:status, o.status)%>
-            </div>
-            <ul class="list-group list-group-horizontal">
-              <% o.cart_items.each do |ci|%>
-
-                <li class="list-group-item">
-                  <%= ci.product.name%>
-                </li>
-
-              <% end %>
-            </ul>
-          </div>
-          <span class="badge bg-warning rounded-pill"><%= link_to "Detalhes do Pedido", order_path(o.id) %></span>
-        </li>
-
-      <% end %>
-    </ol>
-
+<% end %>
 </div>
-
 <% end %>

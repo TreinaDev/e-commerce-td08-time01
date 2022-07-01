@@ -24,7 +24,7 @@
             <p><strong><%= product.product_category.nil? ? 'Sem categoria' : product.product_category.name %></strong></p>
             <p>
               <%= image_tag 'rubi', height: '16' %>
-              <%= number_with_delimiter(product.current_price_in_rubis) %> 
+              <%= number_with_precision(product.current_price_in_rubis, precision: 0) %> 
             </p>
             <p><strong>Status:</strong> <%= product.status %></p>
             <div class="text-center">

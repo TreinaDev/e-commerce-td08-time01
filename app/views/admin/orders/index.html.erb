@@ -22,7 +22,7 @@
       <tr>
         <td><%= order.code %></td>
         <td><%= order.user.name %></td>
-        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_precision(order.price_on_purchase, precision: 0) %></td>
         <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= Order.human_enum_name(:status, order.status)  %></td>
@@ -54,7 +54,7 @@
       <tr>
         <td><%= order.code %></td>
         <td><%= order.user.name %></td>
-        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_precision(order.price_on_purchase, precision: 0) %></td>
         <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= Order.human_enum_name(:status, order.status)  %></td>
@@ -86,7 +86,7 @@
       <tr>
         <td><%= order.code %></td>
         <td><%= order.user.name %></td>
-        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_delimiter(order.price_on_purchase) %></td>
+        <td><%= image_tag 'rubi', height: '16' %> <%= number_with_precision(order.price_on_purchase, precision: 0) %></td>
         <td><%= number_to_currency(order.price_on_purchase) %></td>
         <td><%= order.created_at.strftime('%d/%m/%Y às %H:%M') %></td>
         <td><%= Order.human_enum_name(:status,order.status)  %></td>
