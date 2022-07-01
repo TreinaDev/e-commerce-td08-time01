@@ -30,7 +30,7 @@
         <strong>Valor Total:</strong>
         &nbsp;
         <%= image_tag 'rubi', height: '16' %>
-        <strong><%= number_with_delimiter(@sum).to_i %></strong> 
+        <strong><%= number_with_precision(@sum, precision: 0) %></strong> 
       </td>
     </tr>
     <% unless @promotion_id.nil? %>
