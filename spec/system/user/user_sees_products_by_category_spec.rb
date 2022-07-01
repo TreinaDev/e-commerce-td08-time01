@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'user filter the search of product by category' do
   it 'with success' do
+    ExchangeRate.create!(rate: 2, registered_at_source_for: 2)
     category_tv = ProductCategory.create!(name: 'TVs')
     category_smartphone = ProductCategory.create!(name: 'Smartphones')
     Product.create!(name: 'Smart TV 43', brand: 'Samsung', description: 'TV LED ultrafina',
@@ -20,6 +21,7 @@ describe 'user filter the search of product by category' do
   end
 
   it 'when product is not on shelf' do
+    ExchangeRate.create!(rate: 2, registered_at_source_for: 2)
     category_tv = ProductCategory.create!(name: 'TVs')
     Product.create!(name: 'Smart TV 43', brand: 'Samsung', description: 'TV LED ultrafina',
                     sku: 'SAMLED1234', product_category_id: category_tv.id, status: 'draft')
