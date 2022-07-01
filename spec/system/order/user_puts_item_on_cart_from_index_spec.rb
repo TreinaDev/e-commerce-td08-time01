@@ -15,5 +15,6 @@ describe 'User puts item on cart' do
     expect(cart_items.size).to be 1
     expect(cart_items.last.product.name).to eq 'Garrafa'
     expect(cart_items.last.product.name).to eq 'Garrafa'
+    expect(current_path).to eq root_path
   end
 end

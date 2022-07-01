@@ -19,7 +19,14 @@
                 <%= number_with_delimiter(product.current_price_in_rubis) %> 
               </p>
               <div class="text-center">
-                <%= link_to 'Ver produto', product, class: 'btn btn-outline-primary' %>
+                <% user_id = user_signed_in? ? current_user.id : user_id = 0 %>  
+                <%= form_with url: user_cart_items_path(user_id) do |f| %>
+                  <%= f.hidden_field :quantity, value: 1 %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.hidden_field :origin_page, value: request.fullpath %>
+                  <%= debugger %>
+                  <%= f.submit 'Colocar no carrinho', id: "put_on_cart_#{product.id}", class: 'btn btn-outline-primary' %>
+                <% end %>
               </div>
             </div>
           </article>

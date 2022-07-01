@@ -7,6 +7,7 @@ class CartItemsController < ApplicationController
   end
 
   def create 
+    origin_page = params[:origin_page]
     product_id = params[:product_id]
     quantity = params[:quantity]
 
@@ -15,7 +16,7 @@ class CartItemsController < ApplicationController
     
     cart_item = CartItem.create!(product_id: product_id, user_id: @user_id, quantity: quantity)
 
-    redirect_to product_path(product_id), notice: 'Produto adicionado com sucesso.'
+    redirect_to origin_page, notice: 'Produto adicionado com sucesso.'
   end
 
   def destroy
