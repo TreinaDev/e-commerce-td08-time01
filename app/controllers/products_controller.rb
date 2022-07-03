@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
       @message_if_empty = "Nenhum resultado encontrado para: #{ params[:query] }"
       render 'home/index'
     else
+      return redirect_to root_path if params['name'] == ''
       @products = ProductCategory.find_by(name: params['name']).products.sort_by(&:name)
       @products = @products.filter(&:on_shelf?) unless admin_signed_in? || @products.empty?
       @message_if_empty = "Nenhum resultado encontrado para: #{params['name']}"

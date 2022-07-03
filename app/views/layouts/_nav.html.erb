@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse row d-flex justify-content-center search-bar">
       <%= form_with url: search_products_path, method: :get, class: "d-flex form-inline input-group" do |form| %>
         <% form.label :name, 'Categorias' %>
-        <%= form.collection_select :name, options_for_product_category, :name, :name, { prompt: 'Categorias' }, { required: true, class: 'form-select shadow-none bg-light border-0 max-with-select-navbar' } %>
+        <%= form.collection_select :name, options_for_product_category, :name, :name, { prompt: 'Categorias' }, { class: 'form-select shadow-none bg-light border-0 max-with-select-navbar' } %>
         <%= form.text_field :query, class: "form-control mr-sm-2", type: "search", placeholder: "Busque aqui seu produto" %>
         <%= form.submit "Procurar", class: "btn btn-warning input-group-text shadow-none px-4" %>
       <% end %>
